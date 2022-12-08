@@ -1,5 +1,5 @@
 <?php
-    header("Refresh:0; url=/http://localhost:8080");
+    header("Refresh:0; url=http://localhost:8080");
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -30,6 +30,7 @@
     </style>
   </head>
   <body>
-    <!-- Hello world -->
+    <!-- WordPress Theme Home Page -->
+    <!-- Redirects to Vue 3 App -->
   </body>
 </html>
