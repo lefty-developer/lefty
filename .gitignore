@@ -34,10 +34,10 @@ wp/app/public/*
 
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins", "plugins", "themes" directory
-wp-content/*
-!wp-content/mu-plugins/
-!wp-content/plugins/
-!wp-content/themes/
+wp/app/public/wp-content/*
+!mu-plugins/
+!plugins/
+!themes/
 
 # ignore these plugins
 wp-content/plugins/hello.php
