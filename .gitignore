@@ -28,7 +28,11 @@ pnpm-debug.log*
 
 # WP Ignores
 
-# ignore everything in the root WP except the "wp-content" directory.
+# ignore everything in app but public
+wp/app/*
+!public
+
+# ignore everything in public except the "wp-content" directory.
 wp/app/public/*
 !wp-content
 
