@@ -37,10 +37,9 @@ wp/app/public/*
 !wp-content
 
 # ignore everything in the "wp-content" directory, except:
-# "mu-plugins", "plugins", "themes" directory
+# "themes" directory
+# consider "mu-plugins", "plugins" directories as well
 wp/app/public/wp-content/*
-!mu-plugins/
-!plugins/
 !themes/
 
 # ignore these plugins
