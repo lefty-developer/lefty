@@ -42,7 +42,6 @@ export default {
 </script>
 
 <template>
-  <!-- class = static classes, v-bind:class = dynamic classes. Can use :class shorthand -->
   <div v-if='show' class='menu animate__animated animate__fast'
        v-bind:class='[inAnimation, outAnimation]'>
     <div class='menu-header'>
@@ -54,17 +53,12 @@ export default {
     </div>
     <nav>
       <div class='menu-links'>
-        <router-link to="/">
-          <span class='menu-link'>Home</span>
-        </router-link>
-        <router-link to="/work">
-          <span class='menu-link'>Work</span>
-        </router-link>
-        <router-link to="/experience">
-          <span class='menu-link'>Experience</span>
-        </router-link>
-        <router-link to="/contact">
-          <span class='menu-link'>Contact</span>
+        <router-link v-for='(route, i) in this.$router.options.routes'
+                     v-bind:key='i'
+                     v-bind:to='{ path: route.path }'>
+          <span class='menu-link'>
+            {{ route.name }}
+          </span>
         </router-link>
       </div>
     </nav>

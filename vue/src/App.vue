@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     finishedLoading (status) {
-      status ? this.show = true : false
+      status ? this.show = true : alert('Something\'s wrong...')
     }
   }
 }

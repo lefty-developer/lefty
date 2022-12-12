@@ -15,7 +15,8 @@ export default {
       logo: require('../../assets/logo@4x.png'),
       icon: require('../../assets/icons/arrow.png'),
 
-      // WP Page Data 
+      // WP Page Data
+      page: Object,
       pageNum: Number,
       pagesCount: Number,
       title: String,
@@ -54,22 +55,24 @@ export default {
     }
   },
   created () {
-    // apply page title from global WordPress data props set on main.js
-    document.title = this.$wpPages.find(page => page.id == '12').title.rendered + ' — ' + this.$wpSiteName
-
-    // apply ACF data from $wpPages on mount (global props set on main.js)
+    // supply page data with global WordPress page object (filter by id)
+    this.page = this.$wpPages.find(page => page.id == '12')
     this.pageNum = this.$wpPages.findIndex(page => page.id == '12') + 1
     this.pagesCount = this.$wpPages.length
-    this.title = this.$wpPages.find(page => page.id == '12').acf['lefty-home-title']
-    this.subtitle = this.$wpPages.find(page => page.id == '12').acf['lefty-home-subtitle']
-    this.body = this.$wpPages.find(page => page.id == '12').acf['lefty-home-body']
-    this.image = 'background-image: url(' + this.$wpPages.find(page => page.id == '12').acf['lefty-home-image'] + ')'
 
+    // apply page title
+    document.title = this.page.title.rendered + ' — ' + this.$wpSiteName
+
+    // apply ACF data
+    this.title = this.page.acf['lefty-home-title']
+    this.subtitle = this.page.acf['lefty-home-subtitle']
     this.sliceSubtitle()
+    this.body = this.page.acf['lefty-home-body']
+    this.image = 'background-image: url(' + this.page.acf['lefty-home-image'] + ')'
   },
   mounted () {
     // Inits for mount animations
-    setTimeout(() => { this.renderMarginal = true }, 200)
+    setTimeout(() => this.renderMarginal = true, 200)
     this.mountAnimations()
   }
 }

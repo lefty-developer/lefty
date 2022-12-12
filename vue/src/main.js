@@ -4,9 +4,8 @@ import router from './router'
 // import '../public/css/style.css'
 
 
-// Create app and use router (mount after fetch completed)
+// Create app
 const app = createApp(App)
-app.use(router)
 
 // Get WordPress data from WP REST API
 async function fetchWordPressData() {
@@ -30,6 +29,9 @@ async function fetchWordPressData() {
   // Apply global pages property with WordPress pages post type data
   // Reverse it because the API is a lil silly
   app.config.globalProperties.$wpPages = wpPages.reverse()
+
+  // Use app router
+  app.use(router)
 
   // Mount app
   app.mount('#app')
