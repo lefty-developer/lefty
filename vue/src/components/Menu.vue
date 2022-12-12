@@ -15,19 +15,15 @@ export default {
   },
   methods: {
     closeMenu () {
-      if (this.toggle == false) {
-        alert('Wow, erm. Ahem. Not sure how you managed to get this to happen...')
-        return false
-      } else {
-        this.$emit('close', false)
-      }
+      // Testing against the toggle prop ensures the menu has only been opened through the UI
+      this.toggle ? this.$emit('close', true) : alert('Something\'s wrong...')
     }
   },
   mounted () {
     this.show = this.toggle
   },
   watch: {
-    // is watching the prop toggle
+    // Watches the toggle prop
     toggle () {
       if (this.toggle == true) {
         this.show = this.toggle

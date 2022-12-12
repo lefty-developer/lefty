@@ -9,9 +9,7 @@ export default {
       logo: require('../assets/logo@4x.png'),
       show: true,
       inAnimation: String,
-      // Outbound Animation gets set after mounted() calls showParent method
       outAnimation: String,
-      // Repeated Animation gets set on component mount
       repeatAnimation: String
     }
   },
@@ -23,10 +21,13 @@ export default {
       }, 2000)
       setTimeout(() => {
         this.show = false
-        // tells parent component that the loading is done, and it's ready to show the parent content
-        this.$emit('ready', this.show)
+        this.$emit('ready', !this.show)
       }, 2750)
     }
+  },
+  created () {
+    // apply site name from global WordPress data props set on main.js
+    document.title = this.$wpSiteName
   },
   mounted () {
     this.inAnimation = 'animate__zoomInDown'
