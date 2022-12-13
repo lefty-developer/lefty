@@ -27,7 +27,6 @@ async function fetchWordPressData() {
   }
   const wpPages = await response.json()
   // Apply global pages property with WordPress pages post type data
-  // Reverse it because the API is a lil silly
   app.config.globalProperties.$wpPages = wpPages.reverse()
 
   // Use app router

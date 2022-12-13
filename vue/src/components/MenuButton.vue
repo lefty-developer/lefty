@@ -6,8 +6,11 @@ export default {
   },
   data () {
     return {
-      menuToggled: false,
-      icon: require('../assets/icons/navicon.png')
+      // Assets
+      icon: require('../assets/icons/navicon.png'),
+
+      // Misc.
+      menuToggled: false
     }
   },
   methods: {

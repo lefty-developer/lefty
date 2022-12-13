@@ -18,7 +18,7 @@ export default {
       // WP Page Data
       page: Object,
       pageNum: Number,
-      pagesCount: Number,
+      pageCount: Number,
       title: String,
       subtitle: String,
       lastWord: String,
@@ -56,9 +56,9 @@ export default {
   },
   created () {
     // supply page data with global WordPress page object (filter by id)
-    this.page = this.$wpPages.find(page => page.id == '12')
-    this.pageNum = this.$wpPages.findIndex(page => page.id == '12') + 1
-    this.pagesCount = this.$wpPages.length
+    this.page = this.$wpPages.find(item => item.id == '12')
+    this.pageNum = this.$wpPages.findIndex(item => item.id == '12') + 1
+    this.pageCount = this.$wpPages.length
 
     // apply page title
     document.title = this.page.title.rendered + ' — ' + this.$wpSiteName
@@ -93,7 +93,7 @@ export default {
         <div class='home-page-navbar'>
           <router-link to='/'>
             <img class='home-logo animate__animated animate__fadeInDown' 
-                 v-bind:src='logo' />
+                 v-bind:src='logo' v-if='logo' />
           </router-link>
           <MenuButton v-on:toggle='value => { toggleMenu(value) }'
                       v-bind:toggleStatus='menuToggled'
@@ -120,7 +120,7 @@ export default {
             </button>
           </router-link>
           <span class='home-page-cta-marginal-count'>
-            {{ pageNum }} / {{ pagesCount }}
+            {{ pageNum }} / {{ pageCount }}
           </span>
         </div>
       </div>

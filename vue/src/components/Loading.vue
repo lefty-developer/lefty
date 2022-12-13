@@ -6,7 +6,10 @@ export default {
   },
   data () {
     return {
+      // Assets
       logo: require('../assets/logo@4x.png'),
+
+      // Misc.
       show: true,
       inAnimation: String,
       outAnimation: String,

@@ -7,8 +7,11 @@ export default {
   },
   data () {
     return {
-      show: Boolean,
+      // Assets
       icon: require('../assets/icons/close.png'),
+
+      // Misc.
+      show: Boolean,
       inAnimation: String,
       outAnimation: String
     }
@@ -53,7 +56,7 @@ export default {
     </div>
     <nav>
       <div class='menu-links'>
-        <router-link v-for='(route, i) in this.$router.options.routes'
+        <router-link v-for='(route, i) in this.$router.getRoutes()'
                      v-bind:key='i'
                      v-bind:to='{ path: route.path }'>
           <span class='menu-link'>
