@@ -9,7 +9,7 @@ export default {
     NavMenu,
     MenuButton
   },
-  name: 'WorkPage',
+  name: 'ContactPage',
   data () {
     return {
       // WP Page Data

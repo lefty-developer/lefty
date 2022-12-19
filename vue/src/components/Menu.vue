@@ -35,9 +35,7 @@ export default {
       } else {
         this.inAnimation = false
         this.outAnimation = 'animate__slideOutRight'
-        setTimeout(() => {
-          this.show = this.toggle
-        }, 800)
+        setTimeout(() => this.show = this.toggle, 800)
       }
     }
   }
@@ -56,7 +54,10 @@ export default {
     </div>
     <nav>
       <div class='menu-links'>
-        <router-link v-for='(route, i) in this.$router.getRoutes()'
+        <!-- filter then sort routes by orderNo and addToMenu ACF fields then loop through and display them -->
+        <router-link v-for='(route, i) in this.$router.getRoutes()
+                                            .filter(obj => { return obj.props.default.addToMenu == true})
+                                            .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)'
                      v-bind:key='i'
                      v-bind:to='{ path: route.path }'>
           <span class='menu-link'>

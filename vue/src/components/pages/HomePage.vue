@@ -1,4 +1,5 @@
 <script>
+import router from '../../router'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -16,6 +17,7 @@ export default {
       icon: require('../../assets/icons/arrow.png'),
 
       // WP Page Data
+      pageId: Number,
       page: Object,
       pageNum: Number,
       pageCount: Number,
@@ -35,6 +37,21 @@ export default {
     }
   },
   methods: {
+    assignData () {
+      // assign pageId from dynamically created routes based on WP page data (located at ../../main.js)
+      this.pageId = router.currentRoute.value.matched.find(route => 
+                      route.path == router.currentRoute.value.path
+                    ).props.default.wpPageId
+
+      // assign page data with global WordPress page object (filter pages by id)
+      // filter page nums by dynamic router/wp data
+      this.page = this.$wpPages.find(pageItem => pageItem.id == this.pageId)
+      this.pageNum = this.$route.matched.find(route => 
+                       route.path == this.$route.path).props.default.orderNo
+      this.pageCount = router.getRoutes().filter(obj => { 
+        return obj.props.default.addToMenu == true
+      }).length
+    },
     sliceSubtitle () {
       this.lastWord = this.subtitle.split(' ').pop()
       this.subtitle = this.subtitle.split(' ').slice(0, -1).join(' ')
@@ -55,20 +72,18 @@ export default {
     }
   },
   created () {
-    // supply page data with global WordPress page object (filter by id)
-    this.page = this.$wpPages.find(item => item.id == '12')
-    this.pageNum = this.$wpPages.findIndex(item => item.id == '12') + 1
-    this.pageCount = this.$wpPages.length
+    // assign WP page data associated with this route/component
+    this.assignData()
 
-    // apply page title
-    document.title = this.page.title.rendered + ' — ' + this.$wpSiteName
+    // assign document title
+    document.title = `${ this.page.title.rendered } — ${ this.$wpSiteName }`
 
-    // apply ACF data
+    // assign ACF data
     this.title = this.page.acf['lefty-home-title']
     this.subtitle = this.page.acf['lefty-home-subtitle']
     this.sliceSubtitle()
     this.body = this.page.acf['lefty-home-body']
-    this.image = 'background-image: url(' + this.page.acf['lefty-home-image'] + ')'
+    this.image = `background-image: url(${ this.page.acf['lefty-home-image'] })`
   },
   mounted () {
     // Inits for mount animations
@@ -81,7 +96,7 @@ export default {
 <template>
   <div id='router-root' v-if='$wpPages'>
     <NavMenu v-bind:toggle='menuToggled'
-             v-on:close='value => { toggleMenu(!value) }'
+             v-on:close='value => toggleMenu(!value)'
              v-bind:parent='$options.name' />
     <div id='home-page-wrap'>
       <div class='home-page-image-wrap'>
@@ -95,7 +110,7 @@ export default {
             <img class='home-logo animate__animated animate__fadeInDown' 
                  v-bind:src='logo' v-if='logo' />
           </router-link>
-          <MenuButton v-on:toggle='value => { toggleMenu(value) }'
+          <MenuButton v-on:toggle='value => toggleMenu(value)'
                       v-bind:toggleStatus='menuToggled'
                       class='animate__animated animate__fadeInDown' />
         </div>
