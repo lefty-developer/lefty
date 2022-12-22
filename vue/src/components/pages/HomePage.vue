@@ -73,9 +73,8 @@ export default {
     nextPage () {
       const menuItems = router.getRoutes().filter(obj => { return obj.props.default.addToMenu == true })
                           .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)
-      const currentRouteIndex = menuItems.findIndex(item => item.name == this.page.title.rendered)
-      const nextRoute = menuItems[currentRouteIndex + 1].path
-      return nextRoute
+      const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId == this.pageId)
+      router.push(menuItems[currentRouteIndex + 1].path)
     }
   },
   created () {
@@ -137,12 +136,10 @@ export default {
         <div class='home-page-cta-marginal animate__animated'
              v-if='renderMarginal'
              v-bind:class='[marginalVisible, marginalAnimation]'>
-          <router-link v-bind:to='nextPage()'>
-            <button class='home-page-cta'>
-              <img v-bind:src='icon'
-                  class='button-icon arrow-icon'>
-            </button>
-          </router-link>
+          <button v-on:click='nextPage()' class='home-page-cta'>
+            <img v-bind:src='icon'
+                class='button-icon arrow-icon'>
+          </button>
           <span class='home-page-cta-marginal-count'>
             {{ pageNum }} / {{ pageCount }}
           </span>

@@ -32,7 +32,7 @@
   background-color: #323232; }
 
 .fade-leave-active {
-  transition: opacity 500ms ease-in-out; }
+  transition: 500ms ease-in-out; }
 
 .fade-leave-to {
   opacity: 0; }

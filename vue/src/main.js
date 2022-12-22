@@ -51,16 +51,10 @@ async function fetchWordPressData() {
       addToMenu = false
     }
 
-    // If route will be displayed to ./components/Menu.vue
-    // Then get this item's menu order no. from ACF
-    let orderNo = Number
-    addToMenu ? orderNo = pageItem.acf['add-to-menu']['page-order-num']
-              : orderNo = 0
-
     // Build Route Object
     let pageAsRoute = Object
     // apply WP Front Page data to base route data for vue router
-    if (pageItem.title.rendered == frontPage.title.rendered) {
+    if (pageItem.id == frontPage.id) {
       pageAsRoute = {
         path: '/',
         name: frontPage.title.rendered,
@@ -68,19 +62,19 @@ async function fetchWordPressData() {
         props: {
           wpPageId: pageItem.id,
           addToMenu: addToMenu,
-          orderNo: orderNo
+          orderNo: pageItem.menu_order
         }
       }
     // dynamically create routes from remaining pageItems
     } else {
       pageAsRoute = {
-        path: '/' + pageItem.title.rendered.replace(/ +/g, '-').toLowerCase(),
+        path: '/' + pageItem.slug,
         name: pageItem.title.rendered,
         component: pageComponent,
         props: {
           wpPageId: pageItem.id,
           addToMenu: addToMenu,
-          orderNo: orderNo
+          orderNo: pageItem.menu_order
         }
       }
     }
@@ -90,8 +84,7 @@ async function fetchWordPressData() {
   })
 
 
-  // Use built router on app
-  // Then mount app
+  // Use built router on app, then mount app
   app.use(router)
   app.mount('#app')
 }
