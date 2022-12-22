@@ -14,7 +14,7 @@ export default {
     return {
       // Assets 
       logo: require('../../assets/logo@4x.png'),
-      icon: require('../../assets/icons/arrow.png'),
+      icon: require('../../assets/icons/down-arrow.svg'),
 
       // WP Page Data
       pageId: Number,
@@ -69,6 +69,13 @@ export default {
         this.marginalVisible = 'marginal-visible'
         this.marginalAnimation = 'animate__fadeInUp'
       }, 800)
+    },
+    nextPage () {
+      const menuItems = router.getRoutes().filter(obj => { return obj.props.default.addToMenu == true })
+                          .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)
+      const currentRouteIndex = menuItems.findIndex(item => item.name == this.page.title.rendered)
+      const nextRoute = menuItems[currentRouteIndex + 1].path
+      return nextRoute
     }
   },
   created () {
@@ -76,7 +83,10 @@ export default {
     this.assignData()
 
     // assign document title
-    document.title = `${ this.page.title.rendered } — ${ this.$wpSiteName }`
+    let docTitle
+    this.$wpSiteTagline ? docTitle = `${ this.$wpSiteName } — ${ this.$wpSiteTagline }`
+                        : docTitle = `${ this.page.title.rendered } — ${ this.$wpSiteName }`
+    document.title = docTitle
 
     // assign ACF data
     this.title = this.page.acf['lefty-home-title']
@@ -105,14 +115,13 @@ export default {
         </div>
       </div>
       <div class='home-page-content'>
-        <div class='home-page-navbar'>
+        <div class='home-page-navbar animate__animated animate__fadeInDown'>
           <router-link to='/'>
-            <img class='home-logo animate__animated animate__fadeInDown' 
+            <img class='home-logo' 
                  v-bind:src='logo' v-if='logo' />
           </router-link>
           <MenuButton v-on:toggle='value => toggleMenu(value)'
-                      v-bind:toggleStatus='menuToggled'
-                      class='animate__animated animate__fadeInDown' />
+                      v-bind:toggleStatus='menuToggled' />
         </div>
         <div class='home-page-copy animate__animated'
              v-bind:class='[copyVisible, copyAnimation]'>
@@ -128,7 +137,7 @@ export default {
         <div class='home-page-cta-marginal animate__animated'
              v-if='renderMarginal'
              v-bind:class='[marginalVisible, marginalAnimation]'>
-          <router-link to='/work'>
+          <router-link v-bind:to='nextPage()'>
             <button class='home-page-cta'>
               <img v-bind:src='icon'
                   class='button-icon arrow-icon'>

@@ -36,9 +36,13 @@
       width: 100%;
       max-width: 41.375rem;
 
-      .home-logo {
-        // width: 7.25rem;
-        width: 7.5rem;
+      a {
+        line-height: 0;
+
+        .home-logo {
+          // width: 7.25rem;
+          width: 7.5rem;
+        }
       }
     }
 

@@ -31,10 +31,10 @@
 *::-webkit-scrollbar-thumb:active {
   background-color: #323232; }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 400ms ease-in-out; }
+.fade-leave-active {
+  transition: opacity 500ms ease-in-out; }
 
-.fade-enter, .fade-leave-to {
+.fade-leave-to {
   opacity: 0; }
 
 html {
@@ -194,8 +194,10 @@ body {
         justify-content: space-between;
         width: 100%;
         max-width: 41.375rem; }
-        body #home-page-wrap .home-page-content .home-page-navbar .home-logo {
-          width: 7.5rem; }
+        body #home-page-wrap .home-page-content .home-page-navbar a {
+          line-height: 0; }
+          body #home-page-wrap .home-page-content .home-page-navbar a .home-logo {
+            width: 7.5rem; }
       body #home-page-wrap .home-page-content .home-page-copy {
         display: flex;
         flex-direction: column;

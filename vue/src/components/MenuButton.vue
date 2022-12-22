@@ -7,7 +7,7 @@ export default {
   data () {
     return {
       // Assets
-      icon: require('../assets/icons/navicon.png'),
+      icon: require('../assets/icons/navicon.svg'),
 
       // Misc.
       menuToggled: false

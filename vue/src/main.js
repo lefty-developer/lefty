@@ -17,7 +17,7 @@ async function fetchWordPressData() {
   const wpData = await response.json()
   // Apply global site name/tagline property with WordPress site name/tagline
   app.config.globalProperties.$wpSiteName = wpData.name
-  app.config.globalProperties.$wpSiteTagline = wpData.tagline
+  app.config.globalProperties.$wpSiteTagline = wpData.description
 
   // Fetch WP Front Page data for Router '/' path
   response = await fetch(wpSitePath + '/wp-json/wp/v2/frontpage')

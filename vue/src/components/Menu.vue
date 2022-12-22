@@ -8,7 +8,7 @@ export default {
   data () {
     return {
       // Assets
-      icon: require('../assets/icons/close.png'),
+      icon: require('../assets/icons/close.svg'),
 
       // Misc.
       show: Boolean,
@@ -55,8 +55,7 @@ export default {
     <nav>
       <div class='menu-links'>
         <!-- filter then sort routes by orderNo and addToMenu ACF fields then loop through and display them -->
-        <router-link v-for='(route, i) in this.$router.getRoutes()
-                                            .filter(obj => { return obj.props.default.addToMenu == true})
+        <router-link v-for='(route, i) in this.$router.getRoutes().filter(obj => { return obj.props.default.addToMenu == true })
                                             .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)'
                      v-bind:key='i'
                      v-bind:to='{ path: route.path }'>
