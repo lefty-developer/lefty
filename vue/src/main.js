@@ -57,6 +57,7 @@ async function fetchWordPressData() {
     if (pageItem.id == frontPage.id) {
       pageAsRoute = {
         path: '/',
+        alias: '/home',
         name: frontPage.title.rendered,
         component: pageComponent,
         props: {
@@ -69,6 +70,11 @@ async function fetchWordPressData() {
     } else {
       pageAsRoute = {
         path: '/' + pageItem.slug,
+        alias: `/${ pageItem.slug }/`,
+        // strict: true needed to make alias work if it's the same as the path but with a trailing slash
+        // this is so links from the WP dashboard to the front-end will work
+        strict: true,
+        pathToRegexpOptions: { strict: false },
         name: pageItem.title.rendered,
         component: pageComponent,
         props: {
@@ -82,7 +88,6 @@ async function fetchWordPressData() {
     // Push Route Object to Router
     router.addRoute(pageAsRoute)
   })
-
 
   // Use built router on app, then mount app
   app.use(router)

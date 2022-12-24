@@ -34,7 +34,7 @@ export default {
       this.pageNum = this.$route.matched.find(route => 
                        route.path == this.$route.path).props.default.orderNo
       this.pageCount = router.getRoutes().filter(obj => { 
-        return obj.props.default.addToMenu == true
+        return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
     },
     toggleMenu (value) {

@@ -27,7 +27,7 @@ export default {
 
 <template>
   <!-- v-if number of routes is equal to number of WordPress pages -->
-  <LoadingAnimation v-if='this.$router.getRoutes().length == $wpPages.length'
+  <LoadingAnimation v-if='this.$router.getRoutes().filter(obj => { return !obj.aliasOf }).length == $wpPages.length'
                     v-on:ready='status => finishedLoading(status)' />
   <router-view v-slot='{ Component }' v-if='show'>
     <transition name='fade' mode='out-in'>

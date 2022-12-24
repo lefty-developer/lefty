@@ -48,8 +48,8 @@ export default {
       this.page = this.$wpPages.find(pageItem => pageItem.id == this.pageId)
       this.pageNum = this.$route.matched.find(route => 
                        route.path == this.$route.path).props.default.orderNo
-      this.pageCount = router.getRoutes().filter(obj => { 
-        return obj.props.default.addToMenu == true
+      this.pageCount = router.getRoutes().filter(obj => {
+        return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
     },
     sliceSubtitle () {
@@ -71,7 +71,7 @@ export default {
       }, 800)
     },
     nextPage () {
-      const menuItems = router.getRoutes().filter(obj => { return obj.props.default.addToMenu == true })
+      const menuItems = router.getRoutes().filter(obj => { return (!obj.aliasOf) && (obj.props.default.addToMenu == true) })
                           .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)
       const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId == this.pageId)
       router.push(menuItems[currentRouteIndex + 1].path)
