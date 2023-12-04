@@ -1,9 +1,8 @@
 <?php
-add_action( 'admin_head-edit.php', 'wpse_59871_script_enqueuer' );
+// add_action( 'admin_head-edit.php', 'wpse_59871_script_enqueuer' );
 
-// remove Password input field from Pages' Quick Edit panel 
-function wpse_59871_script_enqueuer() 
-{    
+// remove Password input field from Pages Quick Edit panels
+function wpse_59871_script_enqueuer() {    
 
       //  /wp-admin/edit.php?post_type=post
       //  /wp-admin/edit.php?post_type=page

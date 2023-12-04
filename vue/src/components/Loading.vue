@@ -38,7 +38,7 @@ export default {
       this.inAnimation = false
       this.repeatAnimation = 'animate__bounce animate__infinite'
       this.showParent()
-    }, 1500)
+    }, 1000)
   }
 }
 </script>

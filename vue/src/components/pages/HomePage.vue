@@ -83,8 +83,8 @@ export default {
 
     // assign document title
     let docTitle
-    this.$wpSiteTagline ? docTitle = `${ this.$wpSiteName } — ${ this.$wpSiteTagline }`
-                        : docTitle = `${ this.page.title.rendered } — ${ this.$wpSiteName }`
+    this.$wpSiteTagline ? docTitle = `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
+                        : docTitle = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
     document.title = docTitle
 
     // assign ACF data
@@ -141,7 +141,7 @@ export default {
                 class='button-icon arrow-icon'>
           </button>
           <span class='home-page-cta-marginal-count'>
-            {{ pageNum }} / {{ pageCount }}
+            Page&nbsp;&nbsp;{{ pageNum }} / {{ pageCount }}
           </span>
         </div>
       </div>

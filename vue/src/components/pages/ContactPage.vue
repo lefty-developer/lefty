@@ -45,7 +45,7 @@ export default {
     this.assignData()
 
     // assign page title
-    document.title = `${ this.page.title.rendered } — ${ this.$wpSiteName }`
+    document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
   }
 }
 </script>

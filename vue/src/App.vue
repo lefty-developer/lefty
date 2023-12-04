@@ -1,5 +1,7 @@
 <script>
 // import router from './router/index.js'
+import 'animate.css'
+import '../public/css/style.css'
 import LoadingAnimation from './components/Loading.vue'
 
 
@@ -18,7 +20,7 @@ export default {
       status ? this.show = true : alert('Something\'s wrong...')
 
       // trigger new navigation once all routes are added in created() and app loading is finished...
-      // only use this if dynamic routes are added in App created() instead of main.js
+      // only use if dynamic routes are added in App created() instead of main.js
       // router.replace(router.currentRoute.value.path)
     }
   }
@@ -27,7 +29,7 @@ export default {
 
 <template>
   <!-- v-if number of routes is equal to number of WordPress pages -->
-  <LoadingAnimation v-if='this.$router.getRoutes().filter(obj => { return !obj.aliasOf }).length == $wpPages.length'
+  <LoadingAnimation v-if='this.$router.getRoutes().filter(obj => { return (!obj.aliasOf) }).length == $wpPages.length'
                     v-on:ready='status => finishedLoading(status)' />
   <router-view v-slot='{ Component }' v-if='show'>
     <transition name='fade' mode='out-in'>
