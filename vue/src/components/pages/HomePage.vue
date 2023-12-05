@@ -46,8 +46,7 @@ export default {
       // assign page data with global WordPress page object (filter pages by id)
       // filter page nums by dynamic router/wp data
       this.page = this.$wpPages.find(pageItem => pageItem.id == this.pageId)
-      this.pageNum = this.$route.matched.find(route => 
-                       route.path == this.$route.path).props.default.orderNo
+      this.pageNum = this.$route.matched.find(route => route.path == this.$route.path).props.default.orderNo
       this.pageCount = router.getRoutes().filter(obj => {
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
@@ -82,10 +81,8 @@ export default {
     this.assignData()
 
     // assign document title
-    let docTitle
-    this.$wpSiteTagline ? docTitle = `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
-                        : docTitle = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
-    document.title = docTitle
+    document.title = this.$wpSiteTagline ? `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
+                                         : `${ this.page.title.rendered } – ${ this.$wpSiteName }`
 
     // assign ACF data
     this.title = this.page.acf['lefty-home-title']

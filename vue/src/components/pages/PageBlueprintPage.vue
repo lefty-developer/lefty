@@ -58,5 +58,6 @@ export default {
             v-bind:toggleStatus='menuToggled'
             v-bind:parent='$options.name'
             class='animate__animated animate__fadeInDown' />
+    {{ pageNum }}
   </div>
 </template>
