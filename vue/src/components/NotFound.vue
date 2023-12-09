@@ -1,5 +1,5 @@
 <script>
-// import router from '../../router'
+import router from '../router'
 import NavMenu from './Menu.vue'
 import MenuButton from './MenuButton.vue'
 
@@ -21,14 +21,19 @@ export default {
   },
   created () {
     // assign page title
-    document.title = `404 Not Found – ${ this.$wpSiteName }`
+    document.title = `Page Not Found – ${ this.$wpSiteName }`
+  },
+  mounted () {
+    const catchAll = router.currentRoute.value.params.catchAll
+    catchAll == 'connection-error' ? console.log('API connection error')
+                                   : console.log('404 Page Not Found')
   }
 }
 </script>
 
 <template>
-  <div id='router-root'>
-    <h1>404 Not Found</h1>
+  <div id='router-root' class='not-found-wrap'>
+    <h1>Page Not Found</h1>
     <p>Sorry, the page you are looking for does not exist.</p>
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)' />

@@ -7,16 +7,16 @@ import NotFound from './components/NotFound.vue'
 // Create app
 const app = createApp(App)
 
+// Create catch-all route for 404 errors
+router.addRoute({
+  path: '/:catchAll(.*)*',
+  component: NotFound,
+  name: 'NotFound'
+})
+
 // Get WordPress data from WP REST API
 async function fetchWordPressData() {
   const wpSitePath = 'http://leftyvuewp.local'
-
-  // Catch-all route for 404 errors
-  router.addRoute({
-    path: '/:catchAll(.*)*',
-    component: NotFound,
-    name: 'NotFound'
-  })
 
   // Try-Catch block for error handling
   try {
@@ -71,8 +71,6 @@ async function fetchWordPressData() {
     app.use(router)
     app.mount('#app')
   } catch (error) {
-    console.error('An error involving the API has occurred: ', error)
-    alert('An error occurred when attempting to access the API server.')
     // Unbuilt router and app mount required to send to 404 page
     app.use(router).mount('#app')
     router.push({ name: 'NotFound', params: { catchAll: 'connection-error' } })
