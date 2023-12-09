@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import NotFound from './components/NotFound.vue'
 
 
 // Create app
@@ -10,13 +11,14 @@ const app = createApp(App)
 async function fetchWordPressData() {
   const wpSitePath = 'http://leftyvuewp.local'
 
-  // Fetch WordPress site data
+  // Try-Catch block for API error handling
   try {
+    // Access WordPress API
     // Promise.all to do multiple fetch requests 
     const [wpData, frontPage, wpPages] = await Promise.all([
-      fetch(`${wpSitePath}/wp-json`).then(response => response.json()),
-      fetch(`${wpSitePath}/wp-json/wp/v2/frontpage`).then(response => response.json()),
-      fetch(`${wpSitePath}/wp-json/wp/v2/pages`).then(response => response.json())
+      fetch(`${ wpSitePath }/wp-json`).then(response => response.json()),
+      fetch(`${ wpSitePath }/wp-json/wp/v2/frontpage`).then(response => response.json()),
+      fetch(`${ wpSitePath }/wp-json/wp/v2/pages`).then(response => response.json())
     ])
 
     // Apply global pages property with WordPress data
@@ -39,8 +41,8 @@ async function fetchWordPressData() {
 
       // Build Route Object
       const pageAsRoute = {
-        path: pageItem.id == frontPage.id ? '/' : `/${pageItem.slug}`,
-        alias: pageItem.id == frontPage.id ? ['/home', '/home/'] : `/${pageItem.slug}/`,
+        path: pageItem.id == frontPage.id ? '/' : `/${ pageItem.slug }`,
+        alias: pageItem.id == frontPage.id ? ['/home', '/home/'] : `/${ pageItem.slug }/`,
         // strict: true needed to make alias work if alias is the same as path + a trailing slash
         // this is so links from the WP dashboard to the front-end will work
         // in vue 2 it's pathToRegexpOptions: { strict: false }
@@ -56,6 +58,13 @@ async function fetchWordPressData() {
 
       // Push Route Object to Router
       router.addRoute(pageAsRoute)
+    })
+
+    // Catch-all route for 404 errors
+    router.addRoute({
+      path: '/:catchAll(.*)',
+      component: NotFound,
+      name: 'NotFound'
     })
 
     // Use built router on app, then mount app

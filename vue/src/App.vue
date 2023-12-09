@@ -28,8 +28,8 @@ export default {
 </script>
 
 <template>
-  <!-- v-if number of routes is equal to number of WordPress pages -->
-  <LoadingAnimation v-if='this.$router.getRoutes().filter(obj => { return (!obj.aliasOf) }).length == $wpPages.length'
+  <!-- v-if number of routes is equal to number of WordPress pages (+1 to account for 404/Not Found route) -->
+  <LoadingAnimation v-if='this.$router.getRoutes().filter(obj => { return (!obj.aliasOf) }).length == $wpPages.length + 1'
                     v-on:ready='status => finishedLoading(status)' />
   <router-view v-slot='{ Component }' v-if='show'>
     <transition name='fade' mode='out-in'>
