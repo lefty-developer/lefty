@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <div id='router-root' v-if='$wpPages'>
+  <div id='router-root'>
     <h1>404 Not Found</h1>
     <p>Sorry, the page you are looking for does not exist.</p>
     <NavMenu v-bind:toggle='menuToggled'

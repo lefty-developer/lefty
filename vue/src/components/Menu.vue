@@ -19,7 +19,7 @@ export default {
   methods: {
     closeMenu () {
       // Testing against the toggle prop ensures the menu has only been opened through the UI
-      this.toggle ? this.$emit('close', true) : alert('Something\'s wrong...')
+      this.toggle ? this.$emit('close', true) : this.$router.push({ name: 'NotFound' })
     }
   },
   mounted () {

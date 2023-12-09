@@ -11,7 +11,14 @@ const app = createApp(App)
 async function fetchWordPressData() {
   const wpSitePath = 'http://leftyvuewp.local'
 
-  // Try-Catch block for API error handling
+  // Catch-all route for 404 errors
+  router.addRoute({
+    path: '/:catchAll(.*)*',
+    component: NotFound,
+    name: 'NotFound'
+  })
+
+  // Try-Catch block for error handling
   try {
     // Access WordPress API
     // Promise.all to do multiple fetch requests 
@@ -60,19 +67,15 @@ async function fetchWordPressData() {
       router.addRoute(pageAsRoute)
     })
 
-    // Catch-all route for 404 errors
-    router.addRoute({
-      path: '/:catchAll(.*)',
-      component: NotFound,
-      name: 'NotFound'
-    })
-
     // Use built router on app, then mount app
     app.use(router)
     app.mount('#app')
   } catch (error) {
     console.error('An error involving the API has occurred: ', error)
-    alert('An error occurred when attempting to access the API.')
+    alert('An error occurred when attempting to access the API server.')
+    // Unbuilt router and app mount required to send to 404 page
+    app.use(router).mount('#app')
+    router.push({ name: 'NotFound', params: { catchAll: 'connection-error' } })
   }
 }
 
