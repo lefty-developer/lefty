@@ -11,6 +11,7 @@ export default {
   name: 'NotFound',
   data () {
     return {
+      errorType: String,
       menuToggled: false
     }
   },
@@ -20,26 +21,31 @@ export default {
     } 
   },
   created () {
-    // assign page title
-    document.title = `Page Not Found – ${ this.$wpSiteName }`
-  },
-  mounted () {
+    // assign errorType 
     const catchAll = router.currentRoute.value.params.catchAll
-    catchAll == 'connection-error' ? console.log('API connection error')
-                                   : console.log('404 Page Not Found')
+    this.errorType = catchAll == 'connection-error' ? 'API connection error' : false
+
+    // assign page title
+    document.title = this.errorType ? `Connection Error` : `Page Not Found`
+    document.title += ` – ${ this.$wpSiteName }`
   }
 }
 </script>
 
 <template>
-  <div id='router-root' class='not-found-wrap'>
+  <div v-if='!errorType' id='router-root' class='not-found-wrap'>
     <h1>Page Not Found</h1>
-    <p>Sorry, the page you are looking for does not exist.</p>
+    <p>Sorry, it seems the page you are looking for does not exist.</p>
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)' />
     <MenuButton v-on:toggle='value => toggleMenu(value)'
             v-bind:toggleStatus='menuToggled'
             v-bind:parent='$options.name'
             class='animate__animated animate__fadeInDown' />
+  </div>
+
+  <div v-else id='router-root' class='not-found-wrap connection-error'>
+    <h1>Connection Error</h1>
+    <p>We encountered an issue with the server, please try again later.</p>
   </div>
 </template>
