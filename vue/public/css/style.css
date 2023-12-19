@@ -37,28 +37,28 @@
 .fade-leave-to {
   opacity: 0; }
 
-html {
-  height: 100%; }
+html, body {
+  width: 100%;
+  height: 0.125rem;
+  min-height: 100%; }
 
 body {
   background: #fafafa;
   font-family: 'Commissioner', sans-serif;
   font-size: 1.125rem;
-  width: 100%;
-  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   line-height: 1.67em; }
   body #app {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center; }
     body #app #router-root {
       width: 100%;
-      min-height: 100vh;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center; }
@@ -169,7 +169,7 @@ body {
             color: #b1afa8; }
   body #home-page-wrap {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     background: #FAFAFA;
     display: flex;
     justify-content: space-between;
@@ -177,7 +177,7 @@ body {
     padding: 5.625rem 0; }
     body #home-page-wrap .home-page-image-wrap {
       width: 40%;
-      min-height: 100%; }
+      height: 100%; }
       body #home-page-wrap .home-page-image-wrap .home-page-image {
         width: 100%;
         height: 100%;
@@ -186,7 +186,7 @@ body {
         background-color: rgba(0, 0, 0, 0.1); }
     body #home-page-wrap .home-page-content {
       width: 60%;
-      min-height: 100%;
+      height: 100%;
       padding: 0 clamp(2rem, 9.375vw, 9.375rem);
       display: flex;
       flex-direction: column;

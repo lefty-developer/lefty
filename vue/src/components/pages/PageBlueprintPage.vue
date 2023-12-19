@@ -56,8 +56,7 @@ export default {
              v-on:close='value => toggleMenu(!value)' />
     <MenuButton v-on:toggle='value => toggleMenu(value)'
             v-bind:toggleStatus='menuToggled'
-            v-bind:parent='$options.name'
-            class='animate__animated animate__fadeInDown' />
+            v-bind:parent='$options.name' />
     {{ pageNum }}
   </div>
 </template>

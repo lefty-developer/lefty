@@ -31,7 +31,6 @@ export default {
       menuToggled: false,
       copyVisible: String,
       copyAnimation: String,
-      renderMarginal: false,
       marginalVisible: String,
       marginalAnimation: String
     }
@@ -93,7 +92,6 @@ export default {
   },
   mounted () {
     // Inits for mount animations
-    setTimeout(() => this.renderMarginal = true, 200)
     this.mountAnimations()
   }
 }
@@ -131,7 +129,6 @@ export default {
           <p class='home-page-body'>{{ body }}</p>
         </div>
         <div class='home-page-cta-marginal animate__animated'
-             v-if='renderMarginal'
              v-bind:class='[marginalVisible, marginalAnimation]'>
           <button v-on:click='nextPage()' class='home-page-cta'>
             <img v-bind:src='icon'

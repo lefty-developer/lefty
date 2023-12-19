@@ -26,7 +26,7 @@ export default {
     this.errorType = catchAll == 'connection-error' ? 'API connection error' : false
 
     // assign page title
-    document.title = this.errorType ? `Connection Error` : `Page Not Found`
+    document.title = this.errorType ? 'Connection Error' : 'Page Not Found'
     document.title += ` – ${ this.$wpSiteName }`
   }
 }
@@ -40,8 +40,7 @@ export default {
              v-on:close='value => toggleMenu(!value)' />
     <MenuButton v-on:toggle='value => toggleMenu(value)'
             v-bind:toggleStatus='menuToggled'
-            v-bind:parent='$options.name'
-            class='animate__animated animate__fadeInDown' />
+            v-bind:parent='$options.name' />
   </div>
 
   <div v-else id='router-root' class='not-found-wrap connection-error'>

@@ -1,16 +1,15 @@
 #home-page-wrap {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background: #FAFAFA;
   display: flex;
   justify-content: space-between;
-  // overflow-x: hidden;
   overflow: hidden;
   padding: 5.625rem 0;
 
   .home-page-image-wrap {
     width: 40%;
-    min-height: 100%;
+    height: 100%;
 
     .home-page-image {
       width: 100%;
@@ -23,12 +22,10 @@
 
   .home-page-content {
     width: 60%;
-    min-height: 100%;
+    height: 100%;
     padding: 0 clamp(2rem, 9.375vw, 9.375rem);
     display: flex;
     flex-direction: column;
-    // breaks scroll on home for some reason
-    // justify-content: flex-end;
     align-items: center;
 
     .home-page-navbar {
@@ -41,7 +38,6 @@
         line-height: 0;
 
         .home-logo {
-          // width: 7.5rem;
           width: 8rem;
         }
       }
@@ -62,20 +58,15 @@
 
       h2.home-page-subtitle {
         color: #323232;
-        // font-size: 1rem;
         font-size: 1.125rem;
-        // line-height: 1.3em;
         line-height: 1.4em;
-        // letter-spacing: 0.28em;
         letter-spacing: 0.28em;
         font-weight: 800;
         text-transform: uppercase;
         align-self: flex-end;
 
         .home-page-subtitle-slice {
-          // color: #bdbdb6;
           color: #b1afa8;
-          // color: #2f65cd;
         }
       }
   
@@ -83,7 +74,6 @@
         font-family: 'Roboto', sans-serif;
         color: #323232;
         font-style: italic;
-        // font-size: 5.25rem;
         font-size: clamp(2.125rem, 5.25vw, 5.25rem);
         text-align: right;
         line-height: 1.05em;
@@ -109,7 +99,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      // overflow: auto;
       visibility: hidden;
 
       &.marginal-visible {
@@ -123,8 +112,6 @@
         text-transform: uppercase;
         color: #323232;
         letter-spacing: 0.325em;
-        // height: 3.5rem;
-        // line-height: 3.5rem;
       }
     }
   }

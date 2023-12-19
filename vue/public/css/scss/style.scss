@@ -52,16 +52,16 @@
 }
 
 // Base site styles
-html {
-  height: 100%;
+html, body {
+  width: 100%;
+  height: 0.125rem;
+  min-height: 100%;
 }
 
 body {
   background: #fafafa;
   font-family: 'Commissioner', sans-serif;
   font-size: 1.125rem;
-  width: 100%;
-  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,14 +69,14 @@ body {
 
   #app {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
     #router-root {
       width: 100%;
-      min-height: 100vh;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -88,7 +88,6 @@ body {
       padding: 0 1.75rem;
       outline: none;
       background: #D5D5D0;
-      // background: #D0D2D5;
       border: none;
       display: flex;
       align-items: center;
@@ -107,7 +106,6 @@ body {
 
       &:focus {
         outline: none;
-        // background: transparent;
         border: none;
       }
     

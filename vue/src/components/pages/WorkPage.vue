@@ -54,9 +54,10 @@ export default {
   <div id='router-root' v-if='$wpPages'>
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)' />
-    <MenuButton v-on:toggle='value => toggleMenu(value)'
+    <div id='work-page-wrap'>
+      <MenuButton v-on:toggle='value => toggleMenu(value)'
             v-bind:toggleStatus='menuToggled'
-            v-bind:parent='$options.name'
-            class='animate__animated animate__fadeInDown' />
+            v-bind:parent='$options.name' />
+    </div>
   </div>
 </template>
