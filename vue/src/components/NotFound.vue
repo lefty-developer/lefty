@@ -11,7 +11,7 @@ export default {
   name: 'NotFound',
   data () {
     return {
-      errorType: String,
+      errorType: '',
       menuToggled: false
     }
   },

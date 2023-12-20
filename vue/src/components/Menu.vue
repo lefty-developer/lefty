@@ -11,9 +11,9 @@ export default {
       icon: require('../assets/icons/close.svg'),
 
       // Misc.
-      show: Boolean,
-      inAnimation: String,
-      outAnimation: String
+      show: false,
+      inAnimation: '',
+      outAnimation: ''
     }
   },
   methods: {

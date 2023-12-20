@@ -17,22 +17,22 @@ export default {
       icon: require('../../assets/icons/down-arrow.svg'),
 
       // WP Page Data
-      pageId: Number,
-      page: Object,
-      pageNum: Number,
-      pageCount: Number,
-      title: String,
-      subtitle: String,
-      lastWord: String,
-      body: String,
-      image: String,
+      page: {},
+      pageId: 0,
+      pageNum: 0,
+      pageCount: 0,
+      title: '',
+      subtitle: '',
+      lastWord: '',
+      body: '',
+      image: '',
 
       // Misc. 
       menuToggled: false,
-      copyVisible: String,
-      copyAnimation: String,
-      marginalVisible: String,
-      marginalAnimation: String
+      copyVisible: '',
+      copyAnimation: '',
+      marginalVisible: '',
+      marginalAnimation: ''
     }
   },
   methods: {
@@ -58,15 +58,15 @@ export default {
       this.menuToggled = value
     },
     mountAnimations () {
-      setTimeout(() => {
+      // setTimeout(() => {
         this.copyVisible = 'copy-visible'
         this.copyAnimation = 'animate__fadeInRight'
-      }, 400)
+      // }, 400)
 
-      setTimeout(() => {
+      // setTimeout(() => {
         this.marginalVisible = 'marginal-visible'
         this.marginalAnimation = 'animate__fadeInUp'
-      }, 800)
+      // }, 800)
     },
     nextPage () {
       const menuItems = router.getRoutes().filter(obj => { return (!obj.aliasOf) && (obj.props.default.addToMenu == true) })

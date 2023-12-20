@@ -11,21 +11,21 @@ export default {
 
       // Misc.
       show: true,
-      inAnimation: String,
-      outAnimation: String,
-      repeatAnimation: String
+      inAnimation: '',
+      outAnimation: '',
+      repeatAnimation: ''
     }
   },
   methods: {
     showParent () {
       setTimeout(() => {
-        this.repeatAnimation = false
+        // this.repeatAnimation = false
         this.outAnimation = 'animate__fadeOutDown'
-      }, 2000)
+      }, 400)
       setTimeout(() => {
         this.show = false
         this.$emit('ready', !this.show)
-      }, 2750)
+      }, 1200)
     }
   },
   created () {
@@ -36,7 +36,7 @@ export default {
     this.inAnimation = 'animate__zoomInDown'
     setTimeout(() => {
       this.inAnimation = false
-      this.repeatAnimation = 'animate__bounce animate__infinite'
+      // this.repeatAnimation = 'animate__bounce animate__infinite'
       this.showParent()
     }, 1000)
   }

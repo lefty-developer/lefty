@@ -13,10 +13,10 @@ export default {
   data () {
     return {
       // WP Page Data
-      pageId: Number,
-      page: Object,
-      pageNum: Number,
-      pagesCount: Number,
+      page: {},
+      pageId: 0,
+      pageNum: 0,
+      pagesCount: 0,
 
       // Misc.
       menuToggled: false
