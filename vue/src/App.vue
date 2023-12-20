@@ -21,9 +21,7 @@ export default {
         this.show = true
       } else {
         this.$router.push({ name: 'NotFound' })
-        setTimeout(() => {
-          this.show = true
-        }, 500)
+        this.show = true
       }
       
       // trigger new navigation once all routes are added in created() and app loading is finished...

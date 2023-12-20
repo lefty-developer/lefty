@@ -17,6 +17,8 @@ export default {
       pageId: 0,
       pageNum: 0,
       pagesCount: 0,
+      password: false,
+      authenticated: true,
 
       // Misc.
       menuToggled: false
@@ -37,15 +39,32 @@ export default {
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
     },
+    async authenticate () {
+      // test for password protection
+      this.password = this.page.content.protected
+      if (this.password) {
+        this.authenticated = false
+        const userInput = prompt('Please enter the password')
+        const unlockPath = `${ this.$wpSitePath}/wp-json/wp/v2/pages/${ this.pageId }?password=${ userInput }`
+
+        const authResponse = await fetch(unlockPath)
+
+        if (authResponse.ok && userInput) {
+          this.authenticated = true
+          // assign page title
+          document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
+        } else {
+          router.push({ name: 'NotFound' })
+        }
+      }
+    },
     toggleMenu (value) {
       this.menuToggled = value
     } 
   },
   created () {
     this.assignData()
-
-    // assign page title
-    document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
+    this.authenticate()
   }
 }
 </script>
@@ -54,9 +73,10 @@ export default {
   <div id='router-root' v-if='$wpPages'>
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)' />
-    <MenuButton v-on:toggle='value => toggleMenu(value)'
+    <div id='blueprint-page-wrap' v-if='authenticated'>
+      <MenuButton v-on:toggle='value => toggleMenu(value)'
             v-bind:toggleStatus='menuToggled'
             v-bind:parent='$options.name' />
-    {{ pageNum }}
+    </div>
   </div>
 </template>

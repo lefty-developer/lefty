@@ -17,6 +17,7 @@ router.addRoute({
 // Get WordPress data from WP REST API
 async function fetchWordPressData() {
   const wpSitePath = 'http://leftyvuewp.local'
+  app.config.globalProperties.$wpSitePath = wpSitePath
 
   // Try-Catch block for error handling
   try {

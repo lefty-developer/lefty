@@ -49,6 +49,7 @@ export default {
       this.pageCount = router.getRoutes().filter(obj => {
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
+
     },
     sliceSubtitle () {
       this.lastWord = this.subtitle.split(' ').pop()
