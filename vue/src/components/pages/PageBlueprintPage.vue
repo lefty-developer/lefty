@@ -54,10 +54,11 @@ export default {
           // assign page title
           document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
         } else {
-          router.push({ name: 'NotFound' })
+          router.push({ name: 'NotFound', params: { catchAll: 'unauthorized' } })
         }
       }
     },
+    // communicates between Menu and MenuButton components
     toggleMenu (value) {
       this.menuToggled = value
     } 

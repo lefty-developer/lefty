@@ -21,13 +21,19 @@ export default {
     } 
   },
   created () {
-    // assign errorType 
+    // assign errorType, check for specific errors
     const catchAll = router.currentRoute.value.params.catchAll
-    this.errorType = catchAll == 'connection-error' ? 'API connection error' : false
+    if (catchAll == 'connection-error') {
+        this.errorType = 'Connection Error'
+    } else if (catchAll == 'unauthorized') {
+        this.errorType = 'Unauthorized'
+    } else {
+      this.errorType = false
+    }
 
     // assign page title
-    document.title = this.errorType ? 'Connection Error' : 'Page Not Found'
-    document.title += ` – ${ this.$wpSiteName }`
+    document.title = this.errorType ? this.errorType : 'Page Not Found'
+    document.title += this.errorType == 'Connection Error' ? '' : ` – ${ this.$wpSiteName }`
   }
 }
 </script>
@@ -43,8 +49,13 @@ export default {
             v-bind:parent='$options.name' />
   </div>
 
-  <div v-else id='router-root' class='not-found-wrap connection-error'>
+  <div v-else-if='errorType == "Connection Error"' id='router-root' class='not-found-wrap connection-error'>
     <h1>Connection Error</h1>
     <p>We encountered an issue with the server, please try again later.</p>
+  </div>
+
+  <div v-else-if='errorType == "Unauthorized"' id='router-root' class='not-found-wrap unauthorized'>
+    <h1>Unauthorized Credentials</h1>
+    <p>You have not given the proper credentials to access this page.</p>
   </div>
 </template>

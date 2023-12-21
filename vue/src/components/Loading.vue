@@ -2,7 +2,8 @@
 export default {
   name: 'LoadingAnimation',
   props: {
-    wpData: Object
+    wpData: Object,
+    connectionError: Boolean
   },
   data () {
     return {
@@ -30,7 +31,7 @@ export default {
   },
   created () {
     // apply site name from global WordPress data props set on main.js
-    document.title = this.$wpSiteName
+    document.title = this.$wpSiteName ? this.$wpSiteName : 'Resolving issues...'
   },
   mounted () {
     this.inAnimation = 'animate__zoomInDown'
