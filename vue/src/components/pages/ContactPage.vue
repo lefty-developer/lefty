@@ -19,7 +19,8 @@ export default {
       pagesCount: Number,
 
       // Misc.
-      menuToggled: false
+      menuToggled: false,
+      form: ''
     }
   },
   methods: {
@@ -37,12 +38,18 @@ export default {
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
     },
+    async getForm () {
+      const formPath = `${ this.$wpSitePath }/wp-json/vord/v1/contact-form-maker/`
+      const form = await fetch(formPath).then(response => response.json())
+      this.form = form
+    },
     toggleMenu (value) {
       this.menuToggled = value
     } 
   },
   created () {
     this.assignData()
+    this.getForm()
 
     // assign page title
     document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
@@ -57,5 +64,6 @@ export default {
     <MenuButton v-on:toggle='value => toggleMenu(value)'
             v-bind:toggleStatus='menuToggled'
             v-bind:parent='$options.name' />
+    
   </div>
 </template>

@@ -1,25 +1,17 @@
 <?php
-// add_action( 'admin_head-edit.php', 'wpse_59871_script_enqueuer' );
+    function get_plugin_output() {
+        ob_start();
+        if (function_exists("wd_contact_form_maker")) {
+            wd_contact_form_maker(1, "embedded"); 
+        }
+        $output = ob_get_clean();
+        return new WP_REST_Response($output, 200);
+    }
 
-// remove Password input field from Pages Quick Edit panels
-function wpse_59871_script_enqueuer() {    
-
-      //  /wp-admin/edit.php?post_type=post
-      //  /wp-admin/edit.php?post_type=page
-      //  /wp-admin/edit.php?post_type=cpt  == page in this example
-
-    global $current_screen;
-    if( 'edit-page' != $current_screen->id )
-        return;
-    ?>
-    <script type="text/javascript">         
-        jQuery(document).ready( function($) {
-          $( "input[class*='password']" ).each(function (i) {
-              $(this).parent().parent().next().remove();
-              $(this).parent().parent().remove();
-          })
-        });    
-    </script>
-    <?php
-}
+    add_action('rest_api_init', function () {
+        register_rest_route('vord/v1', '/contact-form-maker/', array(
+            'methods' => 'GET',
+            'callback' => 'get_plugin_output',
+        ));
+    });
 ?>

@@ -45,7 +45,7 @@ export default {
       if (this.password) {
         this.authenticated = false
         const userInput = prompt('Please enter the password')
-        const unlockPath = `${ this.$wpSitePath}/wp-json/wp/v2/pages/${ this.pageId }?password=${ userInput }`
+        const unlockPath = `${ this.$wpSitePath }/wp-json/wp/v2/pages/${ this.pageId }?password=${ userInput }`
 
         const authResponse = await fetch(unlockPath)
 
