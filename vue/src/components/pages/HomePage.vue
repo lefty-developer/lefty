@@ -14,7 +14,8 @@ export default {
     return {
       // Assets 
       logo: require('../../assets/logo@4x.png'),
-      icon: require('../../assets/icons/down-arrow.svg'),
+      contactIcon: require('../../assets/icons/sent.png'),
+      arrowIcon: require('../../assets/icons/down-arrow.svg'),
 
       // WP Page Data
       page: {},
@@ -37,10 +38,12 @@ export default {
   },
   methods: {
     assignData () {
-      // assign pageId from dynamically created routes based on WP page data (located at ../../main.js)
-      this.pageId = router.currentRoute.value.matched.find(route => 
-                      route.path == router.currentRoute.value.path
-                    ).props.default.wpPageId
+      // assign pageId from dynamically-created routes
+      // object destructuring
+      const {path, matched} = router.currentRoute.value;
+      // optional chaining (?.) and nullish coalescing (||)
+      const {wpPageId} = matched.find(route => route.path === path)?.props?.default || {};
+      this.pageId = wpPageId;
 
       // assign page data with global WordPress page object (filter pages by id)
       // filter page nums by dynamic router/wp data
@@ -70,10 +73,16 @@ export default {
       // }, 800)
     },
     nextPage () {
-      const menuItems = router.getRoutes().filter(obj => { return (!obj.aliasOf) && (obj.props.default.addToMenu == true) })
-                          .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)
-      const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId == this.pageId)
-      router.push(menuItems[currentRouteIndex + 1].path)
+      const menuItems = router.getRoutes()
+        .filter(route => !route.aliasOf && route.props?.default?.addToMenu)
+        .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo);
+
+      const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId === this.pageId);
+      const nextRoute = menuItems[currentRouteIndex + 1];
+
+      if (nextRoute) {
+        router.push(nextRoute.path);
+      }
     }
   },
   created () {
@@ -131,8 +140,16 @@ export default {
         </div>
         <div class='home-page-cta-marginal animate__animated'
              v-bind:class='[marginalVisible, marginalAnimation]'>
-          <button v-on:click='nextPage()' class='home-page-cta'>
-            <img v-bind:src='icon'
+          <button v-on:click='this.$router.push({ path: "/contact" })' class='home-page-cta'>
+            <span class='button-text'>Contact</span>
+            <div class='button-item-gap'></div>
+            <img v-bind:src='contactIcon'
+                class='button-icon arrow-icon'>
+          </button>
+          <button v-on:click='nextPage()' class='home-page-cta button-outline'>
+            <span class='button-text'>My Work</span>
+            <div class='button-item-gap'></div>
+            <img v-bind:src='arrowIcon'
                 class='button-icon arrow-icon'>
           </button>
           <span class='home-page-cta-marginal-count'>

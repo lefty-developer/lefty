@@ -40,8 +40,8 @@ export default {
     },
     async getForm () {
       const formPath = `${ this.$wpSitePath }/wp-json/vord/v1/contact-form-maker/`
-      const form = await fetch(formPath).then(response => response.json())
-      this.form = form
+      this.form = await fetch(formPath).then(response => response.json())
+      console.log(this.form)
     },
     toggleMenu (value) {
       this.menuToggled = value

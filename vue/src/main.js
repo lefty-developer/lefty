@@ -69,10 +69,9 @@ async function fetchWordPressData() {
     })
 
     // Use built router on app, then mount app
-    app.use(router)
-    app.mount('#app')
+    app.use(router).mount('#app')
   } catch (error) {
-    // Unbuilt router and app mount required to send to 404 page
+    // Unbuilt router and app mount required to send to api connection error page
     app.use(router).mount('#app')
     router.push({ name: 'NotFound', params: { catchAll: 'connection-error' } })
   }
