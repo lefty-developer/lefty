@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  padding: 5.625rem 0;
+  padding: 5.375rem 0;
 
   .home-page-image-wrap {
     width: 40%;
@@ -49,7 +49,7 @@
       flex-grow: 1;
       justify-content: flex-end;
       max-width: 41.375rem;
-      margin: 7rem 0;
+      margin: 6.75rem 0;
       visibility: hidden;
 
       &.copy-visible {
@@ -60,7 +60,7 @@
         color: #323232;
         font-size: 1.125rem;
         line-height: 1.4em;
-        letter-spacing: 0.28em;
+        letter-spacing: 0.26em;
         font-weight: 800;
         text-transform: uppercase;
         align-self: flex-end;
@@ -77,10 +77,10 @@
         font-style: italic;
         font-size: clamp(2.125rem, 5.25vw, 5.25rem);
         text-align: right;
-        line-height: 1.05em;
+        line-height: 1.0125em;
         letter-spacing: 0;
         font-weight: 900;
-        margin-top: 1.5rem;
+        margin-top: 1.625rem;
         align-self: flex-end;
       }
   
@@ -89,8 +89,9 @@
         font-size: 1.125rem;
         line-height: 1.67em;
         text-align: right;
-        margin-top: 2rem;
+        margin-top: 2.125rem;
         align-self: flex-end;
+        font-weight: 400;
       } 
     }
 
@@ -110,7 +111,7 @@
         &:first-child {
 
           img {
-            margin-right: -0.25rem;
+            margin: 0 -0.25rem 0 -0.125rem;
           }
         }
 
@@ -131,6 +132,14 @@
         color: #323232;
         letter-spacing: 0.325em;
         margin-left: auto;
+        margin-right: -0.75rem;
+        padding: 0.75rem;
+        transition: 300ms ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          color: #929292;
+        }
       }
     }
   }

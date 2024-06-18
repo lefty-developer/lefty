@@ -46,6 +46,7 @@ export default {
   <div v-if='show' class='menu animate__animated animate__fast'
        v-bind:class='[inAnimation, outAnimation]'>
     <div class='menu-header'>
+      <p class='menu-header-text'>Menu</p>
       <button v-on:click='closeMenu()'
             class='menu-close-button'>
         <img v-bind:src='icon'

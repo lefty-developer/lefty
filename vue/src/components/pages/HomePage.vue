@@ -14,7 +14,7 @@ export default {
     return {
       // Assets 
       logo: require('../../assets/logo@4x.png'),
-      contactIcon: require('../../assets/icons/sent.png'),
+      contactIcon: require('../../assets/icons/contact.png'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
 
       // WP Page Data
@@ -33,7 +33,8 @@ export default {
       copyVisible: '',
       copyAnimation: '',
       marginalVisible: '',
-      marginalAnimation: ''
+      marginalAnimation: '',
+      deltaCounter: 0
     }
   },
   methods: {
@@ -59,6 +60,7 @@ export default {
       this.subtitle = this.subtitle.split(' ').slice(0, -1).join(' ')
     },
     toggleMenu (value) {
+      console.log(value)
       this.menuToggled = value
     },
     mountAnimations () {
@@ -75,15 +77,35 @@ export default {
     nextPage () {
       const menuItems = router.getRoutes()
         .filter(route => !route.aliasOf && route.props?.default?.addToMenu)
-        .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo);
+        .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)
 
-      const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId === this.pageId);
-      const nextRoute = menuItems[currentRouteIndex + 1];
+      const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId === this.pageId)
+      const nextRoute = menuItems[currentRouteIndex + 1]
 
       if (nextRoute) {
-        router.push(nextRoute.path);
+        router.push(nextRoute.path)
       }
-    }
+    },
+    handleScroll (event) {
+      const delta = Math.sign(event.deltaY)
+      if (this.deltaCounter > 0 && (this.deltaCounter + delta < this.deltaCounter)) {
+        // if user scrolled down a little already but then scrolled up without activating nextPage()
+        // reset delta counter
+        this.deltaCounter = 0
+      } else {
+        this.deltaCounter += delta
+      }
+      console.log("Delta Counter: ", this.deltaCounter)
+
+      if (this.deltaCounter > 2) {
+        // Activate nextPage() method
+        // Use a click event on the next page button because directly manipulating the router with a wheel event creates inescapable bugs with window.history
+        this.$refs.nextRouteButton.click()
+      } else if (this.deltaCounter < 0) {
+        // force reset delta counter if user first tries scrolling up without scrolling down
+        this.deltaCounter = 0
+      }
+    } 
   },
   created () {
     // assign WP page data associated with this route/component
@@ -108,7 +130,7 @@ export default {
 </script>
 
 <template>
-  <div id='router-root' v-if='$wpPages'>
+  <div id='router-root' v-if='$wpPages' v-on:wheel='handleScroll'>
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)'
              v-bind:parent='$options.name' />
@@ -124,8 +146,9 @@ export default {
             <img class='home-logo' 
                  v-bind:src='logo' v-if='logo' />
           </router-link>
-          <MenuButton v-on:toggle='value => toggleMenu(value)'
-                      v-bind:toggleStatus='menuToggled' />
+          <!-- <MenuButton v-on:toggle='value => toggleMenu(value)'
+                      v-bind:toggleStatus='menuToggled' /> -->
+          <MenuButton v-on:click='toggleMenu(true)' />
         </div>
         <div class='home-page-copy animate__animated'
              v-bind:class='[copyVisible, copyAnimation]'>
@@ -136,7 +159,14 @@ export default {
             </span>
           </h2>
           <h1 class='home-page-title' v-html='title'></h1>
-          <p class='home-page-body'>{{ body }}</p>
+          <p class='home-page-body'>
+            {{ body }}
+            <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-top: 1rem;'>
+              <!-- Try scrolling down to begin your navigation. -->
+              Try scrolling down as a way to navigate ahead.
+              <!-- Try scrolling as a way to operate the navigation. -->
+            </span>
+          </p>
         </div>
         <div class='home-page-cta-marginal animate__animated'
              v-bind:class='[marginalVisible, marginalAnimation]'>
@@ -146,14 +176,14 @@ export default {
             <img v-bind:src='contactIcon'
                 class='button-icon arrow-icon'>
           </button>
-          <button v-on:click='nextPage()' class='home-page-cta button-outline'>
+          <button ref='nextRouteButton' v-on:click='nextPage()' class='home-page-cta button-outline'>
             <span class='button-text'>My Work</span>
             <div class='button-item-gap'></div>
             <img v-bind:src='arrowIcon'
                 class='button-icon arrow-icon'>
           </button>
-          <span class='home-page-cta-marginal-count'>
-            Page&nbsp;&nbsp;{{ pageNum }} / {{ pageCount }}
+          <span class='home-page-cta-marginal-count' v-on:click='toggleMenu(true)'>
+            {{ page.title.rendered }}&nbsp;&nbsp;{{ pageNum }} / {{ pageCount }}
           </span>
         </div>
       </div>

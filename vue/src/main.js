@@ -42,7 +42,6 @@ async function fetchWordPressData() {
       const componentName = pageItem.title.rendered.replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase())
       // code split/lazy load component by component name 
       const pageComponent = () => import(`./components/pages/${ componentName }Page.vue`)
-
       // Check ACF field add-to-menu
       // Used for route display on ./components/Menu.vue
       const addToMenu = pageItem.acf['add-to-menu'] ? pageItem.acf['add-to-menu'].value : false

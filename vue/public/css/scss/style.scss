@@ -160,10 +160,12 @@ body {
           &::before {
             animation-play-state: running;
             border-color: #C6C6C4;
+            // background-color: #C6C6C4;
           }
         }
 
         &::before {
+          background: transparent;
           position: absolute;
           z-index: 0;
           content: '';
@@ -172,7 +174,7 @@ body {
           transform: translate(-50%, -50%);
           border: 0.125rem solid transparent;
           border-radius: calc(var(--height) * 0.5);
-          animation: border-pulsate 1s ease-in-out infinite;
+          animation: border-pulsate 800ms ease-in-out infinite;
           animation-play-state: paused;
           transition: 300ms ease-in-out;
         }
