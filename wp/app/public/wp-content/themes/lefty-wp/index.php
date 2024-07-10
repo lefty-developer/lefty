@@ -1,5 +1,7 @@
 <?php
-    header("Refresh:0; url=http://localhost:8080");
+    $pathAfterDomain = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    
+    header("Refresh:0; url=http://localhost:8080" . $pathAfterDomain);
 ?>
 <!DOCTYPE html>
 <html lang="">

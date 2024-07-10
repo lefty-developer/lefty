@@ -24,6 +24,7 @@ export default {
   },
   mounted () {
     this.show = this.toggle
+    console.log('Page: ', this.parent)
   },
   watch: {
     // Watches the toggle prop
@@ -49,6 +50,8 @@ export default {
       <p class='menu-header-text'>Menu</p>
       <button v-on:click='closeMenu()'
             class='menu-close-button'>
+        <span class='button-text'>Exit</span>
+        <div class='button-item-gap'></div>
         <img v-bind:src='icon'
             class='button-icon close-icon' />
       </button>

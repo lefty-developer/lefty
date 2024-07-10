@@ -4,7 +4,7 @@
   background: #FAFAFA;
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
+  overflow-x: hidden;
   padding: 5.375rem 0;
 
   .home-page-image-wrap {
@@ -17,13 +17,15 @@
       background-size: cover;
       background-position: center right;
       background-color: rgba(0, 0, 0, .10);
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
     }
   }
 
   .home-page-content {
     width: 60%;
     height: 100%;
-    padding: 0 clamp(2rem, 9.375vw, 9.375rem);
+    padding: 0 clamp(2rem, 9vw, 9rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,7 +40,7 @@
         line-height: 0;
 
         .home-logo {
-          width: 8rem;
+          width: 8.5rem;
         }
       }
     }
@@ -64,6 +66,7 @@
         font-weight: 800;
         text-transform: uppercase;
         align-self: flex-end;
+        margin-bottom: 0.125rem;
 
         .home-page-subtitle-slice {
           // color: #b1afa8;

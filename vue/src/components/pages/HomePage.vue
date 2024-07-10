@@ -49,7 +49,7 @@ export default {
       // assign page data with global WordPress page object (filter pages by id)
       // filter page nums by dynamic router/wp data
       this.page = this.$wpPages.find(pageItem => pageItem.id == this.pageId)
-      this.pageNum = this.$route.matched.find(route => route.path == this.$route.path).props.default.orderNo
+      this.pageNum = this.$route.matched.find(route => route.path == this.$route.path).props.default.orderNo - 1
       this.pageCount = router.getRoutes().filter(obj => {
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length

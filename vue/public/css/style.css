@@ -72,8 +72,6 @@ body {
       display: flex;
       align-items: center;
       transition: 300ms ease-in-out; }
-      body #app button.menu-close-button {
-        padding: 0 1.25rem; }
       body #app button:hover {
         cursor: pointer;
         background: #c9c8c3;
@@ -82,6 +80,8 @@ body {
       body #app button:focus {
         outline: none;
         border: none; }
+      body #app button.menu-close-button {
+        padding-right: 1.875rem; }
       body #app button .button-text {
         font-family: 'Commissioner', sans-serif;
         font-weight: 800;
@@ -147,7 +147,7 @@ body {
     margin: 2rem;
     letter-spacing: .025em; }
     body div.content-box img.loading-logo {
-      max-width: 10rem;
+      max-width: 11rem;
       width: 100%;
       margin-bottom: 1rem; }
   body .menu {
@@ -215,7 +215,7 @@ body {
     background: #FAFAFA;
     display: flex;
     justify-content: space-between;
-    overflow: hidden;
+    overflow-x: hidden;
     padding: 5.375rem 0; }
     body #home-page-wrap .home-page-image-wrap {
       width: 40%;
@@ -225,11 +225,13 @@ body {
         height: 100%;
         background-size: cover;
         background-position: center right;
-        background-color: rgba(0, 0, 0, 0.1); }
+        background-color: rgba(0, 0, 0, 0.1);
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem; }
     body #home-page-wrap .home-page-content {
       width: 60%;
       height: 100%;
-      padding: 0 clamp(2rem, 9.375vw, 9.375rem);
+      padding: 0 clamp(2rem, 9vw, 9rem);
       display: flex;
       flex-direction: column;
       align-items: center; }
@@ -241,7 +243,7 @@ body {
         body #home-page-wrap .home-page-content .home-page-navbar a {
           line-height: 0; }
           body #home-page-wrap .home-page-content .home-page-navbar a .home-logo {
-            width: 8rem; }
+            width: 8.5rem; }
       body #home-page-wrap .home-page-content .home-page-copy {
         display: flex;
         flex-direction: column;
@@ -259,7 +261,8 @@ body {
           letter-spacing: 0.26em;
           font-weight: 800;
           text-transform: uppercase;
-          align-self: flex-end; }
+          align-self: flex-end;
+          margin-bottom: 0.125rem; }
           body #home-page-wrap .home-page-content .home-page-copy h2.home-page-subtitle .home-page-subtitle-slice {
             font-style: normal; }
         body #home-page-wrap .home-page-content .home-page-copy h1.home-page-title {
