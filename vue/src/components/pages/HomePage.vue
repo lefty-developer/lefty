@@ -13,7 +13,9 @@ export default {
   data () {
     return {
       // Assets 
-      logo: require('../../assets/logo@4x.png'),
+      logo: require('../../assets/logo@2x.png'),
+      acclaimed: require('../../assets/home/proven-choice.svg'),
+      certifiedIcon: require('../../assets/home/handshake.png'),
       contactIcon: require('../../assets/icons/contact.png'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
 
@@ -66,7 +68,7 @@ export default {
     mountAnimations () {
       // setTimeout(() => {
         this.copyVisible = 'copy-visible'
-        this.copyAnimation = 'animate__fadeInRight'
+        this.copyAnimation = 'animate__fadeIn'
       // }, 400)
 
       // setTimeout(() => {
@@ -105,7 +107,7 @@ export default {
         // force reset delta counter if user first tries scrolling up without scrolling down
         this.deltaCounter = 0
       }
-    } 
+    }
   },
   created () {
     // assign WP page data associated with this route/component
@@ -136,8 +138,16 @@ export default {
              v-bind:parent='$options.name' />
     <div id='home-page-wrap'>
       <div class='home-page-image-wrap'>
-        <div class='home-page-image  animate__animated animate__fadeInLeft'
+        <div class='home-page-image  animate__animated animate__fadeIn'
              v-bind:style='image'>
+        </div>
+        <div class='home-page-endorsement animate__animated animate__fadeIn'>
+          <img class='home-acclaimed'
+             v-bind:src='acclaimed' v-if='acclaimed' />
+          <img class='home-certified'
+             v-bind:src='certifiedIcon' v-if='certifiedIcon' />
+          <div class='home-endorsement-circle'></div>
+          <div class='home-endorsement-circle'></div>
         </div>
       </div>
       <div class='home-page-content'>
@@ -150,23 +160,27 @@ export default {
                       v-bind:toggleStatus='menuToggled' /> -->
           <MenuButton v-on:click='toggleMenu(true)' />
         </div>
-        <div class='home-page-copy animate__animated'
-             v-bind:class='[copyVisible, copyAnimation]'>
-          <h2 class='home-page-subtitle'>
-            {{ subtitle }}
-            <span class='home-page-subtitle-slice'>
-              {{ lastWord }}
-            </span>
-          </h2>
-          <h1 class='home-page-title' v-html='title'></h1>
-          <p class='home-page-body'>
-            {{ body }}
-            <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-top: 1rem;'>
-              <!-- Try scrolling down to begin your navigation. -->
-              Try scrolling down as a way to navigate ahead.
-              <!-- Try scrolling as a way to operate the navigation. -->
-            </span>
-          </p>
+        <div class='home-page-copy-wrap'>
+          <div class='home-page-copy-margin'></div>
+          <div class='home-page-copy animate__animated'
+               v-bind:class='[copyVisible, copyAnimation]'>
+            <h2 class='home-page-subtitle'>
+              {{ subtitle }}
+              <span class='home-page-subtitle-slice'>
+                {{ lastWord }}
+              </span>
+            </h2>
+            <h1 class='home-page-title' v-html='title'></h1>
+            <p class='home-page-body'>
+              {{ body }}
+              <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-top: 1rem;'>
+                <!-- Try scrolling down to begin your navigation. -->
+                Try scrolling down as a way to navigate ahead.
+                <!-- Try scrolling as a way to operate the navigation. -->
+              </span>
+            </p>
+          </div>
+          <div class='home-page-copy-margin'></div>
         </div>
         <div class='home-page-cta-marginal animate__animated'
              v-bind:class='[marginalVisible, marginalAnimation]'>
@@ -182,7 +196,8 @@ export default {
             <img v-bind:src='arrowIcon'
                 class='button-icon arrow-icon'>
           </button>
-          <span class='home-page-cta-marginal-count' v-on:click='toggleMenu(true)'>
+          <span :data-text='page.title.rendered + "&nbsp;&nbsp;" + pageNum + " / " + pageCount'
+                class='home-page-cta-marginal-count' v-on:click='toggleMenu(true)'>
             {{ page.title.rendered }}&nbsp;&nbsp;{{ pageNum }} / {{ pageCount }}
           </span>
         </div>

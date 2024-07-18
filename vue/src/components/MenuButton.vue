@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-    <button>
+    <button class='menu-button'>
     <span class='button-text'>Menu</span>
     <div class='button-item-gap'></div>
     <img v-bind:src='icon'

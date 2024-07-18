@@ -9,6 +9,7 @@ export default {
     return {
       // Assets
       icon: require('../assets/icons/close.svg'),
+      arrowIcon: require('../assets/icons/down-arrow.svg'),
 
       // Misc.
       show: false,
@@ -17,10 +18,18 @@ export default {
     }
   },
   methods: {
+    assignData() {
+      // assign socials from WP
+
+    },
     closeMenu () {
       // Testing against the toggle prop ensures the menu has only been opened through the UI
       this.toggle ? this.$emit('close', true) : this.$router.push({ name: 'NotFound' })
     }
+  },
+  created () {
+    // assign WP page data associated with this component
+    this.assignData()
   },
   mounted () {
     this.show = this.toggle
@@ -69,5 +78,10 @@ export default {
         </router-link>
       </div>
     </nav>
+    <div class='menu-socials'>
+      <span>Socials&nbsp;&nbsp;1 / 4</span>
+      <img v-bind:src='arrowIcon'
+                class='button-icon arrow-icon'>
+    </div>
   </div>
 </template>

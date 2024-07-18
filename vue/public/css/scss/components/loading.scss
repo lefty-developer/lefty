@@ -16,5 +16,6 @@ div.content-box {
     max-width: 11rem;
     width: 100%;
     margin-bottom: 1rem;
+    filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%);
   }
 }
