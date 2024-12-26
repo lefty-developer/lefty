@@ -1,9 +1,14 @@
 # Vue Ignores
 
 .DS_Store
-node_modules
-/dist
-
+vue/node_modules
+vue/dist
+vue/babel.config.js
+vue/jsconfig.json
+vue/package.json
+vue/package-lock.json
+vue/vue.config.js
+vue/README.md
 
 # local env files
 .env.local
