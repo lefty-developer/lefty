@@ -45,7 +45,7 @@ export default {
 </script>
 
 <template>
-  <!-- class = static classes, v-bind:class = dynamic classes. Can use :class shorthand -->
+  <!-- v-bind:class = dynamic classes, :class shorthand -->
   <div v-if='show' class='content-box'>
     <img v-bind:src='logo'
          class='loading-logo animate__animated'

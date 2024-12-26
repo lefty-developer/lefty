@@ -61,7 +61,7 @@
           display: block;
           width: 100%;
           font-size: 1rem;
-          letter-spacing: 0.27em;
+          letter-spacing: 0.255em;
           font-weight: 800;
           text-transform: uppercase;
         }
@@ -95,24 +95,41 @@
     margin: 3.5rem;
     display: flex;
     width: calc(100% - 7rem);
-    justify-content: flex-end;
+    flex-direction: column;
     align-items: center;
 
-    span {
-      color: $outerspace-light;
-      font-family: 'Commissioner', sans-serif;
-      font-weight: 800;
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.375em;
+    .menu-socials-header {
+      flex-grow: 1;
+      flex-basis: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+
+      span {
+        color: $outerspace-light;
+        font-family: 'Commissioner', sans-serif;
+        font-weight: 800;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.375em;
+      }
+      
+      .arrow-icon {
+        width: 24px;
+        height: 24px;
+        transform: rotate(270deg);
+        margin-left: 1.125rem;
+        margin-top: 0.125rem;
+      }
     }
-    
-    .arrow-icon {
-      width: 24px;
-      height: 24px;
-      transform: rotate(270deg);
-      margin-left: 1.125rem;
+
+    .menu-socials-carousel-container {
+      height: 4rem;
+      width: 100%;
+      background: red;
+      margin-top: 2.125rem;
     }
   }
 }

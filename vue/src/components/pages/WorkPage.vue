@@ -3,7 +3,6 @@ import router from '../../router'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
-
 export default {
   components: {
     NavMenu,

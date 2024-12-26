@@ -79,9 +79,15 @@ export default {
       </div>
     </nav>
     <div class='menu-socials'>
-      <span>Socials&nbsp;&nbsp;1 / 4</span>
-      <img v-bind:src='arrowIcon'
-                class='button-icon arrow-icon'>
+      <div class='menu-socials-header'>
+        <span>Socials&nbsp;&nbsp;1 / 4</span>
+        <img v-bind:src='arrowIcon'
+             class='button-icon arrow-icon'>
+      </div>
+      <div class='menu-socials-carousel-container'>
+        <!-- carousel goes here -->
+      </div>
+
     </div>
   </div>
 </template>

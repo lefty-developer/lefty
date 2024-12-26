@@ -25,8 +25,8 @@
     .home-page-endorsement {
       position: absolute;
       z-index: 2;
-      top: 13rem;
-      right: -18rem;
+      top: 12.5rem;
+      left: calc(100vw - 18rem);
       width: 9rem;
       // transform: rotate(-10deg);
     }
@@ -49,18 +49,18 @@
           transform: rotate(0deg);
         }
         to {
-          transform: rotate(-360deg);
+          transform: rotate(360deg);
         }
       }
     }
 
     .home-certified {
-      width: 3.75rem;
+      width: 4rem;
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      padding-bottom: 0.375rem;
+      padding-bottom: 0.5rem;
       z-index: 2;
       filter: invert(49%) sepia(65%) saturate(345%) hue-rotate(186deg) brightness(84%) contrast(92%);
     }
@@ -81,6 +81,12 @@
       &:nth-of-type(2) {
         width: 6.25rem;
         height: 6.25rem;
+        border-width: 0.1875rem;
+      }
+
+      &:nth-of-type(3) {
+        width: 5.5625rem;
+        height: 5.5625rem;
         border-width: 0.1875rem;
       }
     }
@@ -166,10 +172,10 @@
           color: $outerspace-light;
           font-size: 1.125rem;
           line-height: 1.4em;
-          letter-spacing: 0.26em;
+          letter-spacing: 0.25em;
           font-weight: 800;
           text-transform: uppercase;
-          align-self: flex-end;
+          // align-self: flex-end;
           margin-bottom: 0.125rem;
   
           .home-page-subtitle-slice {
@@ -181,9 +187,9 @@
         h1.home-page-title {
           font-family: 'Roboto', sans-serif;
           color: $outerspace;
-          font-style: italic;
+          // font-style: italic;
           font-size: clamp(2.125rem, 5.25vw, 5.25rem);
-          text-align: right;
+          // text-align: right;
           line-height: 1.0125em;
           letter-spacing: 0;
           font-weight: 900;
@@ -195,7 +201,7 @@
           color: $outerspace-light;
           font-size: 1.125rem;
           line-height: 1.67em;
-          text-align: right;
+          // text-align: right;
           margin-top: 2.125rem;
           align-self: flex-end;
           font-weight: 400;
@@ -233,7 +239,7 @@
       }
 
       .home-page-cta-marginal-count {
-        --words: attr(data-text);
+        --breadcrumb: attr(data-text);
         position: relative;
         font-family: 'Commissioner', sans-serif;
         font-weight: 800;
@@ -247,7 +253,7 @@
         transition: 300ms ease-in-out;
 
         &::before {
-          content: var(--words);
+          content: var(--breadcrumb);
           position: absolute;
           top: 50%;
           left: 50%;
@@ -260,11 +266,11 @@
         }
 
         @keyframes glint {
-          0%, 50%, 100% {
+          0%, 45%, 100% {
             opacity: 0;
           }
 
-          75% {
+          55% {
             opacity: 1;
           }
         }

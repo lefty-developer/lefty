@@ -1,14 +1,15 @@
 <script>
 import router from '../../router'
+import HandleScroll from '../mixins/HandleScroll.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
-
 
 export default {
   components: {
     NavMenu,
     MenuButton
   },
+  mixins: [HandleScroll],
   name: 'HomePage',
   data () {
     return {
@@ -35,8 +36,7 @@ export default {
       copyVisible: '',
       copyAnimation: '',
       marginalVisible: '',
-      marginalAnimation: '',
-      deltaCounter: 0
+      marginalAnimation: ''
     }
   },
   methods: {
@@ -75,38 +75,6 @@ export default {
         this.marginalVisible = 'marginal-visible'
         this.marginalAnimation = 'animate__fadeInUp'
       // }, 800)
-    },
-    nextPage () {
-      const menuItems = router.getRoutes()
-        .filter(route => !route.aliasOf && route.props?.default?.addToMenu)
-        .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)
-
-      const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId === this.pageId)
-      const nextRoute = menuItems[currentRouteIndex + 1]
-
-      if (nextRoute) {
-        router.push(nextRoute.path)
-      }
-    },
-    handleScroll (event) {
-      const delta = Math.sign(event.deltaY)
-      if (this.deltaCounter > 0 && (this.deltaCounter + delta < this.deltaCounter)) {
-        // if user scrolled down a little already but then scrolled up without activating nextPage()
-        // reset delta counter
-        this.deltaCounter = 0
-      } else {
-        this.deltaCounter += delta
-      }
-      console.log("Delta Counter: ", this.deltaCounter)
-
-      if (this.deltaCounter > 2) {
-        // Activate nextPage() method
-        // Use a click event on the next page button because directly manipulating the router with a wheel event creates inescapable bugs with window.history
-        this.$refs.nextRouteButton.click()
-      } else if (this.deltaCounter < 0) {
-        // force reset delta counter if user first tries scrolling up without scrolling down
-        this.deltaCounter = 0
-      }
     }
   },
   created () {
@@ -148,6 +116,7 @@ export default {
              v-bind:src='certifiedIcon' v-if='certifiedIcon' />
           <div class='home-endorsement-circle'></div>
           <div class='home-endorsement-circle'></div>
+          <!-- <div class='home-endorsement-circle'></div> -->
         </div>
       </div>
       <div class='home-page-content'>
@@ -175,7 +144,7 @@ export default {
               {{ body }}
               <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-top: 1rem;'>
                 <!-- Try scrolling down to begin your navigation. -->
-                Try scrolling down as a way to navigate ahead.
+                Just scroll to move on to the next page—that's it!
                 <!-- Try scrolling as a way to operate the navigation. -->
               </span>
             </p>

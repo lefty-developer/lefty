@@ -4,7 +4,6 @@ import 'animate.css'
 import '../public/css/style.css'
 import LoadingAnimation from './components/Loading.vue'
 
-
 export default {
   components: {
     LoadingAnimation
@@ -33,8 +32,9 @@ export default {
 </script>
 
 <template>
-  <LoadingAnimation v-on:ready='status => finishedLoading(status)' />
-  <router-view v-slot='{ Component }' v-if='show'>
+  <!-- <LoadingAnimation v-on:ready='status => finishedLoading(status)' /> -->
+  <!-- <router-view v-slot='{ Component }' v-if='show'> -->
+  <router-view v-slot='{ Component }'>
     <transition name='fade' mode='out-in'>
       <component v-bind:is='Component' v-bind:key='$route.path'></component>
     </transition>
