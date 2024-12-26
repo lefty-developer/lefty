@@ -61,7 +61,7 @@
           display: block;
           width: 100%;
           font-size: 1rem;
-          letter-spacing: 0.255em;
+          letter-spacing: 0.25em;
           font-weight: 800;
           text-transform: uppercase;
         }
@@ -128,8 +128,31 @@
     .menu-socials-carousel-container {
       height: 4rem;
       width: 100%;
-      background: red;
       margin-top: 2.125rem;
+
+      .menu-socials-carousel {
+        display: flex;
+
+        .menu-socials-carousel-item {
+          background: $platinum;
+          padding: 0.75rem 1.75rem;
+          border-radius: 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:not(:last-child) {
+            margin-right: 0.625rem;
+          }
+
+          span {
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 500;
+            color: #889688;
+          }
+        }
+      }
     }
   }
 }

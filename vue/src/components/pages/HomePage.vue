@@ -159,6 +159,7 @@ export default {
             <img v-bind:src='contactIcon'
                 class='button-icon arrow-icon'>
           </button>
+          <!-- ref='nextRouteButton' hooks button into HandleScroll.vue method -->
           <button ref='nextRouteButton' v-on:click='nextPage()' class='home-page-cta button-outline'>
             <span class='button-text'>My Work</span>
             <div class='button-item-gap'></div>

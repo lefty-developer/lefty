@@ -85,9 +85,22 @@ export default {
              class='button-icon arrow-icon'>
       </div>
       <div class='menu-socials-carousel-container'>
-        <!-- carousel goes here -->
+        <div class='menu-socials-carousel'>
+          <!-- loop through socials and display them -->
+          <div class='menu-socials-carousel-item'>
+            <span>LinkedIn</span>
+          </div>
+          <div class='menu-socials-carousel-item'>
+            <span>GitHub</span>
+          </div>
+          <div class='menu-socials-carousel-item'>
+            <span>Dribbble</span>
+          </div>
+          <div class='menu-socials-carousel-item'>
+            <span>Instagram</span>
+          </div>
+        </div>
       </div>
-
     </div>
   </div>
 </template>
