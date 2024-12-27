@@ -179,7 +179,7 @@ body {
     box-shadow: 0.625rem 0rem 3.125rem rgba(98, 121, 184, 0.35);
     z-index: 99; }
     body .menu .menu-header {
-      margin: 3.5rem;
+      margin: 4.25rem 3.5rem 3.5rem 3.5rem;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -224,9 +224,9 @@ body {
           body .menu nav .menu-links:hover .router-link-active:hover {
             color: #6279B8; }
     body .menu .menu-socials {
-      margin: 3rem 3.5rem 4.75rem 3.5rem;
+      margin: 3rem 0 4.625rem 0;
       display: flex;
-      width: calc(100% - 7rem);
+      width: calc(100% - 3.5rem);
       flex-direction: column;
       align-items: center; }
       body .menu .menu-socials .menu-socials-header {
@@ -235,7 +235,8 @@ body {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        width: 100%; }
+        width: 100%;
+        margin: 0 3.5rem 0 3.5rem; }
         body .menu .menu-socials .menu-socials-header:hover {
           cursor: pointer; }
         body .menu .menu-socials .menu-socials-header span {
@@ -269,7 +270,7 @@ body {
         body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel {
           display: flex;
           position: relative;
-          left: 0;
+          left: 3.5rem;
           transition: all 300ms ease-in-out; }
           body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item {
             background: #E9EBE9;
@@ -280,7 +281,7 @@ body {
             justify-content: center; }
             body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item:not(:last-child) {
               margin-right: 0.625rem; }
-            body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item:nth-child(2) img {
+            body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item:not(:first-child) img {
               filter: brightness(0) saturate(100%) invert(61%) sepia(6%) saturate(573%) hue-rotate(71deg) brightness(95%) contrast(83%); }
             body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item .menu-socials-carousel-item-icon {
               margin-right: 0.5rem;

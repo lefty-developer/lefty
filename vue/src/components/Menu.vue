@@ -16,7 +16,7 @@ export default {
       inAnimation: '',
       outAnimation: '',
       carouselCounter: 1,
-      carouselOffset: 0
+      carouselOffset: 56
     }
   },
   methods: {
@@ -42,6 +42,13 @@ export default {
     // Watches the toggle prop
     toggle () {
       if (this.toggle == true) {
+        this.carouselCounter = 1
+        this.carouselOffset = 56
+        this.$nextTick(() => {
+          if (this.$refs.socialsCarousel) {
+            this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
+          }
+        })
         this.show = this.toggle
         this.outAnimation = false
         this.inAnimation = 'animate__slideInRight'
@@ -99,6 +106,7 @@ export default {
             <span>GitHub</span>
           </div>
           <div class='menu-socials-carousel-item'>
+            <img class='menu-socials-carousel-item-icon' src='../assets/icons/dribbble.png' alt='GitHub Logo'>
             <span>Dribbble</span>
           </div>
           <div class='menu-socials-carousel-item'>

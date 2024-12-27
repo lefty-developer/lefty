@@ -12,7 +12,7 @@
   z-index: 99;
 
   .menu-header {
-    margin: 3.5rem;
+    margin: 4.25rem 3.5rem 3.5rem 3.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -92,9 +92,9 @@
   }
 
   .menu-socials {
-    margin: 3rem 3.5rem 4.75rem 3.5rem;
+    margin: 3rem 0 4.625rem 0;
     display: flex;
-    width: calc(100% - 7rem);
+    width: calc(100% - 3.5rem);
     flex-direction: column;
     align-items: center;
 
@@ -105,6 +105,7 @@
       align-items: center;
       justify-content: flex-end;
       width: 100%;
+      margin: 0 3.5rem 0 3.5rem;
 
       &:hover {
         cursor: pointer;
@@ -149,7 +150,7 @@
       .menu-socials-carousel {
         display: flex;
         position: relative;
-        left: 0;
+        left: 3.5rem;
         transition: all 300ms ease-in-out;
 
         .menu-socials-carousel-item {
@@ -164,7 +165,7 @@
             margin-right: 0.625rem;
           }
 
-          &:nth-child(2) {
+          &:not(:first-child) {
 
             img {
               filter: brightness(0) saturate(100%) invert(61%) sepia(6%) saturate(573%) hue-rotate(71deg) brightness(95%) contrast(83%);
