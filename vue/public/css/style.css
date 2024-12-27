@@ -86,7 +86,7 @@ body {
         font-size: 0.875rem;
         text-transform: uppercase;
         color: #36413E;
-        letter-spacing: 0.325em;
+        letter-spacing: 0.3em;
         transition: 300ms ease-in-out; }
       body #app button .button-item-gap {
         height: 100%;
@@ -190,7 +190,7 @@ body {
         font-size: 0.875rem;
         text-transform: uppercase;
         color: #414E4A;
-        letter-spacing: 0.325em;
+        letter-spacing: 0.3em;
         transition: 300ms ease-in-out; }
     body .menu nav {
       height: 100%;
@@ -224,7 +224,7 @@ body {
           body .menu nav .menu-links:hover .router-link-active:hover {
             color: #6279B8; }
     body .menu .menu-socials {
-      margin: 3.5rem;
+      margin: 3rem 3.5rem 4.75rem 3.5rem;
       display: flex;
       width: calc(100% - 7rem);
       flex-direction: column;
@@ -236,6 +236,8 @@ body {
         align-items: center;
         justify-content: flex-end;
         width: 100%; }
+        body .menu .menu-socials .menu-socials-header:hover {
+          cursor: pointer; }
         body .menu .menu-socials .menu-socials-header span {
           color: #414E4A;
           font-family: 'Commissioner', sans-serif;
@@ -243,28 +245,51 @@ body {
           font-size: 0.75rem;
           font-weight: 800;
           text-transform: uppercase;
-          letter-spacing: 0.375em; }
+          letter-spacing: 0.35em; }
         body .menu .menu-socials .menu-socials-header .arrow-icon {
           width: 24px;
           height: 24px;
           transform: rotate(270deg);
           margin-left: 1.125rem;
-          margin-top: 0.125rem; }
+          margin-top: 0.125rem;
+          filter: brightness(0) invert(29%) sepia(7%) saturate(702%) hue-rotate(111deg) brightness(97%) contrast(94%); }
       body .menu .menu-socials .menu-socials-carousel-container {
-        height: 4rem;
         width: 100%;
-        margin-top: 2.125rem; }
+        margin-top: 2.125rem;
+        position: relative;
+        overflow: hidden; }
+        body .menu .menu-socials .menu-socials-carousel-container::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 100%;
+          width: 2.875rem;
+          background: linear-gradient(90deg, rgba(250, 250, 250, 0) 0% 0%, rgba(250, 250, 250, 0.878) 71.91% 71.91%, #fafafa 100% 100%); }
         body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel {
-          display: flex; }
+          display: flex;
+          position: relative;
+          left: 0;
+          transition: all 300ms ease-in-out; }
           body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item {
             background: #E9EBE9;
-            padding: 0.75rem 1.75rem;
+            padding: 0.5625rem 1.8125rem;
             border-radius: 3rem;
             display: flex;
             align-items: center;
             justify-content: center; }
             body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item:not(:last-child) {
               margin-right: 0.625rem; }
+            body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item:nth-child(2) img {
+              filter: brightness(0) saturate(100%) invert(61%) sepia(6%) saturate(573%) hue-rotate(71deg) brightness(95%) contrast(83%); }
+            body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item .menu-socials-carousel-item-icon {
+              margin-right: 0.5rem;
+              min-width: 0.125rem;
+              min-height: 0.125rem;
+              width: auto;
+              height: auto;
+              max-width: 1.5rem;
+              max-height: 1.5rem; }
             body .menu .menu-socials .menu-socials-carousel-container .menu-socials-carousel .menu-socials-carousel-item span {
               font-size: 1rem;
               font-style: italic;
@@ -429,7 +454,7 @@ body {
           font-size: 0.875rem;
           text-transform: uppercase;
           color: #414E4A;
-          letter-spacing: 0.325em;
+          letter-spacing: 0.3em;
           margin-left: auto;
           margin-right: -0.75rem;
           padding: 0.75rem;

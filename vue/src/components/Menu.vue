@@ -14,22 +14,25 @@ export default {
       // Misc.
       show: false,
       inAnimation: '',
-      outAnimation: ''
+      outAnimation: '',
+      carouselCounter: 1,
+      carouselOffset: 0
     }
   },
   methods: {
-    assignData() {
-      // assign socials from WP
-
-    },
     closeMenu () {
       // Testing against the toggle prop ensures the menu has only been opened through the UI
       this.toggle ? this.$emit('close', true) : this.$router.push({ name: 'NotFound' })
+    },
+    nextSocial () {
+      const currentItemWidth = this.$refs.socialItem.offsetWidth
+
+      this.carouselCounter++
+      this.carouselOffset -= (currentItemWidth + 10)
+
+      this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
+
     }
-  },
-  created () {
-    // assign WP page data associated with this component
-    this.assignData()
   },
   mounted () {
     this.show = this.toggle
@@ -79,18 +82,20 @@ export default {
       </div>
     </nav>
     <div class='menu-socials'>
-      <div class='menu-socials-header'>
-        <span>Socials&nbsp;&nbsp;1 / 4</span>
+      <div class='menu-socials-header' v-on:click='nextSocial()'>
+        <span>Socials&nbsp;&nbsp;{{ carouselCounter }} / 4</span>
         <img v-bind:src='arrowIcon'
              class='button-icon arrow-icon'>
       </div>
       <div class='menu-socials-carousel-container'>
-        <div class='menu-socials-carousel'>
+        <div class='menu-socials-carousel' ref='socialsCarousel'>
           <!-- loop through socials and display them -->
-          <div class='menu-socials-carousel-item'>
+          <div class='menu-socials-carousel-item' ref='socialItem'>
+            <img class='menu-socials-carousel-item-icon' src='../assets/icons/linkedin.png' alt='LinkedIn Logo'>
             <span>LinkedIn</span>
           </div>
           <div class='menu-socials-carousel-item'>
+            <img class='menu-socials-carousel-item-icon' src='../assets/icons/github.png' alt='GitHub Logo'>
             <span>GitHub</span>
           </div>
           <div class='menu-socials-carousel-item'>

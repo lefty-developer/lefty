@@ -24,7 +24,7 @@
       font-size: 0.875rem;
       text-transform: uppercase;
       color: $outerspace-light;
-      letter-spacing: 0.325em;
+      letter-spacing: 0.3em;
       // padding: 0.75rem;
       transition: 300ms ease-in-out;
     }
@@ -92,7 +92,7 @@
   }
 
   .menu-socials {
-    margin: 3.5rem;
+    margin: 3rem 3.5rem 4.75rem 3.5rem;
     display: flex;
     width: calc(100% - 7rem);
     flex-direction: column;
@@ -106,6 +106,10 @@
       justify-content: flex-end;
       width: 100%;
 
+      &:hover {
+        cursor: pointer;
+      }
+
       span {
         color: $outerspace-light;
         font-family: 'Commissioner', sans-serif;
@@ -113,7 +117,7 @@
         font-size: 0.75rem;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.375em;
+        letter-spacing: 0.35em;
       }
       
       .arrow-icon {
@@ -122,20 +126,35 @@
         transform: rotate(270deg);
         margin-left: 1.125rem;
         margin-top: 0.125rem;
+        filter: brightness(0) invert(29%) sepia(7%) saturate(702%) hue-rotate(111deg) brightness(97%) contrast(94%);
       }
     }
 
     .menu-socials-carousel-container {
-      height: 4rem;
       width: 100%;
       margin-top: 2.125rem;
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 2.875rem;
+        background: linear-gradient(90deg, rgba(250, 250, 250, 0) 0% 0%, rgba(250, 250, 250, 0.878) 71.91% 71.91%, rgba(250, 250, 250, 1) 100% 100%);
+      }
 
       .menu-socials-carousel {
         display: flex;
+        position: relative;
+        left: 0;
+        transition: all 300ms ease-in-out;
 
         .menu-socials-carousel-item {
           background: $platinum;
-          padding: 0.75rem 1.75rem;
+          padding: 0.5625rem 1.8125rem;
           border-radius: 3rem;
           display: flex;
           align-items: center;
@@ -143,6 +162,23 @@
 
           &:not(:last-child) {
             margin-right: 0.625rem;
+          }
+
+          &:nth-child(2) {
+
+            img {
+              filter: brightness(0) saturate(100%) invert(61%) sepia(6%) saturate(573%) hue-rotate(71deg) brightness(95%) contrast(83%);
+            }
+          }
+
+          .menu-socials-carousel-item-icon {
+            margin-right: 0.5rem; 
+            min-width: 0.125rem;
+            min-height: 0.125rem;
+            width: auto;
+            height: auto;
+            max-width: 1.5rem;
+            max-height: 1.5rem;
           }
 
           span {
