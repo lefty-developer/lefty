@@ -160,6 +160,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          white-space: nowrap;
 
           &:not(:last-child) {
             margin-right: 0.625rem;
@@ -174,10 +175,8 @@
 
           .menu-socials-carousel-item-icon {
             margin-right: 0.5rem; 
-            min-width: 0.125rem;
-            min-height: 0.125rem;
-            width: auto;
-            height: auto;
+            width: 100vw;
+            height: 100vh;
             max-width: 1.5rem;
             max-height: 1.5rem;
           }

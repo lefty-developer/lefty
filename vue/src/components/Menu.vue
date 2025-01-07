@@ -10,6 +10,7 @@ export default {
       // Assets
       icon: require('../assets/icons/close.svg'),
       arrowIcon: require('../assets/icons/down-arrow.svg'),
+      socialIcons: [],
 
       // Misc.
       show: false,
@@ -47,11 +48,19 @@ export default {
         this.$nextTick(() => {
           if (this.$refs.socialsCarousel) {
             this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
+            this.$refs.socialsCarousel.style.transition = 'none'
           }
         })
         this.show = this.toggle
         this.outAnimation = false
         this.inAnimation = 'animate__slideInRight'
+        this.$nextTick(() => {
+          if (this.$refs.socialsCarousel) {
+            setTimeout(() => {
+              this.$refs.socialsCarousel.style.transition = 'all 300ms ease-in-out'
+            }, 0)
+          }
+        })
       } else {
         this.inAnimation = false
         this.outAnimation = 'animate__slideOutRight'
@@ -103,7 +112,7 @@ export default {
           </div>
           <div class='menu-socials-carousel-item'>
             <img class='menu-socials-carousel-item-icon' src='../assets/icons/github.png' alt='GitHub Logo'>
-            <span>GitHub</span>
+            <span>GitHub on my nibknob</span>
           </div>
           <div class='menu-socials-carousel-item'>
             <img class='menu-socials-carousel-item-icon' src='../assets/icons/dribbble.png' alt='GitHub Logo'>
