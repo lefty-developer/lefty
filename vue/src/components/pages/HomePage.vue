@@ -62,7 +62,6 @@ export default {
       this.subtitle = this.subtitle.split(' ').slice(0, -1).join(' ')
     },
     toggleMenu (value) {
-      console.log(value)
       this.menuToggled = value
     },
     mountAnimations () {

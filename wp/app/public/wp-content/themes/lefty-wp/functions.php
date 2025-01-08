@@ -67,4 +67,14 @@
     }
 
     // add_filter('wp_handle_upload', 'compress_and_convert_images_to_webp');
+
+    if (function_exists('acf_add_options_page')) {
+        acf_add_options_page(array(
+            'page_title' => 'Menu Options',
+            'menu_title' => 'Menu Options',
+            'menu_slug' => 'menu-general-options',
+            'capability' => 'edit_posts',
+            'redirect' => false
+        ));
+    }
 ?>

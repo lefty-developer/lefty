@@ -8,9 +8,9 @@ export default {
   data () {
     return {
       // Assets
-      icon: require('../assets/icons/close.svg'),
+      closeIcon: require('../assets/icons/close.svg'),
       arrowIcon: require('../assets/icons/down-arrow.svg'),
-      socialIcons: [],
+      socials: [],
 
       // Misc.
       show: false,
@@ -26,18 +26,29 @@ export default {
       this.toggle ? this.$emit('close', true) : this.$router.push({ name: 'NotFound' })
     },
     nextSocial () {
-      const currentItemWidth = this.$refs.socialItem.offsetWidth
+      if (this.carouselCounter >= this.socials.length) {
+        this.carouselCounter = 1
+        this.carouselOffset = 56
 
-      this.carouselCounter++
-      this.carouselOffset -= (currentItemWidth + 10)
+        this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
+      } else {
+        const currentItemWidth = this.$refs.socialItem[this.carouselCounter - 1].offsetWidth
 
-      this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
+        this.carouselCounter++
+        this.carouselOffset -= (currentItemWidth + 10)
 
+        this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
+      }
+    },
+    assignData () {
+      this.$menuOptions['lefty-menu-socials'].forEach(social => {
+        this.socials.push(social)
+      })
     }
   },
   mounted () {
     this.show = this.toggle
-    console.log('Page: ', this.parent)
+    console.log('Menu Parent: ', this.parent)
   },
   watch: {
     // Watches the toggle prop
@@ -67,6 +78,9 @@ export default {
         setTimeout(() => this.show = this.toggle, 800)
       }
     }
+  },
+  created () {
+    this.assignData()
   }
 }
 </script>
@@ -80,7 +94,7 @@ export default {
             class='menu-close-button'>
         <span class='button-text'>Exit</span>
         <div class='button-item-gap'></div>
-        <img v-bind:src='icon'
+        <img v-bind:src='closeIcon'
             class='button-icon close-icon' />
       </button>
     </div>
@@ -99,28 +113,25 @@ export default {
     </nav>
     <div class='menu-socials'>
       <div class='menu-socials-header' v-on:click='nextSocial()'>
-        <span>Socials&nbsp;&nbsp;{{ carouselCounter }} / 4</span>
+        <span>Socials&nbsp;&nbsp;{{ carouselCounter }} / {{ socials.length }}</span>
         <img v-bind:src='arrowIcon'
              class='button-icon arrow-icon'>
       </div>
       <div class='menu-socials-carousel-container'>
         <div class='menu-socials-carousel' ref='socialsCarousel'>
           <!-- loop through socials and display them -->
-          <div class='menu-socials-carousel-item' ref='socialItem'>
-            <img class='menu-socials-carousel-item-icon' src='../assets/icons/linkedin.png' alt='LinkedIn Logo'>
-            <span>LinkedIn</span>
-          </div>
-          <div class='menu-socials-carousel-item'>
-            <img class='menu-socials-carousel-item-icon' src='../assets/icons/github.png' alt='GitHub Logo'>
-            <span>GitHub on my nibknob</span>
-          </div>
-          <div class='menu-socials-carousel-item'>
-            <img class='menu-socials-carousel-item-icon' src='../assets/icons/dribbble.png' alt='GitHub Logo'>
-            <span>Dribbble</span>
-          </div>
-          <div class='menu-socials-carousel-item'>
-            <span>Instagram</span>
-          </div>
+          <a v-bind:href='social["lefty-menu-social-target"]'
+            target='_blank'
+            class='menu-socials-carousel-item'
+            v-for='(social, i) in socials'
+            v-bind:key='i'
+            ref='socialItem'>
+            <img v-if='social["lefty-menu-social-icon"]'
+              class='menu-socials-carousel-item-icon'
+              v-bind:src='social["lefty-menu-social-icon"]'
+              v-bind:alt='`${social["lefty-menu-social-label"]} Logo`'>
+            <span>{{ social['lefty-menu-social-label'] }}</span>
+          </a>
         </div>
       </div>
     </div>

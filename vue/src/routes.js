@@ -1,23 +1,23 @@
 export function routes () {
   let success = false
-  let routes = []
+  const routes = []
   let globalProperties = {}
 
 
   // Get WordPress data from WP REST API
   async function fetchWordPressData() {
     const wpSitePath = 'http://leftyvuewp.local'
-    // app.config.globalProperties.$wpSitePath = wpSitePath
     globalProperties.wpSitePath = wpSitePath
 
     // Try-Catch block for error handling
     try {
       // Access WordPress API
       // Promise.all to do multiple fetch requests 
-      const [wpData, frontPage, wpPages] = await Promise.all([
+      const [wpData, frontPage, wpPages, menuOptions] = await Promise.all([
         fetch(`${ wpSitePath }/wp-json`).then(response => response.json()),
         fetch(`${ wpSitePath }/wp-json/wp/v2/frontpage`).then(response => response.json()),
-        fetch(`${ wpSitePath }/wp-json/wp/v2/pages`).then(response => response.json())
+        fetch(`${ wpSitePath }/wp-json/wp/v2/pages`).then(response => response.json()),
+        fetch(`${ wpSitePath }/wp-json/acf/v3/options/options`).then(response => response.json())
       ])
 
       // Apply global pages property with WordPress data
@@ -25,7 +25,7 @@ export function routes () {
       globalProperties.wpSiteTagline = wpData.description
       globalProperties.frontPage = frontPage
       globalProperties.wpPages = wpPages.reverse()
-
+      globalProperties.menuOptions = menuOptions.acf
 
       // Build router from WP Page data
       wpPages.forEach(pageItem => {

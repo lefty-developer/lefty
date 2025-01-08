@@ -17,7 +17,6 @@ router.addRoute({
 // Load Routes and Global Properties from Routes Module
 async function routesObj () {
   const data = await routes()
-  console.log(data.routes)
 
   if (data && data.success) {
     app.config.globalProperties.$wpSitePath = data.globalProps.wpSitePath
@@ -25,6 +24,7 @@ async function routesObj () {
     app.config.globalProperties.$wpSiteTagline = data.globalProps.wpSiteTagline
     app.config.globalProperties.$frontPage = data.globalProps.frontPage
     app.config.globalProperties.$wpPages = data.globalProps.wpPages
+    app.config.globalProperties.$menuOptions = data.globalProps.menuOptions
 
     // Build router from routes obj
     data.routes.forEach(route => {

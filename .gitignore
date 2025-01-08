@@ -9,6 +9,7 @@ vue/package.json
 vue/package-lock.json
 vue/vue.config.js
 vue/README.md
+vue/public/sitemap.xml
 
 # local env files
 .env.local
