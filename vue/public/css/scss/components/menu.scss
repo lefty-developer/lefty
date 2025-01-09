@@ -109,6 +109,14 @@
 
       &:hover {
         cursor: pointer;
+        
+        span {
+          color: $glaucous;
+        }
+
+        .arrow-icon {
+          filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+        }
       }
 
       span {
@@ -119,6 +127,8 @@
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.35em;
+        transition: color 300ms ease-in-out;
+        user-select: none;
       }
       
       .arrow-icon {
@@ -128,6 +138,8 @@
         margin-left: 1.125rem;
         margin-top: 0.125rem;
         filter: brightness(0) invert(29%) sepia(7%) saturate(702%) hue-rotate(111deg) brightness(97%) contrast(94%);
+        transition: filter 300ms ease-in-out;
+        user-select: none;
       }
     }
 
@@ -162,16 +174,25 @@
           justify-content: center;
           white-space: nowrap;
           text-decoration: none;
+          transition: all 300ms ease-in-out;
+
+          &:hover {
+            -webkit-box-shadow:inset 0px 0px 0px 0.125rem $glaucous;
+            -moz-box-shadow:inset 0px 0px 0px 0.125rem $glaucous;
+            box-shadow:inset 0px 0px 0px 0.125rem $glaucous;
+            background: none;
+
+            span {
+              color: $glaucous;
+            }
+
+            .menu-socials-carousel-item-icon {
+              filter: brightness(0) saturate(100%) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+            }
+          }
 
           &:not(:last-child) {
             margin-right: 0.625rem;
-          }
-
-          &:not(:first-child) {
-
-            img {
-              filter: brightness(0) saturate(100%) invert(61%) sepia(6%) saturate(573%) hue-rotate(71deg) brightness(95%) contrast(83%);
-            }
           }
 
           .menu-socials-carousel-item-icon {
@@ -180,6 +201,9 @@
             height: 100vh;
             max-width: 1.5rem;
             max-height: 1.5rem;
+            transition: all 300ms ease-in-out;
+            filter: brightness(0) saturate(100%) invert(61%) sepia(6%) saturate(573%) hue-rotate(71deg) brightness(95%) contrast(83%);
+            user-select: none;
           }
 
           span {
@@ -187,6 +211,8 @@
             font-style: italic;
             font-weight: 500;
             color: #889688;
+            transition: color 300ms ease-in-out;
+            user-select: none;
           }
         }
       }
