@@ -52,9 +52,10 @@ export default {
 <template>
   <div id='router-root' v-if='$wpPages'>
     <NavMenu v-bind:toggle='menuToggled'
-             v-on:close='value => toggleMenu(!value)' />
-    <MenuButton v-on:toggle='value => toggleMenu(value)'
-            v-bind:toggleStatus='menuToggled'
-            v-bind:parent='$options.name' />
+             v-on:close='value => toggleMenu(!value)'
+             v-bind:parent='$options.name' />
+    <div id='experience-page-wrap'>
+      <MenuButton v-on:click='toggleMenu(true)' />
+    </div>
   </div>
 </template>

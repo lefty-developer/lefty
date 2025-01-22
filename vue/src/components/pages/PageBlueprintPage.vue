@@ -72,11 +72,10 @@ export default {
 <template>
   <div id='router-root' v-if='$wpPages'>
     <NavMenu v-bind:toggle='menuToggled'
-             v-on:close='value => toggleMenu(!value)' />
+             v-on:close='value => toggleMenu(!value)'
+             v-bind:parent='$options.name' />
     <div id='blueprint-page-wrap' v-if='authenticated'>
-      <MenuButton v-on:toggle='value => toggleMenu(value)'
-            v-bind:toggleStatus='menuToggled'
-            v-bind:parent='$options.name' />
+      <MenuButton v-on:click='toggleMenu(true)' />
     </div>
   </div>
 </template>

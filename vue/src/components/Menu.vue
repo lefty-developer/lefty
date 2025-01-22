@@ -92,7 +92,7 @@ export default {
       <p class='menu-header-text'>Menu</p>
       <button v-on:click='closeMenu()'
             class='menu-close-button'>
-        <span class='button-text'>Exit</span>
+        <span class='button-text'>Close</span>
         <div class='button-item-gap'></div>
         <img v-bind:src='closeIcon'
             class='button-icon close-icon' />

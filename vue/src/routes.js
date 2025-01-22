@@ -1,6 +1,6 @@
 export function routes () {
-  let success = false
   const routes = []
+  let success = false
   let globalProperties = {}
 
 

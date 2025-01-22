@@ -65,15 +65,15 @@ export default {
       this.menuToggled = value
     },
     mountAnimations () {
-      // setTimeout(() => {
+      setTimeout(() => {
         this.copyVisible = 'copy-visible'
         this.copyAnimation = 'animate__fadeIn'
-      // }, 400)
+      }, 200)
 
-      // setTimeout(() => {
+      setTimeout(() => {
         this.marginalVisible = 'marginal-visible'
-        this.marginalAnimation = 'animate__fadeInUp'
-      // }, 800)
+        this.marginalAnimation = 'animate__fadeInUp animate__fast'
+      }, 400)
     }
   },
   created () {
@@ -119,7 +119,7 @@ export default {
         </div>
       </div>
       <div class='home-page-content'>
-        <div class='home-page-navbar animate__animated animate__fadeInDown'>
+        <div class='home-page-navbar animate__animated animate__fadeInDown animate__fast'>
           <router-link to='/'>
             <img class='home-logo' 
                  v-bind:src='logo' v-if='logo' />
