@@ -117,7 +117,7 @@ export default {
         <img v-bind:src='arrowIcon'
              class='button-icon arrow-icon'>
       </div>
-      <div class='menu-socials-carousel-container'>
+      <div class='menu-socials-carousel-wrap'>
         <div class='menu-socials-carousel' ref='socialsCarousel'>
           <!-- loop through socials and display them -->
           <a v-bind:href='social["lefty-menu-social-target"]'

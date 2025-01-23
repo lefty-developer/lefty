@@ -7,9 +7,6 @@ export default {
   },
   data () {
     return {
-      // Assets
-      logo: require('../assets/logo@4x.png'),
-
       // Misc.
       show: true,
       inAnimation: '',
@@ -40,6 +37,12 @@ export default {
       // this.repeatAnimation = 'animate__bounce animate__infinite'
       this.showParent()
     }, 1000)
+  },
+  computed: {
+    // Lazy load logo
+    logo() {
+      return require('../assets/logo@4x.png')
+    }
   }
 }
 </script>

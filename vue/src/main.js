@@ -15,7 +15,7 @@ router.addRoute({
 })
 
 // Load Routes and Global Properties from Routes Module
-async function routesObj () {
+async function loadRoutesModule () {
   const data = await routes()
 
   if (data && data.success) {
@@ -43,4 +43,4 @@ async function routesObj () {
   }
 }
 
-routesObj()
+loadRoutesModule()

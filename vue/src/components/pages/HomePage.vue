@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       // Assets 
-      logo: require('../../assets/logo@2x.png'),
+      // logo: require('../../assets/logo@2x.png'),
       acclaimed: require('../../assets/home/proven-choice.svg'),
       certifiedIcon: require('../../assets/home/handshake.png'),
       contactIcon: require('../../assets/icons/contact.png'),
@@ -68,12 +68,12 @@ export default {
       setTimeout(() => {
         this.copyVisible = 'copy-visible'
         this.copyAnimation = 'animate__fadeIn'
-      }, 200)
+      }, 150)
 
       setTimeout(() => {
         this.marginalVisible = 'marginal-visible'
-        this.marginalAnimation = 'animate__fadeInUp animate__fast'
-      }, 400)
+        this.marginalAnimation = 'animate__fadeIn'
+      }, 300)
     }
   },
   created () {
@@ -94,6 +94,12 @@ export default {
   mounted () {
     // Inits for mount animations
     this.mountAnimations()
+  },
+  computed: {
+    // Lazy load logo
+    logo() {
+      return require('../../assets/logo@2x.png')
+    }
   }
 }
 </script>
@@ -104,7 +110,7 @@ export default {
              v-on:close='value => toggleMenu(!value)'
              v-bind:parent='$options.name' />
     <div id='home-page-wrap'>
-      <div class='home-page-image-wrap'>
+      <section class='home-page-image-wrap'>
         <div class='home-page-image  animate__animated animate__fadeIn'
              v-bind:style='image'>
         </div>
@@ -117,9 +123,9 @@ export default {
           <div class='home-endorsement-circle'></div>
           <!-- <div class='home-endorsement-circle'></div> -->
         </div>
-      </div>
-      <div class='home-page-content'>
-        <div class='home-page-navbar animate__animated animate__fadeInDown animate__fast'>
+      </section>
+      <section class='home-page-content'>
+        <div class='home-page-navbar animate__animated animate__fadeIn'>
           <router-link to='/'>
             <img class='home-logo' 
                  v-bind:src='logo' v-if='logo' />
@@ -170,7 +176,7 @@ export default {
             {{ page.title.rendered }}&nbsp;&nbsp;{{ pageNum }} / {{ pageCount }}
           </span>
         </div>
-      </div>
+      </section>
     </div>
   </div>
 </template>

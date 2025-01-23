@@ -14,6 +14,7 @@ export default {
   data () {
     return {
       // Assets
+      synopsisIcon: require('../../assets/icons/book-reading.png'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
 
       // WP Page Data
@@ -50,6 +51,12 @@ export default {
 
     // assign page title
     document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
+  },
+  computed: {
+    // Lazy load logo
+    logo() {
+      return require('../../assets/logo@2x.png')
+    }
   }
 }
 </script>
@@ -60,15 +67,36 @@ export default {
              v-on:close='value => toggleMenu(!value)' 
              v-bind:parent='$options.name' />
     <div id='work-page-wrap'>
-      <!-- <MenuButton v-on:toggle='value => toggleMenu(value)'
-            v-bind:toggleStatus='menuToggled' /> -->
-      <MenuButton v-on:click='toggleMenu(true)' />
-      <button ref='nextRouteButton' v-on:click='nextPage()' class='work-page-cta button-outline'>
-        <span class='button-text'>Experience</span>
-        <div class='button-item-gap'></div>
-        <img v-bind:src='arrowIcon'
-            class='button-icon arrow-icon'>
-      </button>
+      <div class='work-page-content animate__animated animate__fadeIn'>
+        <section class='work-page-logo-wrap'>
+          <router-link to='/'>
+            <img class='work-logo' 
+                 v-bind:src='logo' v-if='logo' />
+          </router-link>
+        </section>
+        <section class='work-page-copy-wrap'>
+          <button v-on:click='this.$router.push({ path: "/contact" })' class='work-page-cta'>
+            <span class='button-text'>Synopsis</span>
+            <div class='button-item-gap'></div>
+            <img v-bind:src='synopsisIcon'
+                class='button-icon arrow-icon'>
+          </button>
+          <button ref='nextRouteButton' v-on:click='nextPage()' class='work-page-cta button-outline'>
+            <span class='button-text'>Experience</span>
+            <div class='button-item-gap'></div>
+            <img v-bind:src='arrowIcon'
+                class='button-icon arrow-icon'>
+          </button>
+        </section>
+        <section class='work-page-nav-wrap'>
+          <MenuButton v-on:click='toggleMenu(true)' />
+        </section>
+      </div>
+      <div class='work-page-carousel-wrap'>
+        <div class='work-page-carousel'>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
