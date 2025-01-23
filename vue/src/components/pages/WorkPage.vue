@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       // Assets
-      synopsisIcon: require('../../assets/icons/book-reading.png'),
+      synopsisIcon: require('../../assets/icons/read.png'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
 
       // WP Page Data
@@ -22,6 +22,9 @@ export default {
       pageId: 0,
       pageNum: 0,
       pagesCount: 0,
+      title: '',
+      subtitle: '',
+      body: '',
 
       // Misc.
       menuToggled: false
@@ -49,8 +52,13 @@ export default {
   created () {
     this.assignData()
 
-    // assign page title
+    // assign document title
     document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
+
+    // assign ACF page data
+    this.title = this.page.acf['lefty-home-title']
+    this.subtitle = this.page.acf['lefty-home-subtitle']
+    this.body = this.page.acf['lefty-home-body']
   },
   computed: {
     // Lazy load logo

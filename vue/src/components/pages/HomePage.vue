@@ -84,7 +84,7 @@ export default {
     document.title = this.$wpSiteTagline ? `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
                                          : `${ this.page.title.rendered } – ${ this.$wpSiteName }`
 
-    // assign ACF data
+    // assign ACF page data
     this.title = this.page.acf['lefty-home-title']
     this.subtitle = this.page.acf['lefty-home-subtitle']
     this.sliceSubtitle()
