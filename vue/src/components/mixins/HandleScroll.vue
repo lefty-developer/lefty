@@ -43,6 +43,9 @@ export default {
         this.deltaCounter = 0
       }
     }
+  },
+  created () {
+    console.log("HandleScroll.vue accessed")
   }
 }
 </script>

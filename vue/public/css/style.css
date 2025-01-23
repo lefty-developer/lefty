@@ -504,3 +504,5 @@ body {
             body #home-page-wrap .home-page-content .home-page-cta-marginal .home-page-cta-marginal-count:hover::before {
               animation-play-state: paused;
               opacity: 0; }
+  body #work-page-wrap .work-page-cta img {
+    margin: 0 -0.5rem 0 -0.375rem; }

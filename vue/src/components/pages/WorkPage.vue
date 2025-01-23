@@ -1,5 +1,6 @@
 <script>
 import router from '../../router'
+import HandleScroll from '../mixins/HandleScroll.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -8,9 +9,13 @@ export default {
     NavMenu,
     MenuButton
   },
+  mixins: [HandleScroll],
   name: 'WorkPage',
   data () {
     return {
+      // Assets
+      arrowIcon: require('../../assets/icons/down-arrow.svg'),
+
       // WP Page Data
       page: {},
       pageId: 0,
@@ -50,7 +55,7 @@ export default {
 </script>
 
 <template>
-  <div id='router-root' v-if='$wpPages'>
+  <div id='router-root' v-if='$wpPages' v-on:wheel='handleScroll'>
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)' 
              v-bind:parent='$options.name' />
@@ -58,6 +63,12 @@ export default {
       <!-- <MenuButton v-on:toggle='value => toggleMenu(value)'
             v-bind:toggleStatus='menuToggled' /> -->
       <MenuButton v-on:click='toggleMenu(true)' />
+      <button ref='nextRouteButton' v-on:click='nextPage()' class='work-page-cta button-outline'>
+        <span class='button-text'>Experience</span>
+        <div class='button-item-gap'></div>
+        <img v-bind:src='arrowIcon'
+            class='button-icon arrow-icon'>
+      </button>
     </div>
   </div>
 </template>
