@@ -22,9 +22,7 @@ export default {
       pageId: 0,
       pageNum: 0,
       pagesCount: 0,
-      title: '',
-      subtitle: '',
-      body: '',
+      workItems: [],
 
       // Misc.
       menuToggled: false
@@ -56,9 +54,8 @@ export default {
     document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
 
     // assign ACF page data
-    this.title = this.page.acf['lefty-home-title']
-    this.subtitle = this.page.acf['lefty-home-subtitle']
-    this.body = this.page.acf['lefty-home-body']
+    this.workItems = this.page.acf['lefty-work-items']
+    console.log(this.workItems)
   },
   computed: {
     // Lazy load logo
@@ -83,18 +80,29 @@ export default {
           </router-link>
         </section>
         <section class='work-page-copy-wrap'>
-          <button v-on:click='this.$router.push({ path: "/contact" })' class='work-page-cta'>
-            <span class='button-text'>Synopsis</span>
-            <div class='button-item-gap'></div>
-            <img v-bind:src='synopsisIcon'
-                class='button-icon arrow-icon'>
-          </button>
-          <button ref='nextRouteButton' v-on:click='nextPage()' class='work-page-cta button-outline'>
-            <span class='button-text'>Experience</span>
-            <div class='button-item-gap'></div>
-            <img v-bind:src='arrowIcon'
-                class='button-icon arrow-icon'>
-          </button>
+          <div class='work-page-copy'>
+            <h2 class='work-page-subtitle'>
+              {{ workItems[0]['lefty-work-item-category'] }}
+            </h2>
+            <h1 class='work-page-title' v-html='workItems[0]["lefty-work-item-title"]'></h1>
+            <p class='work-page-body'>
+              {{ workItems[0]['lefty-work-item-brief'] }}
+            </p>
+          </div>
+          <div class='work-page-cta-wrap'>
+            <button v-on:click='this.$router.push({ path: "/contact" })' class='work-page-cta'>
+              <span class='button-text'>Synopsis</span>
+              <div class='button-item-gap'></div>
+              <img v-bind:src='synopsisIcon'
+                  class='button-icon arrow-icon'>
+            </button>
+            <button ref='nextRouteButton' v-on:click='nextPage()' class='work-page-cta button-outline'>
+              <span class='button-text'>Experience</span>
+              <div class='button-item-gap'></div>
+              <img v-bind:src='arrowIcon'
+                  class='button-icon arrow-icon'>
+            </button>
+          </div>
         </section>
         <section class='work-page-nav-wrap'>
           <MenuButton v-on:click='toggleMenu(true)' />

@@ -507,23 +507,55 @@ body {
   body #work-page-wrap {
     width: 100%;
     height: 100%;
-    padding: 3.625rem clamp(2rem, 9.5vw, 9.5rem) 0 clamp(2rem, 9.5vw, 9.5rem); }
+    padding: 3.75rem clamp(2rem, 9.5vw, 9.5rem) 0 clamp(2rem, 9.5vw, 9.5rem); }
     body #work-page-wrap .work-page-content {
       display: flex;
-      justify-content: center; }
+      justify-content: space-between; }
       body #work-page-wrap .work-page-content section {
-        width: 100%;
-        display: flex;
-        align-items: center; }
+        display: flex; }
         body #work-page-wrap .work-page-content section.work-page-logo-wrap a {
           line-height: 0; }
           body #work-page-wrap .work-page-content section.work-page-logo-wrap a .work-logo {
             width: 8rem;
             filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%); }
         body #work-page-wrap .work-page-content section:nth-child(2) {
-          justify-content: center; }
+          flex-direction: column; }
         body #work-page-wrap .work-page-content section:last-child {
-          justify-content: flex-end; }
+          justify-content: flex-end;
+          height: 6.125rem;
+          align-items: center; }
+        body #work-page-wrap .work-page-content section.work-page-copy-wrap {
+          width: 50vw;
+          margin-top: 2rem; }
+          body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy {
+            text-align: center; }
+            body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy .work-page-subtitle {
+              color: #414E4A;
+              font-size: 1.125rem;
+              line-height: 1.4em;
+              letter-spacing: 0.25em;
+              font-weight: 800;
+              text-transform: uppercase;
+              margin-bottom: 0.125rem; }
+            body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy .work-page-title {
+              font-family: 'Roboto', sans-serif;
+              color: #36413E;
+              font-size: clamp(2.125rem, 5.25vw, 5.25rem);
+              line-height: 1.0125em;
+              letter-spacing: 0;
+              font-weight: 900;
+              margin-top: 1.625rem; }
+            body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy p.work-page-body {
+              color: #414E4A;
+              font-size: 1.125rem;
+              line-height: 1.67em;
+              margin-top: 2.125rem;
+              font-weight: 400; }
+          body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-cta-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 2.5rem; }
     body #work-page-wrap button.work-page-cta:not(:nth-child(1)) {
       margin-left: 2rem; }
       body #work-page-wrap button.work-page-cta:not(:nth-child(1)) img {
