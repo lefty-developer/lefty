@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   overflow-x: hidden;
-  padding: 5.25rem 0;
+  padding: 5rem 0 5.25rem 0;
 
   .home-page-image-wrap {
     width: 40%;
@@ -110,7 +110,7 @@
         line-height: 0;
 
         .home-logo {
-          width: 9rem;
+          width: 8.5rem /*9rem*/;
           filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%);
         }
       }

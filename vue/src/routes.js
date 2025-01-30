@@ -73,6 +73,5 @@ export function routes () {
     }
   }
 
-  const returnObj = fetchWordPressData()
-  return returnObj
+  return fetchWordPressData()
 }

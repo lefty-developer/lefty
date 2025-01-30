@@ -68,12 +68,12 @@ export default {
       setTimeout(() => {
         this.copyVisible = 'copy-visible'
         this.copyAnimation = 'animate__fadeIn'
-      }, 150)
+      }, 100)
 
       setTimeout(() => {
         this.marginalVisible = 'marginal-visible'
         this.marginalAnimation = 'animate__fadeIn'
-      }, 300)
+      }, 200)
     }
   },
   created () {

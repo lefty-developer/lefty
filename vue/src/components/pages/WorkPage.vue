@@ -25,7 +25,8 @@ export default {
       workItems: [],
 
       // Misc.
-      menuToggled: false
+      menuToggled: false,
+      index: 0
     }
   },
   methods: {
@@ -82,7 +83,7 @@ export default {
         <section class='work-page-copy-wrap'>
           <div class='work-page-copy'>
             <h2 class='work-page-subtitle'>
-              {{ workItems[0]['lefty-work-item-category'] }}
+              1 / {{ workItems.length }}&nbsp;&nbsp;—&nbsp;&nbsp;{{ workItems[0]['lefty-work-item-category'] }}
             </h2>
             <h1 class='work-page-title' v-html='workItems[0]["lefty-work-item-title"]'></h1>
             <p class='work-page-body'>
@@ -110,7 +111,9 @@ export default {
       </div>
       <div class='work-page-carousel-wrap'>
         <div class='work-page-carousel'>
-
+          <div class='work-page-carousel-item animate__animated animate__fadeIn' 
+               :style='{ "background-image": `url(${workItems[0]["lefty-work-item-thumbnail"]})` }'>
+          </div>
         </div>
       </div>
     </div>
