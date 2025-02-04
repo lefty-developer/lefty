@@ -213,6 +213,23 @@ body {
           filter: brightness(0) invert(29%) sepia(7%) saturate(702%) hue-rotate(111deg) brightness(97%) contrast(94%);
         }
       }
+
+      &.button-icon-only {
+        position: relative;
+        z-index: 1;
+        padding: 0;
+        background: $seasalt;
+        border: 0.125rem solid $ash;
+        border-radius: 100%;
+        // width: fit-content;
+        width: 3.5rem;
+        display: flex;
+        justify-content: center;
+
+        &.work-page-carousel-next {
+          align-self: flex-end;
+        }
+      }
     }
     
     h1, h2, h3, h4, h5, h6, p {

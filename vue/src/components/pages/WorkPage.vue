@@ -79,15 +79,18 @@ export default {
             <img class='work-logo' 
                  v-bind:src='logo' v-if='logo' />
           </router-link>
+          <button class='work-page-carousel-prev button-icon-only'>
+            p
+          </button>
         </section>
         <section class='work-page-copy-wrap'>
           <div class='work-page-copy'>
             <h2 class='work-page-subtitle'>
-              1 / {{ workItems.length }}&nbsp;&nbsp;—&nbsp;&nbsp;{{ workItems[0]['lefty-work-item-category'] }}
+              {{ index + 1 }} / {{ workItems.length }}&nbsp;&nbsp;—&nbsp;&nbsp;{{ workItems[index]['lefty-work-item-category'] }}
             </h2>
-            <h1 class='work-page-title' v-html='workItems[0]["lefty-work-item-title"]'></h1>
+            <h1 class='work-page-title' v-html='workItems[index]["lefty-work-item-title"]'></h1>
             <p class='work-page-body'>
-              {{ workItems[0]['lefty-work-item-brief'] }}
+              {{ workItems[index]['lefty-work-item-brief'] }}
             </p>
           </div>
           <div class='work-page-cta-wrap'>
@@ -107,12 +110,15 @@ export default {
         </section>
         <section class='work-page-nav-wrap'>
           <MenuButton v-on:click='toggleMenu(true)' />
+          <button class='work-page-carousel-next button-icon-only'>
+            n
+          </button>
         </section>
       </div>
       <div class='work-page-carousel-wrap'>
         <div class='work-page-carousel'>
           <div class='work-page-carousel-item animate__animated animate__fadeIn' 
-               :style='{ "background-image": `url(${workItems[0]["lefty-work-item-thumbnail"]})` }'>
+               :style='{ "background-image": `url(${workItems[index]["lefty-work-item-thumbnail"]})` }'>
           </div>
         </div>
       </div>

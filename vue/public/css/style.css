@@ -146,6 +146,18 @@ body {
           color: #414E4A; }
         body #app button.button-outline .button-icon {
           filter: brightness(0) invert(29%) sepia(7%) saturate(702%) hue-rotate(111deg) brightness(97%) contrast(94%); }
+      body #app button.button-icon-only {
+        position: relative;
+        z-index: 1;
+        padding: 0;
+        background: #FAFAFA;
+        border: 0.125rem solid #C3C9C3;
+        border-radius: 100%;
+        width: 3.5rem;
+        display: flex;
+        justify-content: center; }
+        body #app button.button-icon-only.work-page-carousel-next {
+          align-self: flex-end; }
     body #app h1, body #app h2, body #app h3, body #app h4, body #app h5, body #app h6, body #app p {
       display: block; }
   body div.content-box {
@@ -513,19 +525,18 @@ body {
     body #work-page-wrap .work-page-content {
       display: flex;
       justify-content: space-between;
-      padding-bottom: 4rem; }
+      padding-bottom: 4.125rem; }
       body #work-page-wrap .work-page-content section {
-        display: flex; }
+        display: flex;
+        flex-direction: column; }
         body #work-page-wrap .work-page-content section.work-page-logo-wrap a {
           line-height: 0;
           max-height: 6.125rem; }
           body #work-page-wrap .work-page-content section.work-page-logo-wrap a .work-logo {
             width: 8.5rem;
             filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%); }
-        body #work-page-wrap .work-page-content section:nth-child(2) {
-          flex-direction: column; }
-        body #work-page-wrap .work-page-content section:last-child {
-          justify-content: flex-end; }
+        body #work-page-wrap .work-page-content section:first-child, body #work-page-wrap .work-page-content section:last-child {
+          justify-content: space-between; }
         body #work-page-wrap .work-page-content section.work-page-copy-wrap {
           width: 50vw; }
           body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy {
@@ -550,13 +561,13 @@ body {
               color: #414E4A;
               font-size: 1.125rem;
               line-height: 1.67em;
-              margin-top: 2.125rem;
+              margin-top: 2rem;
               font-weight: 400; }
           body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-cta-wrap {
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-top: 2.5rem; }
+            margin-top: 2.375rem; }
     body #work-page-wrap button.work-page-cta:not(:nth-child(1)) {
       margin-left: 2rem; }
       body #work-page-wrap button.work-page-cta:not(:nth-child(1)) img {

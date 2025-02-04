@@ -8,10 +8,11 @@
   .work-page-content {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 4rem;
+    padding-bottom: 4.125rem;
 
     section {
       display: flex;
+      flex-direction: column;
 
       &.work-page-logo-wrap {
         
@@ -26,13 +27,8 @@
         }
       }
 
-      &:nth-child(2) {
-        // justify-content: center;
-        flex-direction: column;
-      }
-
-      &:last-child { 
-        justify-content: flex-end;
+      &:first-child, &:last-child { 
+        justify-content: space-between;
       }
 
       &.work-page-copy-wrap {
@@ -65,7 +61,7 @@
             color: $outerspace-light;
             font-size: 1.125rem;
             line-height: 1.67em;
-            margin-top: 2.125rem;
+            margin-top: 2rem;
             font-weight: 400;
           }
         }
@@ -74,7 +70,7 @@
           width: 100%;
           display: flex;
           justify-content: center;
-          margin-top: 2.5rem;
+          margin-top: 2.375rem;
         }
       }
     }
