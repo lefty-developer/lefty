@@ -88,19 +88,40 @@
   }
 
   .work-page-carousel-wrap {
+    position: relative;
     height: 100%;
+    width: 100vw;
+    overflow-x: hidden;
+    margin-left: clamp(-9.5rem, -9.5vw, -2rem);
+    // display: flex;
+    // justify-content: center;
 
     .work-page-carousel {
+      position: absolute;
       height: 100%;
+      display: flex;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: left 300ms ease-in-out;
 
       .work-page-carousel-item {
         background: $timberwolf;
         background-size: cover;
         background-position: center center;
         width: 43rem;
-        height: 100%;
-        margin: 0 auto;
+        max-height: 100%;
         border-radius: 0.75rem;
+        transition: max-height 300ms ease-in-out;
+
+        &:not(:last-child) {
+          margin-right: 6.5rem;
+        }
+
+        &.last-visible {
+          max-height: 50%;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
       }
     }
   }

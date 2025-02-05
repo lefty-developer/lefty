@@ -573,14 +573,29 @@ body {
       body #work-page-wrap button.work-page-cta:not(:nth-child(1)) img {
         margin: 0 -0.5rem 0 -0.375rem; }
     body #work-page-wrap .work-page-carousel-wrap {
-      height: 100%; }
+      position: relative;
+      height: 100%;
+      width: 100vw;
+      overflow-x: hidden;
+      margin-left: clamp(-9.5rem, -9.5vw, -2rem); }
       body #work-page-wrap .work-page-carousel-wrap .work-page-carousel {
-        height: 100%; }
+        position: absolute;
+        height: 100%;
+        display: flex;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: left 300ms ease-in-out; }
         body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item {
           background: #D0D5D0;
           background-size: cover;
           background-position: center center;
           width: 43rem;
-          height: 100%;
-          margin: 0 auto;
-          border-radius: 0.75rem; }
+          max-height: 100%;
+          border-radius: 0.75rem;
+          transition: max-height 300ms ease-in-out; }
+          body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:not(:last-child) {
+            margin-right: 6.5rem; }
+          body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible {
+            max-height: 50%;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0; }

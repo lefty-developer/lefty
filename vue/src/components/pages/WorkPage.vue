@@ -26,7 +26,10 @@ export default {
 
       // Misc.
       menuToggled: false,
-      index: 0
+      index: 0,
+      carouselArr: [],
+      carouselLeft: 0,
+      nextItemIndex: 2
     }
   },
   methods: {
@@ -46,7 +49,47 @@ export default {
     },
     toggleMenu (value) {
       this.menuToggled = value
-    } 
+    },
+    initCarousel () {
+      this.carouselArr.push(this.workItems.at(-2))
+      this.carouselArr.push(this.workItems.at(-1))
+      this.carouselArr.push(this.workItems.at(0))
+      this.carouselArr.push(this.workItems.at(1))
+      this.carouselArr.push(this.workItems.at(2))
+    },
+    nextItem () {
+      this.index++
+      this.nextItemIndex++
+      this.carouselLeft += 49.5
+      this.$refs.workCarousel.style.transition = 'left 300ms ease-in-out'
+      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+      this.$refs.workItem[3].classList.remove('last-visible')
+      this.$refs.workItem[4].style.transition = 'max-height 300ms ease-in-out'
+      this.$refs.workItem[4].classList.add('last-visible')
+
+      if (this.nextItemIndex < this.workItems.length) {
+        console.log('load next item')
+        setTimeout(() => {
+          this.$refs.workItem[3].style.transition = 'none'
+          this.$refs.workItem[3].classList.add('last-visible')
+
+          this.carouselArr.shift()
+          this.carouselArr.push(this.workItems[this.nextItemIndex])
+          this.carouselLeft = 0
+          this.$refs.workCarousel.style.transition = 'none'
+          this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+        }, 300)
+      } else if (this.nextItemIndex == this.workItems.length) {
+        console.log('approaching end, load first work item')
+      } else if (this.nextItemIndex == this.workItems.length + 1) {
+        console.log('load second work item')
+      } else {
+        console.log('reached first work item, reset carousel')
+        // probably just empty carouselArr and rebuild with initCarousel()
+      }
+      
+      
+    }
   },
   created () {
     this.assignData()
@@ -56,7 +99,9 @@ export default {
 
     // assign ACF page data
     this.workItems = this.page.acf['lefty-work-items']
-    console.log(this.workItems)
+
+    // build initial carousel array
+    this.initCarousel()
   },
   computed: {
     // Lazy load logo
@@ -110,15 +155,19 @@ export default {
         </section>
         <section class='work-page-nav-wrap'>
           <MenuButton v-on:click='toggleMenu(true)' />
-          <button class='work-page-carousel-next button-icon-only'>
+          <button class='work-page-carousel-next button-icon-only'
+                  v-on:click='nextItem()'>
             n
           </button>
         </section>
       </div>
       <div class='work-page-carousel-wrap'>
-        <div class='work-page-carousel'>
-          <div class='work-page-carousel-item animate__animated animate__fadeIn' 
-               :style='{ "background-image": `url(${workItems[index]["lefty-work-item-thumbnail"]})` }'>
+        <div class='work-page-carousel' ref='workCarousel'>
+          <div v-for='(item, i) in carouselArr' :key='i'
+               :class='{ "last-visible": i >= 3 }'
+               class='work-page-carousel-item animate__animated animate__fadeIn'
+               ref='workItem'
+               :style='{ "background-image": `url(${item["lefty-work-item-thumbnail"]})` }'>
           </div>
         </div>
       </div>
