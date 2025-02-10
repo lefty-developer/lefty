@@ -105,9 +105,6 @@
       transition: left 300ms ease-in-out;
 
       .work-page-carousel-item {
-        background: $timberwolf;
-        background-size: cover;
-        background-position: center center;
         width: 43rem;
         max-height: 100%;
         border-radius: 0.75rem;
@@ -118,9 +115,23 @@
         }
 
         &.last-visible {
-          max-height: 50%;
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
+          max-height: 61.8%;
+
+          .work-page-carousel-item-image {
+            width: 61.8%;
+          }
+        }
+
+        .work-page-carousel-item-image {
+          display: block;
+          height: 100%;
+          width: 100%;
+          border-radius: 0.75rem;
+          text-decoration: none;
+          background-size: cover;
+          background-position: center center;
+          transition: width 300ms ease-in-out;
+          cursor: pointer;
         }
       }
     }

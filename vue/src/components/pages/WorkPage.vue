@@ -1,6 +1,7 @@
 <script>
 import router from '../../router'
 import HandleScroll from '../mixins/HandleScroll.vue'
+import DelayService from '../mixins/Delay.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -9,7 +10,7 @@ export default {
     NavMenu,
     MenuButton
   },
-  mixins: [HandleScroll],
+  mixins: [HandleScroll, DelayService],
   name: 'WorkPage',
   data () {
     return {
@@ -29,7 +30,8 @@ export default {
       index: 0,
       carouselArr: [],
       carouselLeft: 0,
-      nextItemIndex: 2
+      nextItemIndex: 2,
+      buttonBuffer: false
     }
   },
   methods: {
@@ -57,28 +59,35 @@ export default {
       this.carouselArr.push(this.workItems.at(1))
       this.carouselArr.push(this.workItems.at(2))
     },
-    nextItem () {
+    async nextItem () {
+      this.buttonBuffer = true
       this.index++
       this.nextItemIndex++
       this.carouselLeft += 49.5
       this.$refs.workCarousel.style.transition = 'left 300ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
       this.$refs.workItem[3].classList.remove('last-visible')
-      this.$refs.workItem[4].style.transition = 'max-height 300ms ease-in-out'
-      this.$refs.workItem[4].classList.add('last-visible')
 
       if (this.nextItemIndex < this.workItems.length) {
         console.log('load next item')
-        setTimeout(() => {
-          this.$refs.workItem[3].style.transition = 'none'
-          this.$refs.workItem[3].classList.add('last-visible')
-
+        await this.delay(300).then(() => {
           this.carouselArr.shift()
           this.carouselArr.push(this.workItems[this.nextItemIndex])
+
+          this.$refs.workItem[3].style.transition = 'none'
+          this.$refs.workItemImage[3].style.transition = 'none'
+
+          this.$refs.workItem[3].classList.add('last-visible')
           this.carouselLeft = 0
           this.$refs.workCarousel.style.transition = 'none'
           this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
-        }, 300)
+        })
+        await this.delay(50).then(() => {
+          // ensure upcoming last-visible item has required transition properties
+          this.$refs.workItem[3].style.transition = 'max-height 300ms ease-in-out'
+          this.$refs.workItemImage[3].style.transition = 'width 300ms ease-in-out'
+          this.buttonBuffer = false
+        })
       } else if (this.nextItemIndex == this.workItems.length) {
         console.log('approaching end, load first work item')
       } else if (this.nextItemIndex == this.workItems.length + 1) {
@@ -86,9 +95,12 @@ export default {
       } else {
         console.log('reached first work item, reset carousel')
         // probably just empty carouselArr and rebuild with initCarousel()
+        // make sure to remove transitions so it jumps back instantly and looks like nothing changed
+        // also put transitions back on after the jump lol
       }
-      
-      
+    },
+    prevItem () {
+      // TODO: implement previous item
     }
   },
   created () {
@@ -122,11 +134,11 @@ export default {
         <section class='work-page-logo-wrap'>
           <router-link to='/'>
             <img class='work-logo' 
-                 v-bind:src='logo' v-if='logo' />
+                 v-bind:src='logo' v-if='logo'>
           </router-link>
-          <button class='work-page-carousel-prev button-icon-only'>
-            p
-          </button>
+          <button class='work-page-carousel-prev button-icon-only'
+                  v-bind:disabled='buttonBuffer'
+          >p</button>
         </section>
         <section class='work-page-copy-wrap'>
           <div class='work-page-copy'>
@@ -143,7 +155,7 @@ export default {
               <span class='button-text'>Synopsis</span>
               <div class='button-item-gap'></div>
               <img v-bind:src='synopsisIcon'
-                  class='button-icon arrow-icon'>
+                   class='button-icon arrow-icon'>
             </button>
             <button ref='nextRouteButton' v-on:click='nextPage()' class='work-page-cta button-outline'>
               <span class='button-text'>Experience</span>
@@ -156,9 +168,9 @@ export default {
         <section class='work-page-nav-wrap'>
           <MenuButton v-on:click='toggleMenu(true)' />
           <button class='work-page-carousel-next button-icon-only'
-                  v-on:click='nextItem()'>
-            n
-          </button>
+                  v-on:click='nextItem()'
+                  v-bind:disabled='buttonBuffer'
+          >n</button>
         </section>
       </div>
       <div class='work-page-carousel-wrap'>
@@ -166,8 +178,11 @@ export default {
           <div v-for='(item, i) in carouselArr' :key='i'
                :class='{ "last-visible": i >= 3 }'
                class='work-page-carousel-item animate__animated animate__fadeIn'
-               ref='workItem'
-               :style='{ "background-image": `url(${item["lefty-work-item-thumbnail"]})` }'>
+               ref='workItem'>
+               <a class='work-page-carousel-item-image'
+                  :style='{ "background-image": `url(${item["lefty-work-item-thumbnail"]})` }'
+                  ref='workItemImage'
+               ></a>
           </div>
         </div>
       </div>

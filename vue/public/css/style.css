@@ -158,6 +158,12 @@ body {
         justify-content: center; }
         body #app button.button-icon-only.work-page-carousel-next {
           align-self: flex-end; }
+      body #app button:disabled {
+        opacity: 1;
+        cursor: pointer; }
+      body #app button[disabled] {
+        background-color: inherit;
+        color: inherit; }
     body #app h1, body #app h2, body #app h3, body #app h4, body #app h5, body #app h6, body #app p {
       display: block; }
   body div.content-box {
@@ -586,9 +592,6 @@ body {
         transform: translateX(-50%);
         transition: left 300ms ease-in-out; }
         body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item {
-          background: #D0D5D0;
-          background-size: cover;
-          background-position: center center;
           width: 43rem;
           max-height: 100%;
           border-radius: 0.75rem;
@@ -596,6 +599,16 @@ body {
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:not(:last-child) {
             margin-right: 6.5rem; }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible {
-            max-height: 50%;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0; }
+            max-height: 61.8%; }
+            body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible .work-page-carousel-item-image {
+              width: 61.8%; }
+          body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item .work-page-carousel-item-image {
+            display: block;
+            height: 100%;
+            width: 100%;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            background-size: cover;
+            background-position: center center;
+            transition: width 300ms ease-in-out;
+            cursor: pointer; }
