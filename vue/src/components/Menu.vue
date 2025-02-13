@@ -1,5 +1,8 @@
 <script>
+import DelayService from './mixins/Delay.vue'
+
 export default {
+  mixins: [DelayService],
   name: 'NavMenu',
   props: {
     toggle: Boolean,
@@ -13,7 +16,7 @@ export default {
       socials: [],
 
       // Misc.
-      show: false,
+      menuVisible: '',
       inAnimation: '',
       outAnimation: '',
       carouselCounter: 1,
@@ -47,35 +50,29 @@ export default {
     }
   },
   mounted () {
-    this.show = this.toggle
     console.log('Menu Parent: ', this.parent)
   },
   watch: {
     // Watches the toggle prop
-    toggle () {
+    async toggle () {
       if (this.toggle == true) {
         this.carouselCounter = 1
         this.carouselOffset = 56
-        this.$nextTick(() => {
-          if (this.$refs.socialsCarousel) {
-            this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
-            this.$refs.socialsCarousel.style.transition = 'none'
-          }
-        })
-        this.show = this.toggle
+        await this.$nextTick()
+        if (this.$refs.socialsCarousel) {
+          this.$refs.socialsCarousel.style.transition = 'none'
+          this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
+        }
+        this.menuVisible = 'menu-visible'
         this.outAnimation = false
         this.inAnimation = 'animate__slideInRight'
-        this.$nextTick(() => {
-          if (this.$refs.socialsCarousel) {
-            setTimeout(() => {
-              this.$refs.socialsCarousel.style.transition = 'all 300ms ease-in-out'
-            }, 0)
-          }
-        })
+        await this.delay(0)
+        if (this.$refs.socialsCarousel) {
+          this.$refs.socialsCarousel.style.transition = 'all 300ms ease-in-out'
+        }
       } else {
         this.inAnimation = false
         this.outAnimation = 'animate__slideOutRight'
-        setTimeout(() => this.show = this.toggle, 800)
       }
     }
   },
@@ -86,8 +83,8 @@ export default {
 </script>
 
 <template>
-  <div v-if='show' class='menu animate__animated animate__fast'
-       v-bind:class='[inAnimation, outAnimation]'>
+  <div class='menu animate__animated animate__fast'
+       v-bind:class='[menuVisible, inAnimation, outAnimation]'>
     <div class='menu-header'>
       <p class='menu-header-text'>Menu</p>
       <button v-on:click='closeMenu()'

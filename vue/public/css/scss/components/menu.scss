@@ -10,6 +10,11 @@
   background-blend-mode: normal;
   box-shadow: 0.625rem 0rem 3.125rem rgba(98, 121, 184, 0.35);
   z-index: 99;
+  visibility: hidden;
+
+  &.menu-visible {
+    visibility: visible;
+  }
 
   .menu-header {
     margin: 4.25rem 3.5rem 3.5rem 3.5rem;

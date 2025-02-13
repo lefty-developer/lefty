@@ -32,7 +32,7 @@ export default {
         this.deltaCounter += delta
       }
 
-      console.log("Delta Counter: ", this.deltaCounter)
+      console.log('Delta Counter: ', this.deltaCounter)
 
       if (this.deltaCounter > 2) {
         // Activate nextPage() method
@@ -45,7 +45,7 @@ export default {
     }
   },
   created () {
-    console.log("HandleScroll.vue accessed")
+    console.log('HandleScroll.vue accessed')
   }
 }
 </script>

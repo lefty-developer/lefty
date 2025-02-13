@@ -7,7 +7,7 @@ export default {
     }
   },
   created () {
-    console.log('Delay.vue accessed')
+    // Silence is golden.
   }
 }
 </script>

@@ -12,7 +12,7 @@ export function routes () {
     // Try-Catch block for error handling
     try {
       // Access WordPress API
-      // Promise.all to do multiple fetch requests 
+      // await Promise.all to do multiple fetch requests as one call
       const [wpData, frontPage, wpPages, menuOptions] = await Promise.all([
         fetch(`${ wpSitePath }/wp-json`).then(response => response.json()),
         fetch(`${ wpSitePath }/wp-json/wp/v2/frontpage`).then(response => response.json()),

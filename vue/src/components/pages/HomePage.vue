@@ -1,6 +1,7 @@
 <script>
 import router from '../../router'
 import HandleScroll from '../mixins/HandleScroll.vue'
+import DelayService from '../mixins/Delay.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -9,7 +10,7 @@ export default {
     NavMenu,
     MenuButton
   },
-  mixins: [HandleScroll],
+  mixins: [HandleScroll, DelayService],
   name: 'HomePage',
   data () {
     return {
@@ -64,16 +65,13 @@ export default {
     toggleMenu (value) {
       this.menuToggled = value
     },
-    mountAnimations () {
-      setTimeout(() => {
-        this.copyVisible = 'copy-visible'
-        this.copyAnimation = 'animate__fadeIn'
-      }, 100)
-
-      setTimeout(() => {
-        this.marginalVisible = 'marginal-visible'
-        this.marginalAnimation = 'animate__fadeIn'
-      }, 200)
+    async mountAnimations () {
+      await this.delay(100)
+      this.copyVisible = 'copy-visible'
+      this.copyAnimation = 'animate__fadeIn'
+      await this.delay(100)
+      this.marginalVisible = 'marginal-visible'
+      this.marginalAnimation = 'animate__fadeIn'
     }
   },
   created () {

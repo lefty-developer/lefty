@@ -1,5 +1,8 @@
 <script>
+import DelayService from './mixins/Delay.vue'
+
 export default {
+  mixins: [DelayService],
   name: 'LoadingAnimation',
   props: {
     wpData: Object,
@@ -15,28 +18,25 @@ export default {
     }
   },
   methods: {
-    showParent () {
-      setTimeout(() => {
-        // this.repeatAnimation = false
-        this.outAnimation = 'animate__fadeOutDown'
-      }, 400)
-      setTimeout(() => {
-        this.show = false
-        this.$emit('ready', !this.show)
-      }, 1200)
+    async showParent () {
+      await this.delay(500)
+      // this.repeatAnimation = false
+      this.outAnimation = 'animate__fadeOutDown'
+      await this.delay(1000)
+      this.show = false
+      this.$emit('ready', !this.show)
     }
   },
   created () {
     // apply site name from global WordPress data props set on main.js
     document.title = this.$wpSiteName ? this.$wpSiteName : 'Resolving issues...'
   },
-  mounted () {
+  async mounted () {
     this.inAnimation = 'animate__zoomInDown'
-    setTimeout(() => {
-      this.inAnimation = false
-      // this.repeatAnimation = 'animate__bounce animate__infinite'
-      this.showParent()
-    }, 1000)
+    await this.delay(1000)
+    this.inAnimation = false
+    // this.repeatAnimation = 'animate__bounce animate__infinite'
+    this.showParent()
   },
   computed: {
     // Lazy load logo

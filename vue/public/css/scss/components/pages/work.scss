@@ -70,7 +70,7 @@
           width: 100%;
           display: flex;
           justify-content: center;
-          margin-top: 2.375rem;
+          margin-top: 2.25rem;
         }
       }
     }
@@ -102,13 +102,13 @@
       display: flex;
       left: 50%;
       transform: translateX(-50%);
-      transition: left 300ms ease-in-out;
+      transition: left 400ms ease-in-out;
 
       .work-page-carousel-item {
         width: 43rem;
         max-height: 100%;
         border-radius: 0.75rem;
-        transition: max-height 300ms ease-in-out;
+        transition: max-height 400ms ease-in-out;
 
         &:not(:last-child) {
           margin-right: 6.5rem;
@@ -130,7 +130,7 @@
           text-decoration: none;
           background-size: cover;
           background-position: center center;
-          transition: width 300ms ease-in-out;
+          transition: width 400ms ease-in-out;
           cursor: pointer;
         }
       }

@@ -17,6 +17,7 @@ export default {
       // Assets
       synopsisIcon: require('../../assets/icons/read.png'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
+      longArrowIcon: require('../../assets/icons/long-arrow.svg'),
 
       // WP Page Data
       page: {},
@@ -53,41 +54,36 @@ export default {
       this.menuToggled = value
     },
     initCarousel () {
-      this.carouselArr.push(this.workItems.at(-2))
-      this.carouselArr.push(this.workItems.at(-1))
-      this.carouselArr.push(this.workItems.at(0))
-      this.carouselArr.push(this.workItems.at(1))
-      this.carouselArr.push(this.workItems.at(2))
+      this.carouselArr.push(...this.workItems.slice(-2), ...this.workItems.slice(0, 3))
     },
     async nextItem () {
       this.buttonBuffer = true
       this.index++
       this.nextItemIndex++
       this.carouselLeft += 49.5
-      this.$refs.workCarousel.style.transition = 'left 300ms ease-in-out'
+      this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
       this.$refs.workItem[3].classList.remove('last-visible')
 
       if (this.nextItemIndex < this.workItems.length) {
         console.log('load next item')
-        await this.delay(300).then(() => {
-          this.carouselArr.shift()
-          this.carouselArr.push(this.workItems[this.nextItemIndex])
+        await this.delay(400)
+        this.carouselArr.shift()
+        this.carouselArr.push(this.workItems[this.nextItemIndex])
 
-          this.$refs.workItem[3].style.transition = 'none'
-          this.$refs.workItemImage[3].style.transition = 'none'
+        this.$refs.workItem[3].style.transition = 'none'
+        this.$refs.workItemImage[3].style.transition = 'none'
 
-          this.$refs.workItem[3].classList.add('last-visible')
-          this.carouselLeft = 0
-          this.$refs.workCarousel.style.transition = 'none'
-          this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
-        })
-        await this.delay(50).then(() => {
-          // ensure upcoming last-visible item has required transition properties
-          this.$refs.workItem[3].style.transition = 'max-height 300ms ease-in-out'
-          this.$refs.workItemImage[3].style.transition = 'width 300ms ease-in-out'
-          this.buttonBuffer = false
-        })
+        this.$refs.workItem[3].classList.add('last-visible')
+        this.carouselLeft = 0
+        this.$refs.workCarousel.style.transition = 'none'
+        this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+
+        await this.delay(50)
+        // reinstate upcoming last-visible item with mandatory transition properties
+        this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
+        this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
+        this.buttonBuffer = false
       } else if (this.nextItemIndex == this.workItems.length) {
         console.log('approaching end, load first work item')
       } else if (this.nextItemIndex == this.workItems.length + 1) {
@@ -137,8 +133,10 @@ export default {
                  v-bind:src='logo' v-if='logo'>
           </router-link>
           <button class='work-page-carousel-prev button-icon-only'
-                  v-bind:disabled='buttonBuffer'
-          >p</button>
+                  v-bind:disabled='buttonBuffer'>
+            <img class='button-icon-only-icon'
+                v-bind:src='longArrowIcon'>
+          </button>
         </section>
         <section class='work-page-copy-wrap'>
           <div class='work-page-copy'>
@@ -169,8 +167,10 @@ export default {
           <MenuButton v-on:click='toggleMenu(true)' />
           <button class='work-page-carousel-next button-icon-only'
                   v-on:click='nextItem()'
-                  v-bind:disabled='buttonBuffer'
-          >n</button>
+                  v-bind:disabled='buttonBuffer'>
+            <img class='button-icon-only-icon'
+                 v-bind:src='longArrowIcon'>
+          </button>
         </section>
       </div>
       <div class='work-page-carousel-wrap'>

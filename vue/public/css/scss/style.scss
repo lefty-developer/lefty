@@ -95,13 +95,14 @@ body {
     button {
       --height: 3.5rem;
       height: var(--height);
-      padding: 0 2rem;
+      padding: 0 2.25rem/* 0 2rem */;
       outline: none;
       background: $timberwolf;
       border: none;
       display: flex;
       align-items: center;
       transition: 300ms ease-in-out;
+      border-radius: 0.375rem;
 
       &:hover {
         cursor: pointer;
@@ -141,6 +142,11 @@ body {
     
         &.close-icon, &.arrow-icon {
           margin-top: 0;
+        }
+
+        &.close-icon {
+          margin-right: -0.125rem;
+          margin-left: -0.125rem;
         }
       }
 
@@ -221,24 +227,76 @@ body {
         background: $seasalt;
         border: 0.125rem solid $ash;
         border-radius: 100%;
-        // width: fit-content;
         width: 3.5rem;
         display: flex;
         justify-content: center;
 
+        .button-icon-only-icon {
+          filter: brightness(0) invert(29%) sepia(7%) saturate(702%) hue-rotate(111deg) brightness(97%) contrast(94%);
+          height: 1.5rem;
+          transition: filter 300ms ease-in-out;
+        }
+
         &.work-page-carousel-next {
           align-self: flex-end;
+          position: relative;
+          right: 1.375rem;
+
+          .button-icon-only-icon {
+            margin-left: 3.125rem;
+          }
         }
-      }
 
-      &:disabled {
-        opacity: 1;
-        cursor: pointer;
-      }
+        &.work-page-carousel-prev {
+          position: relative;
+          left: 1.375rem;
 
-      &[disabled] {
-        background-color: inherit;
-        color: inherit;
+          .button-icon-only-icon {
+            margin-right: 3.125rem;
+            transform: rotate(180deg);
+          }
+        }
+
+        &:hover {
+          box-shadow: none;
+          border-color: $glaucous;
+
+          &::before {
+            animation-play-state: running;
+            border-color: $glaucous;
+          }
+
+          .button-icon-only-icon {
+            filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+          }
+        }
+
+        &::before {
+          background: transparent;
+          position: absolute;
+          z-index: 0;
+          content: '';
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 0.125rem solid transparent;
+          border-color: transparent;
+          border-radius: calc(var(--height) * 0.5);
+          animation: border-pulsate 800ms ease-in-out infinite;
+          animation-play-state: paused;
+          transition: 300ms ease-in-out;
+          overflow: visible;
+        }
+
+        &:disabled {
+          opacity: 1;
+          cursor: pointer;
+        }
+  
+        &[disabled] {
+          background-color: inherit;
+          color: inherit;
+        }
       }
     }
     
