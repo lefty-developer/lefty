@@ -1,7 +1,7 @@
 <script>
 import router from '../../router'
+import { delay } from '../../services/Delay'
 import HandleScroll from '../mixins/HandleScroll.vue'
-import DelayService from '../mixins/Delay.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -10,13 +10,14 @@ export default {
     NavMenu,
     MenuButton
   },
-  mixins: [HandleScroll, DelayService],
+  mixins: [HandleScroll],
   name: 'HomePage',
   data () {
     return {
       // Assets 
-      // logo: require('../../assets/logo@2x.png'),
-      acclaimed: require('../../assets/home/proven-choice.svg'),
+      logo: null,
+      acclaimed: null,
+      starshine: null,
       certifiedIcon: require('../../assets/home/handshake.png'),
       contactIcon: require('../../assets/icons/contact.png'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
@@ -57,6 +58,12 @@ export default {
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
 
+      // assign ACF page data
+      this.title = this.page.acf['lefty-home-title']
+      this.subtitle = this.page.acf['lefty-home-subtitle']
+      this.sliceSubtitle()
+      this.body = this.page.acf['lefty-home-body']
+      this.image = `background-image: url(${ this.page.acf['lefty-home-image'] })`
     },
     sliceSubtitle () {
       this.lastWord = this.subtitle.split(' ').pop()
@@ -65,11 +72,33 @@ export default {
     toggleMenu (value) {
       this.menuToggled = value
     },
-    async mountAnimations () {
-      await this.delay(100)
+    lazyLoadAssets () {
+      const assets = [
+        {
+          name: 'logo',
+          path: import('../../assets/logo@2x.png').then(image => image.default)
+        },
+        {
+          name: 'acclaimed',
+          path: import('../../assets/home/proven-choice.svg').then(image => image.default)
+        },
+        {
+          name: 'starshine',
+          path: import('../../assets/home/starshine.svg').then(image => image.default)
+        }
+      ]
+      return assets
+    },
+    async assignAssets () {
+      this.logo = await this.lazyLoadAssets().find(asset => asset.name == 'logo').path
+      this.acclaimed = await this.lazyLoadAssets().find(asset => asset.name == 'acclaimed').path
+      this.starshine = await this.lazyLoadAssets().find(asset => asset.name == 'starshine').path  
+    },
+    async animations () {
+      await delay(100)
       this.copyVisible = 'copy-visible'
       this.copyAnimation = 'animate__fadeIn'
-      await this.delay(100)
+      await delay(100)
       this.marginalVisible = 'marginal-visible'
       this.marginalAnimation = 'animate__fadeIn'
     }
@@ -79,25 +108,15 @@ export default {
     this.assignData()
 
     // assign document title
-    document.title = this.$wpSiteTagline ? `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
-                                         : `${ this.page.title.rendered } – ${ this.$wpSiteName }`
+    document.title = this.$wpSiteTagline ? 
+                        `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
+                      : `${ this.page.title.rendered } – ${ this.$wpSiteName }`
 
-    // assign ACF page data
-    this.title = this.page.acf['lefty-home-title']
-    this.subtitle = this.page.acf['lefty-home-subtitle']
-    this.sliceSubtitle()
-    this.body = this.page.acf['lefty-home-body']
-    this.image = `background-image: url(${ this.page.acf['lefty-home-image'] })`
+    this.assignAssets()
   },
   mounted () {
     // Inits for mount animations
-    this.mountAnimations()
-  },
-  computed: {
-    // Lazy load logo
-    logo() {
-      return require('../../assets/logo@2x.png')
-    }
+    this.animations()
   }
 }
 </script>
@@ -115,10 +134,12 @@ export default {
         <div class='home-page-endorsement animate__animated animate__fadeIn'>
           <img class='home-acclaimed'
              v-bind:src='acclaimed' v-if='acclaimed' />
+          <img class='home-starshine'
+             v-bind:src='starshine' v-if='starshine' />
           <img class='home-certified'
              v-bind:src='certifiedIcon' v-if='certifiedIcon' />
           <div class='home-endorsement-circle'></div>
-          <div class='home-endorsement-circle'></div>
+          <!-- <div class='home-endorsement-circle'></div> -->
           <!-- <div class='home-endorsement-circle'></div> -->
         </div>
       </section>

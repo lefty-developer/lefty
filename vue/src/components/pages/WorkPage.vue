@@ -1,7 +1,7 @@
 <script>
 import router from '../../router'
+import { delay } from '../../services/Delay'
 import HandleScroll from '../mixins/HandleScroll.vue'
-import DelayService from '../mixins/Delay.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -10,14 +10,15 @@ export default {
     NavMenu,
     MenuButton
   },
-  mixins: [HandleScroll, DelayService],
+  mixins: [HandleScroll],
   name: 'WorkPage',
   data () {
     return {
       // Assets
-      synopsisIcon: require('../../assets/icons/read.png'),
+      synopsisIcon: require('../../assets/icons/arrow-top-right.png'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
       longArrowIcon: require('../../assets/icons/long-arrow.svg'),
+      carouselArrowIcon: require('../../assets/icons/ice-cream/icons8-down-right-48.png'),
 
       // WP Page Data
       page: {},
@@ -45,7 +46,7 @@ export default {
       // assign page data with global WordPress page object (filter pages by id)
       this.page = this.$wpPages.find(pageItem => pageItem.id == this.pageId)
       this.pageNum = this.$route.matched.find(route => 
-                       route.path == this.$route.path).props.default.orderNo
+                       route.path == this.$route.path).props.default.orderNo - 1
       this.pageCount = router.getRoutes().filter(obj => { 
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
@@ -67,7 +68,7 @@ export default {
 
       if (this.nextItemIndex < this.workItems.length) {
         console.log('load next item')
-        await this.delay(400)
+        await delay(400)
         this.carouselArr.shift()
         this.carouselArr.push(this.workItems[this.nextItemIndex])
 
@@ -79,7 +80,7 @@ export default {
         this.$refs.workCarousel.style.transition = 'none'
         this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
 
-        await this.delay(50)
+        await delay(50)
         // reinstate upcoming last-visible item with mandatory transition properties
         this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
         this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
@@ -165,11 +166,17 @@ export default {
         </section>
         <section class='work-page-nav-wrap'>
           <MenuButton v-on:click='toggleMenu(true)' />
-          <button class='work-page-carousel-next button-icon-only'
+          <!-- <button class='work-page-carousel-next button-icon-only'
                   v-on:click='nextItem()'
                   v-bind:disabled='buttonBuffer'>
             <img class='button-icon-only-icon'
                  v-bind:src='longArrowIcon'>
+          </button> -->
+          <button class='work-page-carousel-next'
+                  v-on:click='nextItem()'
+                  v-bind:disabled='buttonBuffer'>
+            <img class='work-page-carousel-next-icon'
+                 v-bind:src='carouselArrowIcon'>
           </button>
         </section>
       </div>
@@ -185,6 +192,12 @@ export default {
                ></a>
           </div>
         </div>
+      </div>
+      <div class='work-page-count-wrap animate__animated animate__fadeIn'>
+        <span :data-text='page.title.rendered + "&nbsp;&nbsp;" + pageNum + " / " + pageCount'
+              class='work-page-count' v-on:click='toggleMenu(true)'>
+          {{ page.title.rendered }}&nbsp;&nbsp;{{ pageNum }} / {{ pageCount }}
+        </span>
       </div>
     </div>
   </div>

@@ -1,8 +1,7 @@
 <script>
-import DelayService from './mixins/Delay.vue'
+import { delay } from '../services/Delay'
 
 export default {
-  mixins: [DelayService],
   name: 'NavMenu',
   props: {
     toggle: Boolean,
@@ -66,7 +65,7 @@ export default {
         this.menuVisible = 'menu-visible'
         this.outAnimation = false
         this.inAnimation = 'animate__slideInRight'
-        await this.delay(0)
+        await delay(0)
         if (this.$refs.socialsCarousel) {
           this.$refs.socialsCarousel.style.transition = 'all 300ms ease-in-out'
         }

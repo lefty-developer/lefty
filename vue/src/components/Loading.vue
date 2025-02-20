@@ -1,8 +1,7 @@
 <script>
-import DelayService from './mixins/Delay.vue'
+import { delay } from '../services/Delay'
 
 export default {
-  mixins: [DelayService],
   name: 'LoadingAnimation',
   props: {
     wpData: Object,
@@ -10,6 +9,9 @@ export default {
   },
   data () {
     return {
+      // Assets
+      logo: null,
+
       // Misc.
       show: true,
       inAnimation: '',
@@ -18,11 +20,17 @@ export default {
     }
   },
   methods: {
+    lazyLoadLogo () {
+      return import('../assets/logo@4x.png').then(image => image.default)
+    },
+    async assignLogo () {
+      this.logo = await this.lazyLoadLogo()
+    },
     async showParent () {
-      await this.delay(500)
+      await delay(500)
       // this.repeatAnimation = false
       this.outAnimation = 'animate__fadeOutDown'
-      await this.delay(1000)
+      await delay(1000)
       this.show = false
       this.$emit('ready', !this.show)
     }
@@ -30,19 +38,14 @@ export default {
   created () {
     // apply site name from global WordPress data props set on main.js
     document.title = this.$wpSiteName ? this.$wpSiteName : 'Resolving issues...'
+    this.assignLogo()
   },
   async mounted () {
     this.inAnimation = 'animate__zoomInDown'
-    await this.delay(1000)
+    await delay(1000)
     this.inAnimation = false
     // this.repeatAnimation = 'animate__bounce animate__infinite'
     this.showParent()
-  },
-  computed: {
-    // Lazy load logo
-    logo() {
-      return require('../assets/logo@4x.png')
-    }
   }
 }
 </script>
