@@ -18,9 +18,9 @@ export default {
       logo: null,
       acclaimed: null,
       starshine: null,
-      certifiedIcon: require('../../assets/home/handshake.png'),
-      contactIcon: require('../../assets/icons/contact.png'),
-      arrowIcon: require('../../assets/icons/down-arrow.svg'),
+      certifiedIcon: null,
+      contactIcon: null,
+      arrowIcon: null,
 
       // WP Page Data
       page: {},
@@ -69,14 +69,11 @@ export default {
       this.lastWord = this.subtitle.split(' ').pop()
       this.subtitle = this.subtitle.split(' ').slice(0, -1).join(' ')
     },
-    toggleMenu (value) {
-      this.menuToggled = value
-    },
     lazyLoadAssets () {
       const assets = [
         {
           name: 'logo',
-          path: import('../../assets/logo@2x.png').then(image => image.default)
+          path: import('../../assets/logo.png').then(image => image.default)
         },
         {
           name: 'acclaimed',
@@ -85,6 +82,18 @@ export default {
         {
           name: 'starshine',
           path: import('../../assets/home/starshine.svg').then(image => image.default)
+        },
+        {
+          name: 'certifiedIcon',
+          path: import('../../assets/home/handshake.png').then(image => image.default)
+        },
+        {
+          name: 'contactIcon',
+          path: import('../../assets/icons/contact.png').then(image => image.default)
+        },
+        {
+          name: 'arrowIcon',
+          path: import('../../assets/icons/down-arrow.svg').then(image => image.default)
         }
       ]
       return assets
@@ -92,27 +101,32 @@ export default {
     async assignAssets () {
       this.logo = await this.lazyLoadAssets().find(asset => asset.name == 'logo').path
       this.acclaimed = await this.lazyLoadAssets().find(asset => asset.name == 'acclaimed').path
-      this.starshine = await this.lazyLoadAssets().find(asset => asset.name == 'starshine').path  
+      this.starshine = await this.lazyLoadAssets().find(asset => asset.name == 'starshine').path
+      this.certifiedIcon = await this.lazyLoadAssets().find(asset => asset.name == 'certifiedIcon').path
+      this.contactIcon = await this.lazyLoadAssets().find(asset => asset.name == 'contactIcon').path
+      this.arrowIcon = await this.lazyLoadAssets().find(asset => asset.name == 'arrowIcon').path
     },
     async animations () {
-      await delay(100)
+      await delay(70)
       this.copyVisible = 'copy-visible'
       this.copyAnimation = 'animate__fadeIn'
-      await delay(100)
+      await delay(70)
       this.marginalVisible = 'marginal-visible'
       this.marginalAnimation = 'animate__fadeIn'
+    },
+    toggleMenu (value) {
+      this.menuToggled = value
     }
   },
   created () {
     // assign WP page data associated with this route/component
     this.assignData()
+    this.assignAssets()
 
     // assign document title
     document.title = this.$wpSiteTagline ? 
-                        `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
-                      : `${ this.page.title.rendered } – ${ this.$wpSiteName }`
-
-    this.assignAssets()
+                      `${ this.$wpSiteName } – ${ this.$wpSiteTagline }`
+                    : `${ this.page.title.rendered } – ${ this.$wpSiteName }`
   },
   mounted () {
     // Inits for mount animations

@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     lazyLoadLogo () {
-      return import('../assets/logo@4x.png').then(image => image.default)
+      return import('../assets/logo-168.png').then(image => image.default)
     },
     async assignLogo () {
       this.logo = await this.lazyLoadLogo()

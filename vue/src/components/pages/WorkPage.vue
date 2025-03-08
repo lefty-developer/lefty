@@ -15,10 +15,11 @@ export default {
   data () {
     return {
       // Assets
-      synopsisIcon: require('../../assets/icons/arrow-top-right.png'),
+      examineIcon: require('../../assets/icons/arrow-top-right.svg'),
       arrowIcon: require('../../assets/icons/down-arrow.svg'),
       longArrowIcon: require('../../assets/icons/long-arrow.svg'),
-      carouselArrowIcon: require('../../assets/icons/ice-cream/icons8-down-right-48.png'),
+      carouselNextArrow: require('../../assets/icons/ice-cream/down-right-arrow-2.svg'),
+      carouselPrevArrow: require('../../assets/icons/ice-cream/down-left-arrow.svg'),
 
       // WP Page Data
       page: {},
@@ -33,7 +34,9 @@ export default {
       carouselArr: [],
       carouselLeft: 0,
       nextItemIndex: 2,
-      buttonBuffer: false
+      prevItemIndex: -2,
+      buttonBuffer: false,
+      copyChangeAnimation: ''
     }
   },
   methods: {
@@ -50,72 +53,116 @@ export default {
       this.pageCount = router.getRoutes().filter(obj => { 
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
+
+      // assign ACF page data
+      this.workItems = this.page.acf['lefty-work-items']
     },
     toggleMenu (value) {
       this.menuToggled = value
     },
     initCarousel () {
+      // build initial carousel array
       this.carouselArr.push(...this.workItems.slice(-2), ...this.workItems.slice(0, 3))
     },
     async nextItem () {
+      // prevent button spam
+      if (this.buttonBuffer) return
       this.buttonBuffer = true
-      this.index++
+
+      // fade out copy
+      this.copyChangeAnimation = 'animate__fadeOut'
+
       this.nextItemIndex++
-      this.carouselLeft += 49.5
+      this.prevItemIndex++
+      this.carouselLeft += 49.125
       this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
       this.$refs.workItem[3].classList.remove('last-visible')
 
       if (this.nextItemIndex < this.workItems.length) {
-        console.log('load next item')
+        // load next item
         await delay(400)
         this.carouselArr.shift()
         this.carouselArr.push(this.workItems[this.nextItemIndex])
-
-        this.$refs.workItem[3].style.transition = 'none'
-        this.$refs.workItemImage[3].style.transition = 'none'
-
-        this.$refs.workItem[3].classList.add('last-visible')
-        this.carouselLeft = 0
-        this.$refs.workCarousel.style.transition = 'none'
-        this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
-
-        await delay(50)
-        // reinstate upcoming last-visible item with mandatory transition properties
-        this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
-        this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
-        this.buttonBuffer = false
+        this.carouselShiftAdjust()
       } else if (this.nextItemIndex == this.workItems.length) {
-        console.log('approaching end, load first work item')
+        // approaching end, load first work item
+        await delay(400)
+        this.carouselArr.shift()
+        this.carouselArr.push(this.workItems[0])
+        this.carouselShiftAdjust()
       } else if (this.nextItemIndex == this.workItems.length + 1) {
-        console.log('load second work item')
+        // reached last work item, load second work item
+        await delay(400)
+        this.carouselArr.shift()
+        this.carouselArr.push(this.workItems[1])
+        this.carouselShiftAdjust()
       } else {
-        console.log('reached first work item, reset carousel')
-        // probably just empty carouselArr and rebuild with initCarousel()
-        // make sure to remove transitions so it jumps back instantly and looks like nothing changed
-        // also put transitions back on after the jump lol
+        // reached first work item, reset carousel
+        await delay(400)
+        this.resetCarousel()
       }
+
+      await this.$nextTick()
+      this.copyChangeAnimation = 'animate__fadeIn'
     },
-    prevItem () {
+    async prevItem () {
       // TODO: implement previous item
+    },
+    async carouselShiftAdjust() {
+      this.index++
+
+      this.$refs.workItem[3].style.transition = 'none'
+      this.$refs.workItemImage[3].style.transition = 'none'
+
+      this.$refs.workItem[3].classList.add('last-visible')
+      this.carouselLeft = 0
+      this.$refs.workCarousel.style.transition = 'none'
+      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+
+      await delay(50)
+      // reinstate upcoming last-visible item with mandatory transition properties
+      this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
+      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
+
+      
+      // prevent button spam, reset button buffer
+      this.buttonBuffer = false
+    },
+    async resetCarousel() {
+      this.carouselArr = []
+      this.initCarousel()
+      this.nextItemIndex = 2
+      this.prevItemIndex = -2
+      this.index = 0
+      
+      this.$refs.workItem[3].style.transition = 'none'
+      this.$refs.workItemImage[3].style.transition = 'none'
+      
+      this.$refs.workItem[3].classList.add('last-visible')
+      this.carouselLeft = 0
+      this.$refs.workCarousel.style.transition = 'none'
+      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+      await delay(50)
+      // reinstate upcoming last-visible item with mandatory transition properties
+      this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
+      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
+      
+      // prevent button spam, reset button buffer
+      this.buttonBuffer = false
     }
   },
   created () {
     this.assignData()
+    this.initCarousel()
 
     // assign document title
     document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
-
-    // assign ACF page data
-    this.workItems = this.page.acf['lefty-work-items']
-
-    // build initial carousel array
-    this.initCarousel()
   },
   computed: {
     // Lazy load logo
     logo() {
-      return require('../../assets/logo@2x.png')
+      return require('../../assets/logo.png')
     }
   }
 }
@@ -140,20 +187,30 @@ export default {
           </button>
         </section>
         <section class='work-page-copy-wrap'>
-          <div class='work-page-copy'>
+          <div class='work-page-copy animate__animated animate__faster'
+               v-bind:class='[
+                // { "animate__fadeIn": !buttonBuffer },
+                copyChangeAnimation
+               ]'>
             <h2 class='work-page-subtitle'>
               {{ index + 1 }} / {{ workItems.length }}&nbsp;&nbsp;—&nbsp;&nbsp;{{ workItems[index]['lefty-work-item-category'] }}
             </h2>
             <h1 class='work-page-title' v-html='workItems[index]["lefty-work-item-title"]'></h1>
             <p class='work-page-body'>
+              <b>
+                <i>
+                  {{ workItems[index]['lefty-work-item-caption']  }}
+                  &nbsp;//&nbsp;
+                </i>
+              </b>
               {{ workItems[index]['lefty-work-item-brief'] }}
             </p>
           </div>
           <div class='work-page-cta-wrap'>
             <button v-on:click='this.$router.push({ path: "/contact" })' class='work-page-cta'>
-              <span class='button-text'>Synopsis</span>
+              <span class='button-text'>Examine</span>
               <div class='button-item-gap'></div>
-              <img v-bind:src='synopsisIcon'
+              <img v-bind:src='examineIcon'
                    class='button-icon arrow-icon'>
             </button>
             <button ref='nextRouteButton' v-on:click='nextPage()' class='work-page-cta button-outline'>
@@ -166,17 +223,11 @@ export default {
         </section>
         <section class='work-page-nav-wrap'>
           <MenuButton v-on:click='toggleMenu(true)' />
-          <!-- <button class='work-page-carousel-next button-icon-only'
+          <button class='work-page-carousel-next button-icon-only'
                   v-on:click='nextItem()'
                   v-bind:disabled='buttonBuffer'>
             <img class='button-icon-only-icon'
                  v-bind:src='longArrowIcon'>
-          </button> -->
-          <button class='work-page-carousel-next'
-                  v-on:click='nextItem()'
-                  v-bind:disabled='buttonBuffer'>
-            <img class='work-page-carousel-next-icon'
-                 v-bind:src='carouselArrowIcon'>
           </button>
         </section>
       </div>

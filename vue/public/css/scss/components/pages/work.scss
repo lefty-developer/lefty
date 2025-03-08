@@ -1,7 +1,8 @@
 #work-page-wrap {
   width: 100%;
   height: 100%;
-  padding: 5rem clamp(2rem, 9.5vw, 9.5rem) 5.25rem clamp(2rem, 9.5vw, 9.5rem);
+  // padding: 5rem clamp(2rem, 9.5vw, 9.5rem) 5.25rem clamp(2rem, 9.5vw, 9.5rem);
+  padding: 4.25rem clamp(2rem, 7.25vw, 7.25rem) 4.75rem clamp(2rem, 7.25vw, 7.25rem);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -15,7 +16,41 @@
       display: flex;
       flex-direction: column;
 
+      // .work-page-carousel-next, .work-page-carousel-prev {
+      //   all: unset;
+      //   display: flex;
+      //   padding: 0.5rem;
+      //   transition: 300ms ease-in-out;
+      //   // filter: brightness(0) saturate(100%) invert(73%) sepia(5%) saturate(550%) hue-rotate(71deg) brightness(83%) contrast(83%);
+      //   filter: brightness(0) saturate(100%) invert(29%) sepia(7%) saturate(702%) hue-rotate(111deg) brightness(97%) contrast(94%);
+      //   position: relative;
+
+      //   .work-page-carousel-icon {
+      //     max-width: 2.5rem;
+      //     max-height: 2.5rem;
+      //     width: 100vw;
+      //     height: 100vh;
+      //   }
+
+      //   &:hover {
+      //     cursor: pointer;
+      //     filter: brightness(0) saturate(100%) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+      //   }
+      // }
+
+      // .work-page-carousel-next {
+      //   align-self: end;
+      //   right: -0.8125rem;
+      //   bottom: -0.875rem;
+      // }
+
+      // .work-page-carousel-prev {
+      //   left: -0.75rem;
+      //   bottom: -0.875rem;
+      // }
+
       &.work-page-logo-wrap {
+        padding: 0 1.875rem 0 0;
         
         a {
           line-height: 0;
@@ -42,7 +77,7 @@
             color: $outerspace-light;
             font-size: 1.125rem;
             line-height: 1.4em;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.215em;
             font-weight: 800;
             text-transform: uppercase;
             margin-bottom: 0.125rem;
@@ -56,16 +91,16 @@
             line-height: 1.0125em;
             letter-spacing: 0.015em;
             font-weight: 900;
-            margin-top: 1.625rem;
+            margin-top: 1.5rem;
           }
 
           p.work-page-body {
-            color: $outerspace-light;
+            color: $outerspace;
             font-size: 1.125rem;
             line-height: 1.67em;
-            margin-top: 2.125rem;
+            margin-top: 1.5rem;
             font-weight: 400;
-            max-width: 64ch;
+            max-width: 70ch;
             justify-self: center;
           }
         }
@@ -74,33 +109,12 @@
           width: 100%;
           display: flex;
           justify-content: center;
-          margin-top: 2.375rem;
+          margin-top: 2.25rem; //2.625rem;
         }
       }
 
       &.work-page-nav-wrap {
-
-        .work-page-carousel-next {
-          all: unset;
-          align-self: end;
-          display: flex;
-          padding: 0.5rem;
-          transition: 300ms ease-in-out;
-          filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%);
-          position: relative;
-          right: -0.875rem;
-          bottom: -0.875rem;
-
-          .work-page-carousel-next-icon {
-            max-width: 3rem;
-            max-height: 3rem;
-          }
-
-          &:hover {
-            cursor: pointer;
-            filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
-          }
-        }
+        // padding: 0 0 0 clamp(2rem, 8vw, 9.5rem);
       }
     }
   }
@@ -110,12 +124,12 @@
     &:first-child {
 
       img {
-        margin: 0 -0.25rem 0 -0.25rem;
+        margin: 0 -0.3125rem 0 -0.25rem;
       }
     }
     
     &:not(:nth-child(1)) {
-      margin-left: 2rem;
+      margin-left: 1.25rem;
 
       img {
         margin: 0 -0.5rem 0 -0.375rem;
@@ -128,7 +142,7 @@
     height: 100%;
     width: 100vw;
     overflow-x: hidden;
-    margin-left: clamp(-9.5rem, -9.5vw, -2rem);
+    margin-left: clamp(-7.25rem, -7.25vw, -2rem);
     // display: flex;
     // justify-content: center;
 
@@ -141,20 +155,20 @@
       transition: left 400ms ease-in-out;
 
       .work-page-carousel-item {
-        width: 43rem;
+        width: 44.625rem; //41.125rem;
         max-height: 100%;
-        border-radius: 0.75rem;
+        // border-radius: 1.625rem;
         transition: max-height 400ms ease-in-out;
 
         &:not(:last-child) {
-          margin-right: 6.5rem;
+          margin-right: 4.5rem;
         }
 
         &.last-visible {
-          max-height: calc(92.5% - 5.125rem); //54%;
+          max-height: calc(97.5% - 4.375rem); //54%;
 
           .work-page-carousel-item-image {
-            width: calc(92.5% - 5.125rem) //54%;
+            width: calc(97.5% - 4.375rem); //54%;
           }
         }
 
@@ -162,7 +176,7 @@
           display: block;
           height: 100%;
           width: 100%;
-          border-radius: 0.75rem;
+          border-radius: 1.75rem;
           text-decoration: none;
           background-size: cover;
           background-position: center center;
@@ -175,8 +189,8 @@
 
   .work-page-count-wrap {
     position: absolute;
-    bottom: 5.25rem; 
-    right: clamp(2rem, 9.1875vw, 9.1875rem);
+    bottom: 4.125rem; 
+    right: clamp(2rem, 6.75vw, 6.75rem);
     // transform: rotate(90deg);
 
     .work-page-count {
@@ -187,44 +201,15 @@
       font-size: 0.875rem;
       text-transform: uppercase;
       color: $outerspace-light;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.245em;
       margin-left: auto;
-      margin-right: -0.75rem;
+      margin-right: -0.5rem;
       padding: 0.75rem;
       transition: 300ms ease-in-out;
-
-      &::before {
-        content: var(--breadcrumb);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, calc(-50% + 0.0625rem));
-        color: $glaucous;
-        animation: glint 2s ease-in-out infinite;
-        width: 100%;
-        text-align: center;
-        transition: 300ms ease-in-out
-      }
-
-      @keyframes glint {
-        0%, 45%, 100% {
-          opacity: 0;
-        }
-
-        55% {
-          opacity: 1;
-        }
-      }
 
       &:hover {
         cursor: pointer;
         color: $glaucous;
-        animation-play-state: paused;
-
-        &::before {
-          animation-play-state: paused;
-          opacity: 0;
-        }
       }
     }
   }

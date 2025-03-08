@@ -37,7 +37,7 @@ export default {
         const currentItemWidth = this.$refs.socialItem[this.carouselCounter - 1].offsetWidth
 
         this.carouselCounter++
-        this.carouselOffset -= (currentItemWidth + 10)
+        this.carouselOffset -= (currentItemWidth + 12)
 
         this.$refs.socialsCarousel.style.left = `${ (this.carouselOffset / 16) }rem`
       }
@@ -48,7 +48,7 @@ export default {
       })
     }
   },
-  mounted () {
+  async mounted () {
     console.log('Menu Parent: ', this.parent)
   },
   watch: {
