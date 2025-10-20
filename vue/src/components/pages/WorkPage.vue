@@ -31,6 +31,7 @@ export default {
       // Misc.
       menuToggled: false,
       index: 0,
+      negativeIndex: 0,
       carouselArr: [],
       carouselLeft: 0,
       nextItemIndex: 2,
@@ -63,42 +64,43 @@ export default {
     initCarousel () {
       // build initial carousel array
       this.carouselArr.push(...this.workItems.slice(-2), ...this.workItems.slice(0, 3))
+
+      console.log(this.carouselArr)
     },
     async nextItem () {
       // prevent button spam
+      // check button buffer is false, then set to true
       if (this.buttonBuffer) return
       this.buttonBuffer = true
 
       // fade out copy
       this.copyChangeAnimation = 'animate__fadeOut'
 
-      this.nextItemIndex++
-      this.prevItemIndex++
       this.carouselLeft += 49.125
       this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
       this.$refs.workItem[3].classList.remove('last-visible')
 
-      if (this.nextItemIndex < this.workItems.length) {
+      if (this.index + 3 < this.workItems.length) {
         // load next item
         await delay(400)
         this.carouselArr.shift()
-        this.carouselArr.push(this.workItems[this.nextItemIndex])
+        this.carouselArr.push(this.workItems[this.index + 3])
         this.carouselShiftAdjust()
-      } else if (this.nextItemIndex == this.workItems.length) {
+      } else if (this.index + 3 == this.workItems.length) {
         // approaching end, load first work item
         await delay(400)
         this.carouselArr.shift()
         this.carouselArr.push(this.workItems[0])
         this.carouselShiftAdjust()
-      } else if (this.nextItemIndex == this.workItems.length + 1) {
+      } else if (this.index + 3 == this.workItems.length + 1) {
         // reached last work item, load second work item
         await delay(400)
         this.carouselArr.shift()
         this.carouselArr.push(this.workItems[1])
         this.carouselShiftAdjust()
       } else {
-        // reached first work item, reset carousel
+        // organically reached first work item, reset carousel
         await delay(400)
         this.resetCarousel()
       }
@@ -107,10 +109,35 @@ export default {
       this.copyChangeAnimation = 'animate__fadeIn'
     },
     async prevItem () {
-      // TODO: implement previous item
+      // prevent button spam
+      // check button buffer is false, then set to true
+      if (this.buttonBuffer) return
+      this.buttonBuffer = true
+
+      // fade out copy
+      this.copyChangeAnimation = 'animate__fadeOut'
+
+      this.carouselLeft += 49.125
+      this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
+      this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }rem)`
+      this.$refs.workItem[2].classList.add('last-visible')
+
+      if (this.index - 3 > -this.workItems.length && this.index >= 0) {
+        // load previous item
+        await delay(400)
+        this.carouselArr.pop()
+        this.carouselArr.unshift(this.workItems.at(this.index - 3))
+        console.log(this.carouselArr)
+        this.carouselPopAdjust()
+      }
+
+      await this.$nextTick()
+      this.copyChangeAnimation = 'animate__fadeIn'
     },
     async carouselShiftAdjust() {
       this.index++
+
+      console.log('index: ' + this.index)
 
       this.$refs.workItem[3].style.transition = 'none'
       this.$refs.workItemImage[3].style.transition = 'none'
@@ -124,6 +151,32 @@ export default {
       // reinstate upcoming last-visible item with mandatory transition properties
       this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
       this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
+
+      console.log(this.carouselArr)
+      
+      // prevent button spam, reset button buffer
+      this.buttonBuffer = false
+    },
+    async carouselPopAdjust() {
+      this.index--
+      if (this.index < 0) {
+        this.index = this.workItems.length - 1
+      }
+
+      console.log('index: ' + this.index)
+
+      this.$refs.workItem[2].style.transition = 'none'
+      this.$refs.workItemImage[2].style.transition = 'none'
+
+      this.$refs.workItem[2].classList.remove('last-visible')
+      this.carouselLeft = 0
+      this.$refs.workCarousel.style.transition = 'none'
+      this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }rem)`
+
+      await delay(50)
+      // reinstate upcoming last-visible item with mandatory transition properties
+      this.$refs.workItem[2].style.transition = 'max-height 400ms ease-in-out'
+      this.$refs.workItemImage[2].style.transition = 'width 400ms ease-in-out'
 
       
       // prevent button spam, reset button buffer
@@ -181,7 +234,8 @@ export default {
                  v-bind:src='logo' v-if='logo'>
           </router-link>
           <button class='work-page-carousel-prev button-icon-only'
-                  v-bind:disabled='buttonBuffer'>
+                  v-bind:disabled='buttonBuffer'
+                  v-on:click='prevItem()'>
             <img class='button-icon-only-icon'
                 v-bind:src='longArrowIcon'>
           </button>

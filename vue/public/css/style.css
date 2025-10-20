@@ -66,10 +66,10 @@ body {
     body #app button {
       --height: 3.5rem;
       height: var(--height);
-      padding: 0 2.625rem;
+      padding: 0 2.5625rem;
       /* 0 2rem; */
       outline: none;
-      background: #36413E;
+      background: #C3C9C3;
       border: none;
       display: flex;
       align-items: center;
@@ -80,24 +80,29 @@ body {
         background: #6279B8;
         box-shadow: 0.625rem 1.125rem 3.125rem rgba(98, 121, 184, 0.3112);
         transform: translateY(-0.125rem); }
+        body #app button:hover .button-text {
+          color: #FAFAFA;
+          font-weight: 600;
+          letter-spacing: 0.25em; }
+        body #app button:hover img.button-icon {
+          filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(96%); }
       body #app button:focus {
         outline: none;
         border: none; }
       body #app button .button-text {
         font-family: 'Commissioner', sans-serif;
-        font-weight: 600;
+        font-weight: 800;
         font-size: 0.875rem;
         text-transform: uppercase;
-        color: #FAFAFA;
-        letter-spacing: 0.25em;
+        color: #36413E;
+        letter-spacing: 0.245em;
         transition: 300ms ease-in-out; }
       body #app button .button-item-gap {
         height: 100%;
         width: 0.625rem; }
       body #app button img.button-icon {
         height: 1.5rem;
-        transition: 300ms ease-in-out;
-        filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(96%); }
+        transition: 300ms ease-in-out; }
         body #app button img.button-icon.navicon {
           margin-top: 0.125rem; }
         body #app button img.button-icon.close-icon, body #app button img.button-icon.arrow-icon {
@@ -227,9 +232,8 @@ body {
     letter-spacing: .025em; }
     body div.content-box img.loading-logo {
       width: 10.5rem;
-      margin-bottom: 1.125rem;
-      filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%);
-      will-change: transform;
+      margin-bottom: 1.25rem;
+      filter: brightness(0) saturate(100%) invert(22%) sepia(10%) saturate(600%) hue-rotate(113deg) brightness(92%) contrast(87%);
       transform-box: fill-box;
       transform-origin: center;
       backface-visibility: hidden;
@@ -645,6 +649,11 @@ body {
             display: flex;
             justify-content: center;
             margin-top: 2.25rem; }
+            body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-cta-wrap .work-page-cta:first-child .button-icon {
+              filter: brightness(0) invert(19%) sepia(75%) saturate(0%) hue-rotate(236deg) brightness(88%) contrast(98%);
+              transition: filter 300ms ease-in-out; }
+            body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-cta-wrap .work-page-cta:first-child:hover .button-icon {
+              filter: brightness(0) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(96%); }
     body #work-page-wrap button.work-page-cta:first-child img {
       margin: 0 -0.3125rem 0 -0.25rem; }
     body #work-page-wrap button.work-page-cta:not(:nth-child(1)) {
@@ -671,14 +680,14 @@ body {
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:not(:last-child) {
             margin-right: 4.5rem; }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible {
-            max-height: calc(97.5% - 4.375rem); }
+            max-height: calc(97.5% - 4.25rem); }
             body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible .work-page-carousel-item-image {
-              width: calc(97.5% - 4.375rem); }
+              width: calc(97.5% - 4.25rem); }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item .work-page-carousel-item-image {
             display: block;
             height: 100%;
             width: 100%;
-            border-radius: 1.75rem;
+            border-radius: 1.5rem;
             text-decoration: none;
             background-size: cover;
             background-position: center center;
@@ -686,7 +695,7 @@ body {
             cursor: pointer; }
     body #work-page-wrap .work-page-count-wrap {
       position: absolute;
-      bottom: 4.125rem;
+      bottom: 4.1875rem;
       right: clamp(2rem, 6.75vw, 6.75rem); }
       body #work-page-wrap .work-page-count-wrap .work-page-count {
         --breadcrumb: attr(data-text);

@@ -1,5 +1,7 @@
 <script>
 import router from '../../router'
+// import { delay } from '../../services/Delay'
+import HandleScroll from '../mixins/HandleScroll.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -8,6 +10,7 @@ export default {
     NavMenu,
     MenuButton
   },
+  mixins: [HandleScroll],
   name: 'ExperiencePage',
   data () {
     return {
@@ -50,12 +53,16 @@ export default {
 </script>
 
 <template>
-  <div id='router-root' v-if='$wpPages'>
+  <div id='router-root' v-if='$wpPages' v-on:wheel='handleScroll'>
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)'
              v-bind:parent='$options.name' />
     <div id='experience-page-wrap'>
-      <MenuButton v-on:click='toggleMenu(true)' />
+      <div class='experience-page-content animate__animated animate__fadeIn'>
+        <MenuButton v-on:click='toggleMenu(true)' />
+        <!-- Hidden nextRouteButton used by HandleScroll mixin to trigger nextPage() on wheel -->
+        <button ref='nextRouteButton' v-on:click='nextPage()' style='display:none' aria-hidden='true'></button>        
+      </div>
     </div>
   </div>
 </template>

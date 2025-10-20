@@ -48,6 +48,9 @@ wp/app/public/*
 wp/app/public/wp-content/*
 !themes/
 
+wp/app/public/wp-content/*
+!plugins/
+
 # ignore these plugins
 wp/app/public/wp-content/plugins/hello.php
 

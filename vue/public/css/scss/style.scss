@@ -97,9 +97,9 @@ body {
     button {
       --height: 3.5rem;
       height: var(--height);
-      padding: 0 2.625rem; /* 0 2rem; */
+      padding: 0 2.5625rem; /* 0 2rem; */
       outline: none;
-      background: $outerspace;
+      background: $ash;
       border: none;
       display: flex;
       align-items: center;
@@ -111,6 +111,16 @@ body {
         background: $glaucous;
         box-shadow: 0.625rem 1.125rem 3.125rem rgba(98, 121, 184, 0.3112);
         transform: translateY(-0.125rem);
+
+        .button-text {
+          color: $seasalt;
+          font-weight: 600;
+          letter-spacing: 0.25em;
+        }
+
+        img.button-icon {
+          filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(96%);
+        }
       }
 
       &:focus {
@@ -120,11 +130,11 @@ body {
     
       .button-text {
         font-family: 'Commissioner', sans-serif;
-        font-weight: 600;
+        font-weight: 800;
         font-size: 0.875rem;
         text-transform: uppercase;
-        color: $seasalt;
-        letter-spacing: 0.25em;
+        color: $outerspace;
+        letter-spacing: 0.245em;
         transition: 300ms ease-in-out;
       }
     
@@ -137,7 +147,7 @@ body {
         height: 1.5rem;
         transition: 300ms ease-in-out;
         // filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%);
-        filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(96%);
+        // filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(96%);
     
         &.navicon {
           margin-top: 0.125rem;
@@ -185,7 +195,7 @@ body {
           }
 
           .button-text {
-            color: $glaucous
+            color: $glaucous;
           }
 
           .button-icon {
@@ -214,6 +224,10 @@ body {
           position: relative;
           z-index: 1;
         }
+
+        // .button-item-gap {
+        //   width: 0.625rem;
+        // }
 
         .button-text {
           color: $outerspace-light;

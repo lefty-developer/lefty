@@ -110,6 +110,21 @@
           display: flex;
           justify-content: center;
           margin-top: 2.25rem; //2.625rem;
+
+          .work-page-cta:first-child {
+
+            .button-icon {
+              filter: brightness(0) invert(19%) sepia(75%) saturate(0%) hue-rotate(236deg) brightness(88%) contrast(98%);
+              transition: filter 300ms ease-in-out;
+            }
+
+            &:hover {
+
+              .button-icon {
+                filter: brightness(0) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(96%);
+              }
+            }
+          }
         }
       }
 
@@ -165,10 +180,10 @@
         }
 
         &.last-visible {
-          max-height: calc(97.5% - 4.375rem); //54%;
+          max-height: calc(97.5% - 4.25rem); //54%;
 
           .work-page-carousel-item-image {
-            width: calc(97.5% - 4.375rem); //54%;
+            width: calc(97.5% - 4.25rem); //54%;
           }
         }
 
@@ -176,7 +191,7 @@
           display: block;
           height: 100%;
           width: 100%;
-          border-radius: 1.75rem;
+          border-radius: 1.5rem;
           text-decoration: none;
           background-size: cover;
           background-position: center center;
@@ -189,7 +204,7 @@
 
   .work-page-count-wrap {
     position: absolute;
-    bottom: 4.125rem; 
+    bottom: 4.1875rem; 
     right: clamp(2rem, 6.75vw, 6.75rem);
     // transform: rotate(90deg);
 

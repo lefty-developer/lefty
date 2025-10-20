@@ -107,10 +107,10 @@ export default {
       this.arrowIcon = await this.lazyLoadAssets().find(asset => asset.name == 'arrowIcon').path
     },
     async animations () {
-      await delay(70)
+      await delay(100)
       this.copyVisible = 'copy-visible'
       this.copyAnimation = 'animate__fadeIn'
-      await delay(70)
+      await delay(100)
       this.marginalVisible = 'marginal-visible'
       this.marginalAnimation = 'animate__fadeIn'
     },
