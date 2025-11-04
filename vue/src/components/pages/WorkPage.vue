@@ -226,7 +226,9 @@ export default {
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)' 
              v-bind:parent='$options.name' />
+
     <div id='work-page-wrap'>
+
       <div class='work-page-content animate__animated animate__fadeIn'>
         <section class='work-page-logo-wrap'>
           <router-link to='/'>
@@ -240,6 +242,7 @@ export default {
                 v-bind:src='longArrowIcon'>
           </button>
         </section>
+
         <section class='work-page-copy-wrap'>
           <div class='work-page-copy animate__animated animate__faster'
                v-bind:class='[
@@ -275,6 +278,7 @@ export default {
             </button>
           </div>
         </section>
+
         <section class='work-page-nav-wrap'>
           <MenuButton v-on:click='toggleMenu(true)' />
           <button class='work-page-carousel-next button-icon-only'
@@ -285,6 +289,7 @@ export default {
           </button>
         </section>
       </div>
+
       <div class='work-page-carousel-wrap'>
         <div class='work-page-carousel' ref='workCarousel'>
           <div v-for='(item, i) in carouselArr' :key='i'
@@ -298,6 +303,7 @@ export default {
           </div>
         </div>
       </div>
+      
       <div class='work-page-count-wrap animate__animated animate__fadeIn'>
         <span :data-text='page.title.rendered + "&nbsp;&nbsp;" + pageNum + " / " + pageCount'
               class='work-page-count' v-on:click='toggleMenu(true)'>

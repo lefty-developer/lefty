@@ -58,6 +58,15 @@ export default {
              v-on:close='value => toggleMenu(!value)'
              v-bind:parent='$options.name' />
     <div id='experience-page-wrap'>
+
+      <div id='experience-page-prev-item'></div>
+
+      <div id='experience-page-content'>
+        <!-- content here -->
+      </div>
+
+      <div id='experience-page-current-item'></div>
+
       <div class='experience-page-content animate__animated animate__fadeIn'>
         <MenuButton v-on:click='toggleMenu(true)' />
         <!-- Hidden nextRouteButton used by HandleScroll mixin to trigger nextPage() on wheel -->
