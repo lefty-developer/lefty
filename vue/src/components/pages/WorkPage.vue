@@ -5,6 +5,15 @@ import HandleScroll from '../mixins/HandleScroll.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
+// static imports for assets, paths are available synchronously
+// therefore images are available when component is created/mounted
+import logoImg from '../../assets/logo.png'
+import examineIconImg from '../../assets/icons/arrow-top-right.svg'
+import arrowIconImg from '../../assets/icons/down-arrow.svg'
+import longArrowIconImg from '../../assets/icons/long-arrow.svg'
+import carouselNextArrowImg from '../../assets/icons/ice-cream/down-right-arrow-2.svg'
+import carouselPrevArrowImg from '../../assets/icons/ice-cream/down-left-arrow.svg'
+
 export default {
   components: {
     NavMenu,
@@ -15,11 +24,12 @@ export default {
   data () {
     return {
       // Assets
-      examineIcon: require('../../assets/icons/arrow-top-right.svg'),
-      arrowIcon: require('../../assets/icons/down-arrow.svg'),
-      longArrowIcon: require('../../assets/icons/long-arrow.svg'),
-      carouselNextArrow: require('../../assets/icons/ice-cream/down-right-arrow-2.svg'),
-      carouselPrevArrow: require('../../assets/icons/ice-cream/down-left-arrow.svg'),
+      logo: logoImg,
+      examineIcon: examineIconImg,
+      arrowIcon: arrowIconImg,
+      longArrowIcon: longArrowIconImg,
+      carouselNextArrow: carouselNextArrowImg,
+      carouselPrevArrow: carouselPrevArrowImg,
 
       // WP Page Data
       page: {},
@@ -149,8 +159,8 @@ export default {
 
       await delay(50)
       // reinstate upcoming last-visible item with mandatory transition properties
-      this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
-      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
+      this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
+      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
 
       console.log(this.carouselArr)
       
@@ -175,8 +185,8 @@ export default {
 
       await delay(50)
       // reinstate upcoming last-visible item with mandatory transition properties
-      this.$refs.workItem[2].style.transition = 'max-height 400ms ease-in-out'
-      this.$refs.workItemImage[2].style.transition = 'width 400ms ease-in-out'
+      this.$refs.workItem[2].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
+      this.$refs.workItemImage[2].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
 
       
       // prevent button spam, reset button buffer
@@ -198,8 +208,8 @@ export default {
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
       await delay(50)
       // reinstate upcoming last-visible item with mandatory transition properties
-      this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out'
-      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out'
+      this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
+      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
       
       // prevent button spam, reset button buffer
       this.buttonBuffer = false
@@ -211,18 +221,24 @@ export default {
 
     // assign document title
     document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
+
+    console.log("Current Route: ", this.$router.currentRoute.value)
+    console.log(`Prev Page : ${ this.$router.options.history.state.back }`)
   },
-  computed: {
-    // Lazy load logo
-    logo() {
-      return require('../../assets/logo.png')
-    }
-  }
+  // computed: {
+  //   // Lazy load logo
+  //   logo() {
+  //     return require('../../assets/logo.png')
+  //   }
+  // }
 }
 </script>
 
 <template>
   <div id='router-root' v-if='$wpPages' v-on:wheel='handleScroll'>
+  <!-- v-if check for global wpPages necessary to avoid race condition between router builder and component mounting -->
+  <!-- also adding a comment above the router-root element breaks the router as well...smdh -->
+
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)' 
              v-bind:parent='$options.name' />
@@ -233,7 +249,7 @@ export default {
         <section class='work-page-logo-wrap'>
           <router-link to='/'>
             <img class='work-logo' 
-                 v-bind:src='logo' v-if='logo'>
+                 v-bind:src='logo' />
           </router-link>
           <button class='work-page-carousel-prev button-icon-only'
                   v-bind:disabled='buttonBuffer'
@@ -295,6 +311,8 @@ export default {
           <div v-for='(item, i) in carouselArr' :key='i'
                :class='{ "last-visible": i >= 3 }'
                class='work-page-carousel-item animate__animated animate__fadeIn'
+               v-on:click='i >= 3 ? nextItem() : null;
+                           i <= 2 ? prevItem() : null'
                ref='workItem'>
                <a class='work-page-carousel-item-image'
                   :style='{ "background-image": `url(${item["lefty-work-item-thumbnail"]})` }'
@@ -310,6 +328,7 @@ export default {
           {{ page.title.rendered }}&nbsp;&nbsp;{{ pageNum }} / {{ pageCount }}
         </span>
       </div>
+
     </div>
   </div>
 </template>

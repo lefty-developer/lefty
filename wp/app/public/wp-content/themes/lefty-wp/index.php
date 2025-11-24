@@ -32,6 +32,7 @@
     </style>
   </head>
   <body>
+    Redirecting...
     <!-- WordPress Theme Home Page -->
     <!-- Redirects to Vue 3 App -->
   </body>

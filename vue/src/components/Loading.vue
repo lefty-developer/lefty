@@ -1,5 +1,6 @@
 <script>
 import { delay } from '../services/Delay'
+import logoImg from '../assets/logo-168.png'
 
 export default {
   name: 'LoadingAnimation',
@@ -10,7 +11,7 @@ export default {
   data () {
     return {
       // Assets
-      logo: null,
+      logo: logoImg,
 
       // Misc.
       show: true,
@@ -20,12 +21,6 @@ export default {
     }
   },
   methods: {
-    lazyLoadLogo () {
-      return import('../assets/logo-168.png').then(image => image.default)
-    },
-    async assignLogo () {
-      this.logo = await this.lazyLoadLogo()
-    },
     async showParent () {
       await delay(500)
       // this.repeatAnimation = false
@@ -38,7 +33,6 @@ export default {
   created () {
     // apply site name from global WordPress data props set on main.js
     document.title = this.$wpSiteName ? this.$wpSiteName : 'Resolving issues...'
-    this.assignLogo()
   },
   async mounted () {
     this.inAnimation = 'animate__zoomInDown'

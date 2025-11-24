@@ -5,6 +5,15 @@ import HandleScroll from '../mixins/HandleScroll.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
+// static imports for assets, paths are available synchronously
+// therefore images are available when component is created/mounted
+import logoImg from '../../assets/logo.png'
+import acclaimedImg from '../../assets/home/proven-choice.svg'
+import starshineImg from '../../assets/home/starshine.svg'
+import certifiedIconImg from '../../assets/home/handshake.png'
+import contactIconImg from '../../assets/icons/contact.png'
+import arrowIconImg from '../../assets/icons/down-arrow.svg'
+
 export default {
   components: {
     NavMenu,
@@ -15,12 +24,12 @@ export default {
   data () {
     return {
       // Assets 
-      logo: null,
-      acclaimed: null,
-      starshine: null,
-      certifiedIcon: null,
-      contactIcon: null,
-      arrowIcon: null,
+      logo: logoImg,
+      acclaimed: acclaimedImg,
+      starshine: starshineImg,
+      certifiedIcon: certifiedIconImg,
+      contactIcon: contactIconImg,
+      arrowIcon: arrowIconImg,
 
       // WP Page Data
       page: {},
@@ -69,43 +78,6 @@ export default {
       this.lastWord = this.subtitle.split(' ').pop()
       this.subtitle = this.subtitle.split(' ').slice(0, -1).join(' ')
     },
-    lazyLoadAssets () {
-      const assets = [
-        {
-          name: 'logo',
-          path: import('../../assets/logo.png').then(image => image.default)
-        },
-        {
-          name: 'acclaimed',
-          path: import('../../assets/home/proven-choice.svg').then(image => image.default)
-        },
-        {
-          name: 'starshine',
-          path: import('../../assets/home/starshine.svg').then(image => image.default)
-        },
-        {
-          name: 'certifiedIcon',
-          path: import('../../assets/home/handshake.png').then(image => image.default)
-        },
-        {
-          name: 'contactIcon',
-          path: import('../../assets/icons/contact.png').then(image => image.default)
-        },
-        {
-          name: 'arrowIcon',
-          path: import('../../assets/icons/down-arrow.svg').then(image => image.default)
-        }
-      ]
-      return assets
-    },
-    async assignAssets () {
-      this.logo = await this.lazyLoadAssets().find(asset => asset.name == 'logo').path
-      this.acclaimed = await this.lazyLoadAssets().find(asset => asset.name == 'acclaimed').path
-      this.starshine = await this.lazyLoadAssets().find(asset => asset.name == 'starshine').path
-      this.certifiedIcon = await this.lazyLoadAssets().find(asset => asset.name == 'certifiedIcon').path
-      this.contactIcon = await this.lazyLoadAssets().find(asset => asset.name == 'contactIcon').path
-      this.arrowIcon = await this.lazyLoadAssets().find(asset => asset.name == 'arrowIcon').path
-    },
     async animations () {
       await delay(100)
       this.copyVisible = 'copy-visible'
@@ -121,7 +93,6 @@ export default {
   created () {
     // assign WP page data associated with this route/component
     this.assignData()
-    this.assignAssets()
 
     // assign document title
     document.title = this.$wpSiteTagline ? 
@@ -137,9 +108,13 @@ export default {
 
 <template>
   <div id='router-root' v-if='$wpPages' v-on:wheel='handleScroll'>
+    <!-- v-if check for global wpPages necessary to avoid race condition between router builder and component mounting -->
+    <!-- also adding a comment above the router-root element breaks the router as well...smdh -->
+
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)'
              v-bind:parent='$options.name' />
+
     <div id='home-page-wrap'>
       <section class='home-page-image-wrap'>
         <div class='home-page-image  animate__animated animate__fadeIn'
@@ -161,7 +136,7 @@ export default {
         <div class='home-page-navbar animate__animated animate__fadeIn'>
           <router-link to='/'>
             <img class='home-logo' 
-                 v-bind:src='logo' v-if='logo' />
+                 v-bind:src='logo' />
           </router-link>
           <!-- <MenuButton v-on:toggle='value => toggleMenu(value)'
                       v-bind:toggleStatus='menuToggled' /> -->

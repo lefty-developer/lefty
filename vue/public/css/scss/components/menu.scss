@@ -36,6 +36,10 @@
 
     .menu-close-button {
 
+      img.close-icon {
+        filter: brightness(0) saturate(100%) invert(22%) sepia(12%) saturate(485%) hue-rotate(113deg) brightness(96%) contrast(90%);
+      }
+
       &:hover {
         // transform: translateY(0.25rem) !important;
       }
@@ -120,7 +124,8 @@
         }
 
         .arrow-icon {
-          filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+          // filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+          filter: brightness(0) invert(43%) sepia(9%) saturate(5896%) hue-rotate(3deg) brightness(100%) contrast(90%);
         }
       }
 
@@ -194,7 +199,8 @@
             }
 
             .menu-socials-carousel-item-icon {
-              filter: brightness(0) saturate(100%) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+              // filter: brightness(0) saturate(100%) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+              filter: brightness(0) saturate(100%) invert(43%) sepia(9%) saturate(5896%) hue-rotate(3deg) brightness(100%) contrast(90%);
             }
           }
 

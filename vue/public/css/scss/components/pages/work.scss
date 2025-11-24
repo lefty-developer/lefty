@@ -89,7 +89,7 @@
             font-style: italic;
             font-size: clamp(2.125rem, 5.25vw, 5.25rem);
             line-height: 1.0125em;
-            letter-spacing: 0.015em;
+            letter-spacing: 0.01375em;
             font-weight: 900;
             margin-top: 1.5rem;
           }
@@ -173,7 +173,28 @@
         width: 44.625rem; //41.125rem;
         max-height: 100%;
         // border-radius: 1.625rem;
-        transition: max-height 400ms ease-in-out;
+        transition: max-height 400ms ease-in-out,
+                    filter 300ms ease-in-out;
+        filter: grayscale(100%) contrast(1.1);
+        overflow: hidden;
+        border-radius: 1.5rem;
+        display: flex;
+        align-items: center;
+
+        &:nth-of-type(3):hover {
+          filter: grayscale(0%);
+        }
+
+        &:nth-of-type(3) {
+
+          .work-page-carousel-item-image {
+
+            &:hover {
+              width: 105%;
+              height: 105%;
+            }
+          }
+        }
 
         &:not(:last-child) {
           margin-right: 4.5rem;
@@ -191,12 +212,13 @@
           display: block;
           height: 100%;
           width: 100%;
-          border-radius: 1.5rem;
+          cursor: pointer;
           text-decoration: none;
           background-size: cover;
           background-position: center center;
-          transition: width 400ms ease-in-out;
-          cursor: pointer;
+          transition: width 400ms ease-in-out,
+                      height 400ms ease-in-out;
+          border-radius: 1.5rem;
         }
       }
     }
@@ -222,9 +244,40 @@
       padding: 0.75rem;
       transition: 300ms ease-in-out;
 
+      &::before {
+        content: var(--breadcrumb);
+        position: absolute;
+        top: 51%;
+        left: 50%;
+        transform: translate(-50%, -51%);
+        color: $glaucous;
+        animation: glint 2s ease-in-out infinite;
+        width: 100%;
+        text-align: center;
+        transition: 300ms ease-in-out;
+        // background hides the og text underneath
+        background: $seasalt;
+      }
+
+      @keyframes glint {
+          0%, 40%, 100% {
+            opacity: 0;
+          }
+
+          55% {
+            opacity: 1;
+          }
+        }
+
       &:hover {
         cursor: pointer;
         color: $glaucous;
+        animation-play-state: paused;
+
+        &::before {
+          animation-play-state: paused;
+          opacity: 0;
+        }
       }
     }
   }

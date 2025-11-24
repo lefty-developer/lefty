@@ -25,6 +25,7 @@ export default {
   methods: {
     closeMenu () {
       // Testing against the toggle prop ensures the menu has only been opened through the UI
+      // Because the source of truth for this.toggle is in the parent component
       this.toggle ? this.$emit('close', true) : this.$router.push({ name: 'NotFound' })
     },
     nextSocial () {
@@ -49,7 +50,7 @@ export default {
     }
   },
   async mounted () {
-    console.log('Menu Parent: ', this.parent)
+    // console.log('Menu Parent: ', this.parent)
   },
   watch: {
     // Watches the toggle prop

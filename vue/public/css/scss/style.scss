@@ -11,7 +11,8 @@ $ash-dark: #aeb6ae;
 $timberwolf: #D0D5D0;
 $platinum: #E9EBE9;
 $seasalt: #FAFAFA;
-$glaucous: #6279B8;
+// $glaucous: #6279B8;
+$glaucous: #b66d0d;
 
 // Base site styles
 * {
@@ -109,7 +110,7 @@ body {
       &:hover {
         cursor: pointer;
         background: $glaucous;
-        box-shadow: 0.625rem 1.125rem 3.125rem rgba(98, 121, 184, 0.3112);
+        box-shadow: 0.625rem 1.125rem 3.125rem rgba(54, 65, 62, 0.3112);
         transform: translateY(-0.125rem);
 
         .button-text {
@@ -199,7 +200,8 @@ body {
           }
 
           .button-icon {
-            filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+            // filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+            filter: brightness(0) invert(43%) sepia(9%) saturate(5896%) hue-rotate(3deg) brightness(100%) contrast(90%);
           }
         }
 
@@ -288,7 +290,8 @@ body {
           }
 
           .button-icon-only-icon {
-            filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+            // filter: brightness(0) invert(48%) sepia(52%) saturate(455%) hue-rotate(186deg) brightness(88%) contrast(86%);
+            filter: brightness(0) invert(43%) sepia(9%) saturate(5896%) hue-rotate(3deg) brightness(100%) contrast(90%);
           }
         }
 
