@@ -1,7 +1,7 @@
 <script>
 import router from '../../router'
 import { delay } from '../../services/Delay'
-import HandleScroll from '../mixins/HandleScroll.vue'
+// import HandleScroll from '../mixins/HandleScroll.vue'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
@@ -19,7 +19,7 @@ export default {
     NavMenu,
     MenuButton
   },
-  mixins: [HandleScroll],
+  // mixins: [HandleScroll],
   name: 'HomePage',
   data () {
     return {
@@ -88,6 +88,18 @@ export default {
     },
     toggleMenu (value) {
       this.menuToggled = value
+    },
+    nextPage() {
+      const menuItems = router.getRoutes()
+        .filter(route => !route.aliasOf && route.props?.default?.addToMenu)
+        .sort((a, b) => a.props.default.orderNo - b.props.default.orderNo)
+
+      const currentRouteIndex = menuItems.findIndex(item => item.props.default.wpPageId === this.pageId)
+      const nextRoute = menuItems[currentRouteIndex + 1]
+
+      if (nextRoute) {
+        router.push(nextRoute.path)
+      }
     }
   },
   created () {
@@ -107,7 +119,8 @@ export default {
 </script>
 
 <template>
-  <div id='router-root' v-if='$wpPages' v-on:wheel='handleScroll'>
+  <div id='router-root' v-if='$wpPages'>
+  <!-- <div id='router-root' v-if='$wpPages' @wheel.passive='false' v-on:wheel='handleScroll'> -->
     <!-- v-if check for global wpPages necessary to avoid race condition between router builder and component mounting -->
     <!-- also adding a comment above the router-root element breaks the router as well...smdh -->
 
@@ -156,9 +169,8 @@ export default {
             <p class='home-page-body'>
               {{ body }}
               <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-top: 1rem;'>
-                <!-- Try scrolling down to begin your navigation. -->
-                Just scroll to move on to the next page—that's it!
-                <!-- Try scrolling as a way to operate the navigation. -->
+                <!-- Just scroll to move on to the next page—that's it! -->
+                "Craft over chaos. Collaboration over noise."
               </span>
             </p>
           </div>
@@ -172,7 +184,7 @@ export default {
             <img v-bind:src='contactIcon'
                 class='button-icon arrow-icon'>
           </button>
-          <!-- ref='nextRouteButton' hooks button into HandleScroll.vue method -->
+          <!-- using ref='nextRouteButton' orginally hooked button into HandleScroll.vue's nextPage() method -->
           <button ref='nextRouteButton' v-on:click='nextPage()' class='home-page-cta button-outline'>
             <span class='button-text'>My Work</span>
             <div class='button-item-gap'></div>

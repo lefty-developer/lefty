@@ -6,7 +6,8 @@
 // Theme Variables
 $outerspace: #36413E;
 $outerspace-light: #414E4A;
-$ash: #C3C9C3;
+// $ash: #C3C9C3;
+$ash: #D0D5D0;
 $ash-dark: #aeb6ae;
 $timberwolf: #D0D5D0;
 $platinum: #E9EBE9;
@@ -116,7 +117,7 @@ body {
         .button-text {
           color: $seasalt;
           font-weight: 600;
-          letter-spacing: 0.25em;
+          // letter-spacing: 0.25em;
         }
 
         img.button-icon {
@@ -135,7 +136,7 @@ body {
         font-size: 0.875rem;
         text-transform: uppercase;
         color: $outerspace;
-        letter-spacing: 0.245em;
+        letter-spacing: 0.22em;
         transition: 300ms ease-in-out;
       }
     
@@ -152,6 +153,7 @@ body {
     
         &.navicon {
           margin-top: 0.125rem;
+          margin-left: 0.0625rem;
         }
     
         &.close-icon, &.arrow-icon {
@@ -233,7 +235,7 @@ body {
 
         .button-text {
           color: $outerspace-light;
-          letter-spacing: 0.245em;
+          letter-spacing: 0.24em;
           font-weight: 800;
         }
 

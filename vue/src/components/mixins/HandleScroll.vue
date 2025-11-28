@@ -34,7 +34,7 @@ export default {
 
       console.log('Delta Counter: ', this.deltaCounter)
 
-      if (this.deltaCounter > 2) {
+      if (this.deltaCounter > 2) {        
         // Activate nextPage() method
         // Use a click event on the next page button because directly manipulating the router with a wheel event creates inescapable bugs with the window.history obj
         this.$refs.nextRouteButton.click()
