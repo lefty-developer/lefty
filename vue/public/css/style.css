@@ -281,9 +281,10 @@ body {
         align-items: center; }
         body .menu nav .menu-links a {
           width: 100%;
-          padding: 0.75rem;
+          padding: 0.6875rem;
           text-align: center;
           text-decoration: none;
+          font-style: italic;
           color: #36413E;
           transition: 300ms ease-in-out; }
           body .menu nav .menu-links a .menu-link {
@@ -342,7 +343,7 @@ body {
           user-select: none; }
       body .menu .menu-socials .menu-socials-carousel-wrap {
         width: 100%;
-        margin-top: 2.125rem;
+        margin-top: 2rem;
         position: relative;
         overflow: hidden; }
         body .menu .menu-socials .menu-socials-carousel-wrap::after {
@@ -564,6 +565,7 @@ body {
           font-weight: 800;
           font-size: 0.875rem;
           text-transform: uppercase;
+          font-style: italic;
           color: #414E4A;
           letter-spacing: 0.24em;
           margin-left: auto;
@@ -685,11 +687,11 @@ body {
           border-radius: 0.875rem;
           display: flex;
           align-items: center; }
-          body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:nth-of-type(3) {
-            filter: grayscale(0%); }
-            body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:nth-of-type(3) .work-page-carousel-item-image:hover {
-              width: 105%;
-              height: 105%; }
+          body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.primary-item {
+            filter: grayscale(0%) contrast(1); }
+          body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:nth-of-type(3) .work-page-carousel-item-image:hover {
+            width: 115%;
+            height: 115%; }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:not(:last-child) {
             margin-right: 4.5rem; }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible {
@@ -717,6 +719,7 @@ body {
         font-weight: 800;
         font-size: 0.875rem;
         text-transform: uppercase;
+        font-style: italic;
         color: #414E4A;
         letter-spacing: 0.245em;
         margin-left: auto;

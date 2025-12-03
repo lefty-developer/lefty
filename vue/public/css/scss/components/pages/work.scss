@@ -181,18 +181,17 @@
         display: flex;
         align-items: center;
 
-        // &:nth-of-type(3):hover {
-        //   filter: grayscale(0%);
-        // }
+        &.primary-item {
+          filter: grayscale(0%) contrast(1);
+        }
 
         &:nth-of-type(3) {
-          filter: grayscale(0%);
 
           .work-page-carousel-item-image {
 
             &:hover {
-              width: 105%;
-              height: 105%;
+              width: 115%;
+              height: 115%;
             }
           }
         }
@@ -238,6 +237,7 @@
       font-weight: 800;
       font-size: 0.875rem;
       text-transform: uppercase;
+      font-style: italic;
       color: $outerspace-light;
       letter-spacing: 0.245em;
       margin-left: auto;

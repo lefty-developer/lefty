@@ -60,9 +60,11 @@
 
       a {
         width: 100%;
-        padding: 0.75rem;
+        // padding: 0.75rem;
+        padding: 0.6875rem;
         text-align: center;
         text-decoration: none;
+        font-style: italic;
         color: $outerspace;
         transition: 300ms ease-in-out;
 
@@ -155,7 +157,8 @@
 
     .menu-socials-carousel-wrap {
       width: 100%;
-      margin-top: 2.125rem;
+      // margin-top: 2.125rem;
+      margin-top: 2rem;
       position: relative;
       overflow: hidden;
 

@@ -100,6 +100,7 @@ export default {
       this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
       this.$refs.workItem[3].classList.remove('last-visible')
+      this.$refs.workItem[2].classList.remove('primary-item')
 
       if (this.index + 3 < this.workItems.length) {
         // load next item
@@ -141,12 +142,15 @@ export default {
       this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }rem)`
       this.$refs.workItem[2].classList.add('last-visible')
+      this.$refs.workItem[2].classList.remove('primary-item')
 
       if (this.index - 3 > -this.workItems.length && this.index >= 0) {
         // load previous item
         await delay(400)
+
         this.carouselArr.pop()
         this.carouselArr.unshift(this.workItems.at(this.index - 3))
+
         this.carouselPopAdjust()
       }
 
@@ -160,6 +164,8 @@ export default {
       this.$refs.workItemImage[3].style.transition = 'none'
 
       this.$refs.workItem[3].classList.add('last-visible')
+      this.$refs.workItem[2].classList.add('primary-item')
+
       this.carouselLeft = 0
       this.$refs.workCarousel.style.transition = 'none'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
@@ -184,6 +190,7 @@ export default {
       this.$refs.workItemImage[2].style.transition = 'none'
 
       this.$refs.workItem[2].classList.remove('last-visible')
+
       this.carouselLeft = 0
       this.$refs.workCarousel.style.transition = 'none'
       this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }rem)`
@@ -193,6 +200,7 @@ export default {
       this.$refs.workItem[2].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
       this.$refs.workItemImage[2].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
 
+      this.$refs.workItem[2].classList.add('primary-item')
       
       // prevent button spam, reset button buffer
       this.buttonBuffer = false
@@ -208,6 +216,8 @@ export default {
       this.$refs.workItemImage[3].style.transition = 'none'
       
       this.$refs.workItem[3].classList.add('last-visible')
+      this.$refs.workItem[2].classList.add('primary-item')
+
       this.carouselLeft = 0
       this.$refs.workCarousel.style.transition = 'none'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
@@ -226,13 +236,7 @@ export default {
 
     // assign document title
     document.title = `${ this.page.title.rendered } – ${ this.$wpSiteName }`
-  },
-  // computed: {
-  //   // Lazy load logo
-  //   logo() {
-  //     return require('../../assets/logo.png')
-  //   }
-  // }
+  }
 }
 </script>
 
@@ -312,7 +316,9 @@ export default {
       <div class='work-page-carousel-wrap'>
         <div class='work-page-carousel' ref='workCarousel'>
           <div v-for='(item, i) in carouselArr' :key='i'
-               :class='{ "last-visible": i >= 3 }'
+               :class='{ "last-visible": i >= 3,
+                         "primary-item": i == 2
+                       }'
                class='work-page-carousel-item animate__animated animate__fadeIn'
                v-on:click='i >= 3 ? nextItem() : null;
                            i <= 2 ? prevItem() : null'
