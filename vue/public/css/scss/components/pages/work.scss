@@ -1,16 +1,19 @@
 #work-page-wrap {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  height: 0.125rem;
   // padding: 5rem clamp(2rem, 9.5vw, 9.5rem) 5.25rem clamp(2rem, 9.5vw, 9.5rem);
-  padding: 4.25rem clamp(2rem, 7.25vw, 7.25rem) 4.75rem clamp(2rem, 7.25vw, 7.25rem);
+  padding: 5rem clamp(2rem, 7.25vw, 7.25rem) 5rem clamp(2rem, 7.25vw, 7.25rem);
+  position: relative;
+  overflow-x: hidden;
+
   display: flex;
   flex-direction: column;
-  position: relative;
 
   .work-page-content {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 4.25rem;
+    padding-bottom: 4.5rem;
 
     section {
       display: flex;
@@ -77,7 +80,7 @@
             color: $outerspace-light;
             font-size: 1.125rem;
             line-height: 1.4em;
-            letter-spacing: 0.215em;
+            letter-spacing: 0.2em;
             font-weight: 800;
             text-transform: uppercase;
             margin-bottom: 0.125rem;
@@ -89,16 +92,15 @@
             font-style: italic;
             font-size: clamp(2.125rem, 5.25vw, 5.25rem);
             line-height: 1.0125em;
-            letter-spacing: 0.01375em;
             font-weight: 900;
-            margin-top: 1.5rem;
+            margin-top: 1.625rem;
           }
 
           p.work-page-body {
             color: $outerspace;
             font-size: 1.125rem;
             line-height: 1.67em;
-            margin-top: 1.5rem;
+            margin-top: 2.125rem;
             font-weight: 400;
             max-width: 70ch;
             justify-self: center;
@@ -154,12 +156,15 @@
 
   .work-page-carousel-wrap {
     position: relative;
+    min-height: 27.825rem;
     height: 100%;
     width: 100vw;
     overflow-x: hidden;
     margin-left: clamp(-7.25rem, -7.25vw, -2rem);
     // display: flex;
     // justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
 
     .work-page-carousel {
       position: absolute;
@@ -201,7 +206,8 @@
         }
 
         &.last-visible {
-          max-height: calc(97.5% - 4.25rem); //54%;
+          // max-height: calc(97.5% - 4.25rem); 
+          max-height: 54%;
 
           .work-page-carousel-item-image {
             width: calc(97.5% - 4.25rem); //54%;
@@ -225,10 +231,13 @@
   }
 
   .work-page-count-wrap {
-    position: absolute;
-    bottom: 4.1875rem; 
-    right: clamp(2rem, 6.75vw, 6.75rem);
-    // transform: rotate(90deg);
+    // position: absolute;
+    // bottom: 4.1875rem; 
+    // right: clamp(2rem, 3.5vw, 3.5rem);
+
+    margin-left: calc(100% - 1rem);
+    margin-bottom: -8.75rem;
+    transform: translateY(-8.75rem) rotate(90deg);
 
     .work-page-count {
       --breadcrumb: attr(data-text);
@@ -244,6 +253,7 @@
       margin-right: -0.5rem;
       padding: 0.75rem;
       transition: 300ms ease-in-out;
+      white-space: nowrap;
 
       &::before {
         content: var(--breadcrumb);

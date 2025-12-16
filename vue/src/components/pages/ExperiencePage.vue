@@ -5,6 +5,10 @@ import router from '../../router'
 import NavMenu from '../Menu.vue'
 import MenuButton from '../MenuButton.vue'
 
+// static imports for assets, paths are available synchronously
+// therefore images are available when component is created/mounted
+import logoImg from '../../assets/logo.png'
+
 export default {
   components: {
     NavMenu,
@@ -14,6 +18,9 @@ export default {
   name: 'ExperiencePage',
   data () {
     return {
+      // Assets
+      logo: logoImg,
+
       // WP Page Data
       page: {},
       pageId: 0,

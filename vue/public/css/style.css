@@ -598,15 +598,17 @@ body {
               opacity: 0; }
   body #work-page-wrap {
     width: 100%;
-    height: 100%;
-    padding: 4.25rem clamp(2rem, 7.25vw, 7.25rem) 4.75rem clamp(2rem, 7.25vw, 7.25rem);
+    min-height: 100%;
+    height: 0.125rem;
+    padding: 5rem clamp(2rem, 7.25vw, 7.25rem) 5rem clamp(2rem, 7.25vw, 7.25rem);
+    position: relative;
+    overflow-x: hidden;
     display: flex;
-    flex-direction: column;
-    position: relative; }
+    flex-direction: column; }
     body #work-page-wrap .work-page-content {
       display: flex;
       justify-content: space-between;
-      padding-bottom: 4.25rem; }
+      padding-bottom: 4.5rem; }
       body #work-page-wrap .work-page-content section {
         display: flex;
         flex-direction: column; }
@@ -628,7 +630,7 @@ body {
               color: #414E4A;
               font-size: 1.125rem;
               line-height: 1.4em;
-              letter-spacing: 0.215em;
+              letter-spacing: 0.2em;
               font-weight: 800;
               text-transform: uppercase;
               margin-bottom: 0.125rem; }
@@ -638,14 +640,13 @@ body {
               font-style: italic;
               font-size: clamp(2.125rem, 5.25vw, 5.25rem);
               line-height: 1.0125em;
-              letter-spacing: 0.01375em;
               font-weight: 900;
-              margin-top: 1.5rem; }
+              margin-top: 1.625rem; }
             body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy p.work-page-body {
               color: #36413E;
               font-size: 1.125rem;
               line-height: 1.67em;
-              margin-top: 1.5rem;
+              margin-top: 2.125rem;
               font-weight: 400;
               max-width: 70ch;
               justify-self: center; }
@@ -667,10 +668,13 @@ body {
         margin: 0 -0.5rem 0 -0.375rem; }
     body #work-page-wrap .work-page-carousel-wrap {
       position: relative;
+      min-height: 27.825rem;
       height: 100%;
       width: 100vw;
       overflow-x: hidden;
-      margin-left: clamp(-7.25rem, -7.25vw, -2rem); }
+      margin-left: clamp(-7.25rem, -7.25vw, -2rem);
+      margin-top: auto;
+      margin-bottom: auto; }
       body #work-page-wrap .work-page-carousel-wrap .work-page-carousel {
         position: absolute;
         height: 100%;
@@ -695,7 +699,7 @@ body {
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:not(:last-child) {
             margin-right: 4.5rem; }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible {
-            max-height: calc(97.5% - 4.25rem); }
+            max-height: 54%; }
             body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible .work-page-carousel-item-image {
               width: calc(97.5% - 4.25rem); }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item .work-page-carousel-item-image {
@@ -709,9 +713,9 @@ body {
             transition: width 400ms ease-in-out, height 400ms ease-in-out;
             border-radius: 0.875rem; }
     body #work-page-wrap .work-page-count-wrap {
-      position: absolute;
-      bottom: 4.1875rem;
-      right: clamp(2rem, 6.75vw, 6.75rem); }
+      margin-left: calc(100% - 1rem);
+      margin-bottom: -8.75rem;
+      transform: translateY(-8.75rem) rotate(90deg); }
       body #work-page-wrap .work-page-count-wrap .work-page-count {
         --breadcrumb: attr(data-text);
         position: relative;
@@ -725,7 +729,8 @@ body {
         margin-left: auto;
         margin-right: -0.5rem;
         padding: 0.75rem;
-        transition: 300ms ease-in-out; }
+        transition: 300ms ease-in-out;
+        white-space: nowrap; }
         body #work-page-wrap .work-page-count-wrap .work-page-count::before {
           content: var(--breadcrumb);
           position: absolute;

@@ -277,12 +277,10 @@ export default {
             </h2>
             <h1 class='work-page-title' v-html='workItems[index]["lefty-work-item-title"]'></h1>
             <p class='work-page-body'>
-              <b>
-                <i>
-                  {{ workItems[index]['lefty-work-item-caption']  }}
-                  &nbsp;//&nbsp;
-                </i>
-              </b>
+              <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-bottom: .825rem;'>
+                {{ workItems[index]['lefty-work-item-caption']  }}
+                &nbsp;({{ workItems[index]['lefty-work-item-tech'] }})
+              </span>
               {{ workItems[index]['lefty-work-item-brief'] }}
             </p>
           </div>
