@@ -133,17 +133,6 @@ export default {
         <div class='home-page-image  animate__animated animate__fadeIn'
              v-bind:style='image'>
         </div>
-        <div class='home-page-endorsement animate__animated animate__fadeIn'>
-          <img class='home-acclaimed'
-             v-bind:src='acclaimed' v-if='acclaimed' />
-          <img class='home-starshine'
-             v-bind:src='starshine' v-if='starshine' />
-          <img class='home-certified'
-             v-bind:src='certifiedIcon' v-if='certifiedIcon' />
-          <div class='home-endorsement-circle'></div>
-          <!-- <div class='home-endorsement-circle'></div> -->
-          <!-- <div class='home-endorsement-circle'></div> -->
-        </div>
       </section>
       <section class='home-page-content'>
         <div class='home-page-navbar animate__animated animate__fadeIn'>
@@ -165,7 +154,22 @@ export default {
                 {{ lastWord }}
               </span>
             </h2>
-            <h1 class='home-page-title' v-html='title'></h1>
+            <div class='home-page-title-x-endorsement-wrap'>
+              <h1 class='home-page-title' 
+                        v-html='title'>
+              </h1>
+              <div class='home-page-endorsement animate__animated animate__fadeIn'>
+                <img class='home-acclaimed'
+                  v-bind:src='acclaimed' v-if='acclaimed' />
+                <img class='home-starshine'
+                  v-bind:src='starshine' v-if='starshine' />
+                <img class='home-certified'
+                  v-bind:src='certifiedIcon' v-if='certifiedIcon' />
+                <div class='home-endorsement-circle'></div>
+                <!-- <div class='home-endorsement-circle'></div> -->
+                <!-- <div class='home-endorsement-circle'></div> -->
+              </div>
+            </div>
             <p class='home-page-body'>
               {{ body }}
               <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-top: 1rem;'>
