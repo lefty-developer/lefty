@@ -273,7 +273,7 @@ export default {
                 copyChangeAnimation
                ]'>
             <h2 class='work-page-subtitle'>
-              {{ index + 1 }} / {{ workItems.length }}&nbsp;&nbsp;—&nbsp;&nbsp;{{ workItems[index]['lefty-work-item-category'] }}
+              {{ index + 1 }} / {{ workItems.length }}&nbsp;&nbsp;—&nbsp;&nbsp;<i>{{ workItems[index]['lefty-work-item-category'] }}</i>
             </h2>
             <h1 class='work-page-title' v-html='workItems[index]["lefty-work-item-title"]'></h1>
             <p class='work-page-body'>

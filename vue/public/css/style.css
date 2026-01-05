@@ -759,3 +759,54 @@ body {
           body #work-page-wrap .work-page-count-wrap .work-page-count:hover::before {
             animation-play-state: paused;
             opacity: 0; }
+  body #experience-page-wrap {
+    width: 100%;
+    height: 100%;
+    background: #FAFAFA;
+    display: flex;
+    justify-content: space-between;
+    overflow-x: hidden;
+    padding: 5rem 0 5rem 0; }
+    body #experience-page-wrap #experience-page-prev-item {
+      width: 10%;
+      height: 100%; }
+      body #experience-page-wrap #experience-page-prev-item .experience-page-prev-item-image-wrap {
+        width: 100%;
+        height: 100%;
+        border-top-right-radius: 0.875rem;
+        border-bottom-right-radius: 0.875rem; }
+        body #experience-page-wrap #experience-page-prev-item .experience-page-prev-item-image-wrap img.experience-page-prev-item-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-top-right-radius: 0.875rem;
+          border-bottom-right-radius: 0.875rem;
+          filter: grayscale(100%) contrast(1.1); }
+    body #experience-page-wrap #experience-page-content {
+      width: 100%;
+      height: 100%;
+      padding: 0 clamp(2rem, 7.25vw, 7.25vw);
+      display: flex;
+      flex-direction: column; }
+      body #experience-page-wrap #experience-page-content .experience-page-navbar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%; }
+        body #experience-page-wrap #experience-page-content .experience-page-navbar a {
+          line-height: 0; }
+          body #experience-page-wrap #experience-page-content .experience-page-navbar a .experience-logo {
+            width: 9rem;
+            filter: brightness(0) invert(22%) sepia(10%) saturate(574%) hue-rotate(113deg) brightness(97%) contrast(91%); }
+    body #experience-page-wrap #experience-page-current-item {
+      width: 85%;
+      height: 100%; }
+      body #experience-page-wrap #experience-page-current-item .experience-page-current-item-image-wrap {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.875rem;
+        padding: 0 5rem 7rem 0; }
+        body #experience-page-wrap #experience-page-current-item .experience-page-current-item-image-wrap img.experience-page-current-item-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 0.875rem; }

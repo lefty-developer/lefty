@@ -130,7 +130,7 @@ export default {
 
     <div id='home-page-wrap'>
       <section class='home-page-image-wrap'>
-        <div class='home-page-image  animate__animated animate__fadeIn'
+        <div class='home-page-image animate__animated animate__fadeIn'
              v-bind:style='image'>
         </div>
       </section>

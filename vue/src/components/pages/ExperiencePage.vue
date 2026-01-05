@@ -26,9 +26,12 @@ export default {
       pageId: 0,
       pageNum: 0,
       pagesCount: 0,
+      experienceItems: [],
 
       // Misc.
-      menuToggled: false
+      menuToggled: false,
+      index: 0,
+      prevItemIndex: 0
     }
   },
   methods: {
@@ -41,10 +44,17 @@ export default {
       // assign page data with global WordPress page object (filter pages by id)
       this.page = this.$wpPages.find(pageItem => pageItem.id == this.pageId)
       this.pageNum = this.$route.matched.find(route => 
-                       route.path == this.$route.path).props.default.orderNo
+                       route.path == this.$route.path).props.default.orderNo - 1
       this.pageCount = router.getRoutes().filter(obj => { 
         return (!obj.aliasOf) && (obj.props.default.addToMenu == true)
       }).length
+
+      // assign ACF page data
+      this.experienceItems = this.page.acf['lefty-experience-items']
+
+      console.log(this.experienceItems)
+
+      this.prevItemIndex = this.experienceItems.length - 1
     },
     toggleMenu (value) {
       this.menuToggled = value
@@ -62,24 +72,41 @@ export default {
 <template>
   <div id='router-root' v-if='$wpPages'>
   <!-- <div id='router-root' v-if='$wpPages' v-on:wheel='handleScroll'> -->
+  <!-- v-if check for global wpPages necessary to avoid race condition between router builder and component mounting -->
+  <!-- also adding a comment above the router-root element breaks the router as well...smdh -->
+
     <NavMenu v-bind:toggle='menuToggled'
              v-on:close='value => toggleMenu(!value)'
              v-bind:parent='$options.name' />
+
     <div id='experience-page-wrap'>
 
-      <div id='experience-page-prev-item'></div>
+      <section id='experience-page-prev-item'>
+        <div class='experience-page-prev-item-image-wrap'>
+          <img class='experience-page-prev-item-image animate__animated animate__fadeIn'
+               v-bind:src='experienceItems[prevItemIndex]["lefty-experience-item-image"]'>
+        </div>
+      </section>
 
-      <div id='experience-page-content'>
-        <!-- content here -->
-      </div>
+      <section id='experience-page-content'>
+        <div class='experience-page-navbar animate__animated animate__fadeIn'>
+          <router-link to='/'>
+            <img class='experience-logo' 
+                 v-bind:src='logo' />
+          </router-link>
+          <!-- <MenuButton v-on:toggle='value => toggleMenu(value)'
+                      v-bind:toggleStatus='menuToggled' /> -->
+          <MenuButton v-on:click='toggleMenu(true)' />
+        </div>
+      </section>
 
-      <div id='experience-page-current-item'></div>
-
-      <div class='experience-page-content animate__animated animate__fadeIn'>
-        <MenuButton v-on:click='toggleMenu(true)' />
-        <!-- Hidden nextRouteButton used by HandleScroll mixin to trigger nextPage() on wheel -->
-        <!-- <button ref='nextRouteButton' v-on:click='nextPage()' style='display:none' aria-hidden='true'></button>         -->
-      </div>
+      <section id='experience-page-current-item'>
+        <div class='experience-page-current-item-image-wrap'>
+          <img class='experience-page-current-item-image animate__animated animate__fadeIn'
+               v-bind:src='experienceItems[index]["lefty-experience-item-image"]'>
+        </div>
+      </section>
+      
     </div>
   </div>
 </template>
