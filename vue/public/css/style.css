@@ -445,10 +445,10 @@ body {
         display: flex;
         flex-direction: column; }
         body #home-page-wrap .home-page-content .home-page-copy-wrap .home-page-copy-margin:first-child {
-          flex-grow: 6;
+          flex-grow: 5.05;
           flex-basis: 0; }
         body #home-page-wrap .home-page-content .home-page-copy-wrap .home-page-copy-margin:not(:first-child) {
-          flex-grow: 4;
+          flex-grow: 4.95;
           flex-basis: 0; }
         body #home-page-wrap .home-page-content .home-page-copy-wrap .home-page-copy {
           display: flex;
@@ -629,7 +629,9 @@ body {
         body #work-page-wrap .work-page-content section.work-page-copy-wrap {
           width: 50vw; }
           body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy {
-            text-align: center; }
+            text-align: center;
+            overflow: hidden;
+            transition: max-height 300ms ease-in-out; }
             body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy .work-page-subtitle {
               color: #414E4A;
               font-size: 1.125rem;
@@ -674,18 +676,19 @@ body {
       position: relative;
       min-height: 27.825rem;
       height: 100%;
+      margin-top: auto;
+      margin-bottom: auto;
       width: 100vw;
       overflow-x: hidden;
       margin-left: clamp(-7.25rem, -7.25vw, -2rem);
-      margin-top: auto;
-      margin-bottom: auto; }
+      transition: height 400ms ease-in-out; }
       body #work-page-wrap .work-page-carousel-wrap .work-page-carousel {
         position: absolute;
         height: 100%;
         display: flex;
         left: 50%;
         transform: translateX(-50%);
-        transition: left 400ms ease-in-out; }
+        transition: left 400ms ease-in-out, height 400ms ease-in-out; }
         body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item {
           width: 44.625rem;
           max-height: 100%;

@@ -75,6 +75,8 @@
 
         .work-page-copy {
           text-align: center;
+          overflow: hidden;
+          transition: max-height 300ms ease-in-out;
 
           .work-page-subtitle {
             color: $outerspace-light;
@@ -158,13 +160,15 @@
     position: relative;
     min-height: 27.825rem;
     height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    // height: 27.825rem;
     width: 100vw;
     overflow-x: hidden;
     margin-left: clamp(-7.25rem, -7.25vw, -2rem);
     // display: flex;
     // justify-content: center;
-    margin-top: auto;
-    margin-bottom: auto;
+    transition: height 400ms ease-in-out;
 
     .work-page-carousel {
       position: absolute;
@@ -172,7 +176,8 @@
       display: flex;
       left: 50%;
       transform: translateX(-50%);
-      transition: left 400ms ease-in-out;
+      transition: left 400ms ease-in-out,
+                  height 400ms ease-in-out;
 
       .work-page-carousel-item {
         width: 44.625rem; //41.125rem;

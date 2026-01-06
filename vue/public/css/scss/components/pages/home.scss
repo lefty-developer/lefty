@@ -76,12 +76,14 @@
       flex-direction: column;
 
       .home-page-copy-margin:first-child {
-        flex-grow: 6;
+        // flex-grow: 6;
+        flex-grow: 5.05;
         flex-basis: 0;
       }
 
       .home-page-copy-margin:not(:first-child) {
-        flex-grow: 4;
+        // flex-grow: 4;
+        flex-grow: 4.95;
         flex-basis: 0;
       }
 

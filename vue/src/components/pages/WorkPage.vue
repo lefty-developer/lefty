@@ -96,8 +96,13 @@ export default {
       // fade out copy
       this.copyChangeAnimation = 'animate__fadeOut'
 
+      // Measure current height before content changes
+      const copyElement = this.$refs.workPageCopy
+      const currentHeight = copyElement.offsetHeight
+      copyElement.style.maxHeight = currentHeight + 'px'
+
       this.carouselLeft += 49.125
-      this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
+      this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out, height 400ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
       this.$refs.workItem[3].classList.remove('last-visible')
       this.$refs.workItem[2].classList.remove('primary-item')
@@ -128,6 +133,19 @@ export default {
 
       await this.$nextTick()
       this.copyChangeAnimation = 'animate__fadeIn'
+
+      // Measure new height and animate to it
+      const newHeight = copyElement.scrollHeight
+      if (currentHeight > newHeight) {
+        copyElement.style.height = currentHeight + 'px'
+      } else {
+        copyElement.style.height = 'auto'
+      }
+      copyElement.style.maxHeight = newHeight + 'px'
+
+      // prevent button spam, reset button buffer
+      await delay(300)
+      this.buttonBuffer = false
     },
     async prevItem () {
       // prevent button spam
@@ -138,8 +156,13 @@ export default {
       // fade out copy
       this.copyChangeAnimation = 'animate__fadeOut'
 
+      // Measure current height before content changes
+      const copyElement = this.$refs.workPageCopy
+      const currentHeight = copyElement.offsetHeight
+      copyElement.style.maxHeight = currentHeight + 'px'
+
       this.carouselLeft += 49.125
-      this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out'
+      this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out, height 400ms ease-in-out'
       this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }rem)`
       this.$refs.workItem[2].classList.add('last-visible')
       this.$refs.workItem[2].classList.remove('primary-item')
@@ -156,6 +179,19 @@ export default {
 
       await this.$nextTick()
       this.copyChangeAnimation = 'animate__fadeIn'
+
+      // Measure new height and animate to it
+      const newHeight = copyElement.scrollHeight
+      if (currentHeight > newHeight) {
+        copyElement.style.height = currentHeight + 'px'
+      } else {
+        copyElement.style.height = 'auto'
+      }
+      copyElement.style.maxHeight = newHeight + 'px'
+
+      // prevent button spam, reset button buffer
+      await delay(300)
+      this.buttonBuffer = false
     },
     async carouselShiftAdjust() {
       this.index++
@@ -174,9 +210,6 @@ export default {
       // reinstate upcoming last-visible item with mandatory transition properties
       this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
       this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
-      
-      // prevent button spam, reset button buffer
-      this.buttonBuffer = false
     },
     async carouselPopAdjust() {
       this.index--
@@ -201,9 +234,6 @@ export default {
       this.$refs.workItemImage[2].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
 
       this.$refs.workItem[2].classList.add('primary-item')
-      
-      // prevent button spam, reset button buffer
-      this.buttonBuffer = false
     },
     async resetCarousel() {
       this.carouselArr = []
@@ -225,9 +255,6 @@ export default {
       // reinstate upcoming last-visible item with mandatory transition properties
       this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
       this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
-      
-      // prevent button spam, reset button buffer
-      this.buttonBuffer = false
     }
   },
   created () {
@@ -268,6 +295,7 @@ export default {
 
         <section class='work-page-copy-wrap'>
           <div class='work-page-copy animate__animated animate__faster'
+               ref='workPageCopy'
                v-bind:class='[
                 // { "animate__fadeIn": !buttonBuffer },
                 copyChangeAnimation
