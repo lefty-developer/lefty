@@ -656,6 +656,12 @@ body {
               font-weight: 400;
               max-width: 70ch;
               justify-self: center; }
+              body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-copy p.work-page-body span.work-page-body-caption {
+                display: block;
+                font-style: italic;
+                font-weight: 700;
+                letter-spacing: 0.00625em;
+                margin-bottom: .825rem; }
           body #work-page-wrap .work-page-content section.work-page-copy-wrap .work-page-cta-wrap {
             width: 100%;
             display: flex;
@@ -674,7 +680,7 @@ body {
         margin: 0 -0.5rem 0 -0.375rem; }
     body #work-page-wrap .work-page-carousel-wrap {
       position: relative;
-      min-height: 27.825rem;
+      min-height: 27.825vw;
       height: 100%;
       margin-top: auto;
       margin-bottom: auto;
@@ -690,7 +696,7 @@ body {
         transform: translateX(-50%);
         transition: left 400ms ease-in-out, height 400ms ease-in-out; }
         body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item {
-          width: 44.625rem;
+          width: 44.625vw;
           max-height: 100%;
           transition: max-height 400ms ease-in-out, filter 300ms ease-in-out;
           filter: grayscale(100%) contrast(1.1);
@@ -701,12 +707,11 @@ body {
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.primary-item {
             filter: grayscale(0%) contrast(1); }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:nth-of-type(3) .work-page-carousel-item-image:hover {
-            width: 115%;
-            height: 115%; }
+            transform: scale(1.05); }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item:not(:last-child) {
-            margin-right: 4.5rem; }
+            margin-right: 4.5vw; }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible {
-            max-height: 54%; }
+            max-height: calc(100% - 12.75rem); }
             body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item.last-visible .work-page-carousel-item-image {
               width: calc(97.5% - 4.25rem); }
           body #work-page-wrap .work-page-carousel-wrap .work-page-carousel .work-page-carousel-item .work-page-carousel-item-image {
@@ -717,7 +722,7 @@ body {
             text-decoration: none;
             background-size: cover;
             background-position: center center;
-            transition: width 400ms ease-in-out, height 400ms ease-in-out;
+            transition: transform 300ms ease-in-out, width 400ms ease-in-out, height 400ms ease-in-out;
             border-radius: 0.875rem; }
     body #work-page-wrap .work-page-count-wrap {
       margin-left: calc(100% - 1rem);

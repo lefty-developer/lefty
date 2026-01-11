@@ -44,6 +44,8 @@ export default {
 
       // Misc. 
       menuToggled: false,
+
+      // For page load animations
       copyVisible: '',
       copyAnimation: '',
       marginalVisible: '',

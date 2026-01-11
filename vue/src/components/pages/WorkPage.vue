@@ -40,8 +40,10 @@ export default {
 
       // Misc.
       menuToggled: false,
+
+      // Carousel state variables
       index: 0,
-      negativeIndex: 0,
+      // negativeIndex: 0,
       carouselArr: [],
       carouselLeft: 0,
       nextItemIndex: 2,
@@ -103,7 +105,7 @@ export default {
 
       this.carouselLeft += 49.125
       this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out, height 400ms ease-in-out'
-      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }vw)`
       this.$refs.workItem[3].classList.remove('last-visible')
       this.$refs.workItem[2].classList.remove('primary-item')
 
@@ -163,7 +165,7 @@ export default {
 
       this.carouselLeft += 49.125
       this.$refs.workCarousel.style.transition = 'left 400ms ease-in-out, height 400ms ease-in-out'
-      this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }rem)`
+      this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }vw)`
       this.$refs.workItem[2].classList.add('last-visible')
       this.$refs.workItem[2].classList.remove('primary-item')
 
@@ -204,12 +206,12 @@ export default {
 
       this.carouselLeft = 0
       this.$refs.workCarousel.style.transition = 'none'
-      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }vw)`
 
       await delay(50)
       // reinstate upcoming last-visible item with mandatory transition properties
       this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
-      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
+      this.$refs.workItemImage[3].style.transition = 'transform 300ms ease-in-out, width 400ms ease-in-out, height 400ms ease-in-out'
     },
     async carouselPopAdjust() {
       this.index--
@@ -226,12 +228,12 @@ export default {
 
       this.carouselLeft = 0
       this.$refs.workCarousel.style.transition = 'none'
-      this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }rem)`
+      this.$refs.workCarousel.style.left = `calc(50% + ${ this.carouselLeft }vw)`
 
       await delay(50)
       // reinstate upcoming last-visible item with mandatory transition properties
       this.$refs.workItem[2].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
-      this.$refs.workItemImage[2].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
+      this.$refs.workItemImage[2].style.transition = 'transform 300ms ease-in-out, width 400ms ease-in-out, height 400ms ease-in-out'
 
       this.$refs.workItem[2].classList.add('primary-item')
     },
@@ -250,11 +252,11 @@ export default {
 
       this.carouselLeft = 0
       this.$refs.workCarousel.style.transition = 'none'
-      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }rem)`
+      this.$refs.workCarousel.style.left = `calc(50% - ${ this.carouselLeft }vw)`
       await delay(50)
       // reinstate upcoming last-visible item with mandatory transition properties
       this.$refs.workItem[3].style.transition = 'max-height 400ms ease-in-out, filter 300ms ease-in-out'
-      this.$refs.workItemImage[3].style.transition = 'width 400ms ease-in-out, height 400ms ease-in-out'
+      this.$refs.workItemImage[3].style.transition = 'transform 300ms ease-in-out, width 400ms ease-in-out, height 400ms ease-in-out'
     }
   },
   created () {
@@ -305,7 +307,7 @@ export default {
             </h2>
             <h1 class='work-page-title' v-html='workItems[index]["lefty-work-item-title"]'></h1>
             <p class='work-page-body'>
-              <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-bottom: .825rem;'>
+              <span class='work-page-body-caption'>
                 {{ workItems[index]['lefty-work-item-caption']  }}
                 &nbsp;({{ workItems[index]['lefty-work-item-tech'] }})
               </span>
@@ -346,8 +348,9 @@ export default {
                          "primary-item": i == 2
                        }'
                class='work-page-carousel-item animate__animated animate__fadeIn'
-               v-on:click='i >= 3 ? nextItem() : null;
-                           i <= 2 ? prevItem() : null'
+               v-on:click='if (i >= 3) nextItem();
+                           else if (i <= 1) prevItem();
+                           else if (i == 2) this.$router.push({ path: "/contact" });'
                ref='workItem'>
                <a class='work-page-carousel-item-image'
                   :style='{ "background-image": `url(${item["lefty-work-item-thumbnail"]})` }'

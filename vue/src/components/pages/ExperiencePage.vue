@@ -26,12 +26,20 @@ export default {
       pageId: 0,
       pageNum: 0,
       pagesCount: 0,
-      experienceItems: [],
 
       // Misc.
       menuToggled: false,
+
+      // Slider state variables
+      experienceItems: [],
       index: 0,
-      prevItemIndex: 0
+      prevItemIndex: 0,
+      subtitle: '',
+      date: '',
+      title: '',
+      description: '',
+      currentImage: '',
+      prevImage: ''
     }
   },
   methods: {
@@ -51,10 +59,15 @@ export default {
 
       // assign ACF page data
       this.experienceItems = this.page.acf['lefty-experience-items']
-
-      console.log(this.experienceItems)
-
       this.prevItemIndex = this.experienceItems.length - 1
+
+      console.log(this.experienceItems[this.index])
+
+      this.subtitle = this.experienceItems[this.index]['lefty-experience-item-subtitle']
+      this.title = this.experienceItems[this.index]['lefty-experience-item-title']
+      this.description = this.experienceItems[this.index]['lefty-experience-item-description']
+      this.currentImage = this.experienceItems[this.index]['lefty-experience-item-image']
+      this.prevImage = this.experienceItems[this.prevItemIndex]['lefty-experience-item-image']
     },
     toggleMenu (value) {
       this.menuToggled = value
@@ -84,7 +97,7 @@ export default {
       <section id='experience-page-prev-item'>
         <div class='experience-page-prev-item-image-wrap'>
           <img class='experience-page-prev-item-image animate__animated animate__fadeIn'
-               v-bind:src='experienceItems[prevItemIndex]["lefty-experience-item-image"]'>
+               v-bind:src='this.prevImage'>
         </div>
       </section>
 
@@ -97,13 +110,36 @@ export default {
           <!-- <MenuButton v-on:toggle='value => toggleMenu(value)'
                       v-bind:toggleStatus='menuToggled' /> -->
           <MenuButton v-on:click='toggleMenu(true)' />
+          
+        </div>
+        <div class='experience-page-copy-wrap'>
+          <div class='experience-page-copy-margin'></div>
+          <div class='experience-page-copy animate__animated'>
+            <h2 class='experience-page-subtitle'>
+              {{ subtitle }}
+              <span class='experience-page-subtitle-slice'>
+                <!-- {{ date }} -->
+              </span>
+            </h2>
+            <h1 class='experience-page-title' 
+                      v-html='title'>
+            </h1>
+            <p class='experience-page-body'>
+              {{ description }}
+              <span style='display: block; font-style: italic; font-weight: 700; letter-spacing: 0.00625em; margin-top: 1rem;'>
+                <!-- Just scroll to move on to the next page—that's it! -->
+                Please use the resume button to view my credentials.
+              </span>
+            </p>
+          </div>
+          <div class='experience-page-copy-margin'></div>
         </div>
       </section>
 
       <section id='experience-page-current-item'>
         <div class='experience-page-current-item-image-wrap'>
           <img class='experience-page-current-item-image animate__animated animate__fadeIn'
-               v-bind:src='experienceItems[index]["lefty-experience-item-image"]'>
+               v-bind:src='this.currentImage'>
         </div>
       </section>
       
